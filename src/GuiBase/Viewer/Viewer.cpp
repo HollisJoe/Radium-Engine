@@ -95,12 +95,19 @@ namespace Ra
         m_currentRenderer = m_renderers[0].get();
 
         auto light = Ra::Core::make_shared<Engine::DirectionalLight>();
+        auto key = Ra::Core::make_shared<Engine::DirectionalLight>();
+        key->setDirection({-1,0,0});
+        key->setColor( {0.5, 0.1, 0.0,1.0});
 
+        auto fill = Ra::Core::make_shared<Engine::DirectionalLight>();
+        fill->setDirection({0,-1,-1});
         for ( auto& renderer : m_renderers )
         {
             if (renderer)
             {
-                renderer->addLight( light );
+                renderer->addLight(light);
+                renderer->addLight(key);
+                renderer->addLight(fill);
             }
         }
 
@@ -277,15 +284,13 @@ namespace Ra
 
     void Gui::Viewer::changeRenderer( int index )
     {
-        if (m_renderers[index]) {
-            // NOTE(Charly): This is probably buggy since it has not been tested.
-            LOG( logWARNING ) << "Changing renderers might be buggy since it has not been tested.";
-            m_currentRenderer->lockRendering();
-            m_currentRenderer = m_renderers[index].get();
-            m_currentRenderer->initialize();
-            m_currentRenderer->resize( width(), height() );
-            m_currentRenderer->unlockRendering();
-        }
+        // NOTE(Charly): This is probably buggy since it has not been tested.
+        LOG( logWARNING ) << "Changing renderers might be buggy since it has not been tested.";
+        m_currentRenderer->lockRendering();
+        m_currentRenderer = m_renderers[index].get();
+        m_currentRenderer->initialize();
+        m_currentRenderer->resize( width(), height() );
+        m_currentRenderer->unlockRendering();
     }
 
     // Asynchronous rendering implementation
@@ -312,10 +317,7 @@ namespace Ra
     {
         for ( auto& renderer : m_renderers )
         {
-            if (renderer)
-            {
-                renderer->handleFileLoading( file );
-            }
+            renderer->handleFileLoading( file );
         }
     }
 
