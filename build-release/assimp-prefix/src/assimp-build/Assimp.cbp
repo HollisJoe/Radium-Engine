@@ -1,0 +1,1438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Assimp"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake-modules\;CMake Files\code\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="uninstall">
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 uninstall"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="assimp">
+				<Option output="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/libassimp.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DOPENDDL_NO_USE_CPP11"/>
+					<Add option="-DASSIMP_BUILD_BOOST_WORKAROUND"/>
+					<Add option="-DASSIMP_BUILD_NO_OWN_ZLIB"/>
+					<Add option="-DASSIMP_BUILD_NO_C4D_IMPORTER"/>
+					<Add option="-DASSIMP_BUILD_DLL_EXPORT"/>
+					<Add option="-DOPENDDLPARSER_BUILD"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/../contrib/openddlparser/include"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/../contrib/unzip"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/Makefile&quot;  VERBOSE=1 assimp"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="assimp/fast">
+				<Option output="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/libassimp.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DOPENDDL_NO_USE_CPP11"/>
+					<Add option="-DASSIMP_BUILD_BOOST_WORKAROUND"/>
+					<Add option="-DASSIMP_BUILD_NO_OWN_ZLIB"/>
+					<Add option="-DASSIMP_BUILD_NO_C4D_IMPORTER"/>
+					<Add option="-DASSIMP_BUILD_DLL_EXPORT"/>
+					<Add option="-DOPENDDLPARSER_BUILD"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/../contrib/openddlparser/include"/>
+					<Add directory="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/../contrib/unzip"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/Makefile&quot;  VERBOSE=1 assimp/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-build/code/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/3DSConverter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/3DSExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/3DSExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/3DSHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/3DSLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/3DSLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ACLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ACLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ASELoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ASELoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ASEParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ASEParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/AssbinExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/AssbinExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/AssbinLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/AssbinLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Assimp.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/AssimpCExport.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/AssxmlExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/AssxmlExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/B3DImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/B3DImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BVHLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BVHLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BaseImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BaseImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BaseProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BaseProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Bitmap.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Bitmap.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderBMesh.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderBMesh.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderDNA.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderDNA.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderDNA.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderIntermediate.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderModifier.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderModifier.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderScene.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderScene.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderSceneGen.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderTessellator.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlenderTessellator.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BlobIOSystem.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/foreach.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/format.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/make_shared.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/math/common_factor_rt.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/scoped_array.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/scoped_ptr.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/shared_array.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/shared_ptr.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/static_assert.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/BoostWorkaround/boost/tuple/tuple.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ByteSwapper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/CInterfaceIOWrapper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/COBLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/COBLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/COBScene.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/CSMLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/CSMLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/CalcTangentsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/CalcTangentsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ColladaExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ColladaExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ColladaHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ColladaLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ColladaLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ColladaParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ColladaParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ComputeUVMappingProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ComputeUVMappingProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ConvertToLHProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ConvertToLHProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DXFHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DXFLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DXFLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DeboneProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DeboneProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DefaultIOStream.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DefaultIOStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DefaultIOSystem.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DefaultIOSystem.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DefaultLogger.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/DefaultProgressHandler.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Exporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXAnimation.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXBinaryTokenizer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXCompileConfig.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXConverter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXConverter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXDeformer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXDocument.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXDocument.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXDocumentUtil.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXDocumentUtil.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXImportSettings.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXMaterial.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXMeshGeometry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXModel.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXNodeAttribute.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXProperties.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXProperties.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXTokenizer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXTokenizer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXUtil.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FBXUtil.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FileLogStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FindDegenerates.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FindDegenerates.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FindInstancesProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FindInstancesProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FindInvalidDataProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FindInvalidDataProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FixNormalsStep.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/FixNormalsStep.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/GenFaceNormalsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/GenFaceNormalsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/GenVertexNormalsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/GenVertexNormalsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/GenericProperty.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/HMPFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/HMPLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/HMPLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/HalfLifeFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Hash.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCBoolean.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCCurve.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCGeometry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCMaterial.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCOpenings.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCProfile.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCReaderGen.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCReaderGen.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCUtil.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFCUtil.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IFF.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IRRLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IRRLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IRRMeshLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IRRMeshLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IRRShared.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/IRRShared.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Importer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Importer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ImporterRegistry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ImproveCacheLocality.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ImproveCacheLocality.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/JoinVerticesProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/JoinVerticesProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWOAnimation.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWOAnimation.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWOBLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWOFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWOLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWOLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWOMaterial.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWSLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LWSLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LimitBoneWeightsProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LimitBoneWeightsProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LineSplitter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/LogAux.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD2FileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD2Loader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD2Loader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD2NormalTable.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD3FileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD3Loader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD3Loader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD5Loader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD5Loader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD5Parser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MD5Parser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDCFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDCLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDCLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDCNormalTable.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDLDefaultColorMap.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDLFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDLLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDLLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MDLMaterialLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MS3DLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MS3DLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MakeVerboseFormat.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MakeVerboseFormat.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MaterialSystem.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MaterialSystem.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/MemoryIOWrapper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/NDOLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/NDOLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/NFFLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/NFFLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OFFLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OFFLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjFileImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjFileImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjFileMtlImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjFileMtlImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjFileParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjFileParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ObjTools.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreBinarySerializer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreBinarySerializer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreMaterial.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreParsingUtils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreStructs.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreStructs.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreXmlSerializer.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OgreXmlSerializer.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OpenGEXExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OpenGEXExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OpenGEXImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OpenGEXImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OpenGEXStructs.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OptimizeGraph.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OptimizeGraph.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OptimizeMeshes.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/OptimizeMeshes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ParsingUtils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PlyExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PlyExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PlyLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PlyLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PlyParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PlyParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PolyTools.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PostStepRegistry.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PretransformVertices.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/PretransformVertices.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ProcessHelper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ProcessHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Profiler.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3BSPFileData.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3BSPFileImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3BSPFileImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3BSPFileParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3BSPFileParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3BSPZipArchive.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3BSPZipArchive.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3DLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Q3DLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/RawLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/RawLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/RemoveComments.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/RemoveComments.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/RemoveRedundantMaterials.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/RemoveRedundantMaterials.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/RemoveVCProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/RemoveVCProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SGSpatialSort.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SGSpatialSort.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SMDLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SMDLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STEPFile.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STEPFileEncoding.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STEPFileEncoding.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STEPFileReader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STEPFileReader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STLExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STLExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STLLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/STLLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SceneCombiner.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SceneCombiner.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ScenePreprocessor.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ScenePreprocessor.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ScenePrivate.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SkeletonMeshBuilder.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SkeletonMeshBuilder.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SmoothingGroups.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SortByPTypeProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SortByPTypeProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SpatialSort.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SpatialSort.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SplitByBoneCountProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SplitByBoneCountProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SplitLargeMeshes.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/SplitLargeMeshes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/StandardShapes.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/StandardShapes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/StdOStreamLogStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/StepExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/StepExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/StreamReader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/StreamWriter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/StringComparison.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Subdivision.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Subdivision.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TargetAnimation.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TargetAnimation.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TerragenLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TerragenLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TextureTransform.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TextureTransform.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TinyFormatter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TriangulateProcess.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/TriangulateProcess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/UnrealLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/UnrealLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ValidateDataStructure.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/ValidateDataStructure.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Version.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Vertex.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/VertexTriangleAdjacency.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/VertexTriangleAdjacency.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/Win32DebugLogStream.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XFileExporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XFileExporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XFileHelper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XFileImporter.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XFileImporter.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XFileParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XFileParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XGLLoader.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XGLLoader.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/XMLTools.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/fast_atof.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/irrXMLWrapper.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/qnan.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/ConvertUTF/ConvertUTF.c">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/ConvertUTF/ConvertUTF.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/clipper/clipper.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/clipper/clipper.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/irrXML/CXMLReaderImpl.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/irrXML/heapsort.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/irrXML/irrArray.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/irrXML/irrString.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/irrXML/irrTypes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/irrXML/irrXML.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/irrXML/irrXML.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/code/DDLNode.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/code/OpenDDLCommon.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/code/OpenDDLExport.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/code/OpenDDLParser.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/code/Value.cpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/include/openddlparser/DDLNode.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/include/openddlparser/OpenDDLCommon.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/include/openddlparser/OpenDDLExport.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/include/openddlparser/OpenDDLParser.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/include/openddlparser/OpenDDLParserUtils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/openddlparser/include/openddlparser/Value.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/common/shapes.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/common/shapes.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/common/utils.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/sweep/advancing_front.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/sweep/advancing_front.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/sweep/cdt.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/sweep/cdt.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/sweep/sweep.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/sweep/sweep.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/sweep/sweep_context.cc">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/poly2tri/poly2tri/sweep/sweep_context.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/unzip/crypt.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/unzip/ioapi.c">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/unzip/ioapi.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/unzip/unzip.c">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/contrib/unzip/unzip.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/Compiler/poppack1.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/Compiler/pstdint.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/Compiler/pushpack1.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/DefaultLogger.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/Exporter.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/IOStream.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/IOSystem.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/Importer.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/LogStream.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/Logger.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/NullLogger.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/ProgressHandler.hpp">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/ai_assert.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/anim.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/camera.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/cexport.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/cfileio.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/cimport.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/color4.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/color4.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/config.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/defs.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/importerdesc.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/light.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/material.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/material.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/matrix3x3.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/matrix3x3.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/matrix4x4.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/matrix4x4.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/mesh.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/metadata.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/postprocess.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/quaternion.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/quaternion.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/scene.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/texture.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/types.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/vector2.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/vector2.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/vector3.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/vector3.inl">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/include/assimp/version.h">
+			<Option target="assimp"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/revision.h.in">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/assimp-config.cmake.in">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/assimp-config-version.cmake.in">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/assimp.pc.in">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/cmake-modules/PrecompiledHeader.cmake">
+			<Option virtualFolder="CMake Files\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/cmake-modules/cmake_uninstall.cmake.in">
+			<Option virtualFolder="CMake Files\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/cmake-modules/FindDirectX.cmake">
+			<Option virtualFolder="CMake Files\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/cmake-modules/FindZLIB.cmake">
+			<Option virtualFolder="CMake Files\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/cmake-modules/FindPkgMacros.cmake">
+			<Option virtualFolder="CMake Files\cmake-modules\"/>
+		</Unit>
+		<Unit filename="/export/home/kahlo/aghazanf/Radium-Engine/3rdPartyLibraries/Assimp/code/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\code\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

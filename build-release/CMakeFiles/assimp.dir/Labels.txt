@@ -1,0 +1,13 @@
+# Target labels
+ assimp
+# Source files and their labels
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/CMakeFiles/assimp
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/CMakeFiles/assimp.rule
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/CMakeFiles/assimp-complete.rule
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-stamp/assimp-install.rule
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-stamp/assimp-mkdir.rule
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-stamp/assimp-download.rule
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-stamp/assimp-update.rule
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-stamp/assimp-patch.rule
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-stamp/assimp-configure.rule
+/export/home/kahlo/aghazanf/Radium-Engine/build-release/assimp-prefix/src/assimp-stamp/assimp-build.rule
