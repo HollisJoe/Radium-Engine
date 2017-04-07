@@ -1,5 +1,6 @@
-
 #include <MattApp.hpp>
+
+#include <QtCore/Qt>
 
 #include <Core/Time/Timer.hpp>
 #include <Core/Tasks/Task.hpp>
@@ -12,6 +13,8 @@
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>
 #include <Engine/Renderer/RenderTechnique/Material.hpp>
 #include <Engine/Renderer/RenderTechnique/RenderTechnique.hpp>
+
+#include <GuiBase/Utils/Keyboard.hpp>
 
 /* This file contains a minimal radium/qt application which shows the
 classic "Spinning Cube" demo. */
@@ -43,13 +46,24 @@ classic "Spinning Cube" demo. */
 
         /// This function will spin our cube
         void  MinimalComponent::spin() {
-            Ra::Core::AngleAxis aa(0.01f, Ra::Core::Vector3::UnitY());
-            Ra::Core::Transform rot(aa);
+            static bool doSpin = false;
 
-            auto ro = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(
-                    m_renderObjects[0]);
-            Ra::Core::Transform t = ro->getLocalTransform();
-            ro->setLocalTransform(rot * t);
+            if(Ra::Gui::isKeyPressed(Qt::Key_F1))
+            {
+                Ra::Gui::keyReleased(Qt::Key_F1);
+                doSpin = !doSpin;
+            }
+
+            if(doSpin)
+            {
+                Ra::Core::AngleAxis aa(0.01f, Ra::Core::Vector3::UnitY());
+                Ra::Core::Transform rot(aa);
+
+                auto ro = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(
+                        m_renderObjects[0]);
+                Ra::Core::Transform t = ro->getLocalTransform();
+                ro->setLocalTransform(rot * t);
+            }
         }
 
 /// This system will be added to the engine. Every frame it will
@@ -57,8 +71,8 @@ classic "Spinning Cube" demo. */
      void MinimalSystem::generateTasks(Ra::Core::TaskQueue *q, const Ra::Engine::FrameInfo &info) {
         // We check that our component is here.
         CORE_ASSERT(m_components.size() == 1, "System incorrectly initialized");
-        //MinimalComponent *c = static_cast<MinimalComponent *>(m_components[0].second);
+        MinimalComponent *c = static_cast<MinimalComponent *>(m_components[0].second);
 
         // Create a new task which wil call c->spin() when executed.
-        //q->registerTask(new Ra::Core::FunctionTask(std::bind(&MinimalComponent::spin, c), "spin"));
+        q->registerTask(new Ra::Core::FunctionTask(std::bind(&MinimalComponent::spin, c), "spin"));
     }

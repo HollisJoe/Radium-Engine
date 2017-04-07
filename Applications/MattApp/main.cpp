@@ -1,10 +1,12 @@
 #include <QApplication>
 #include <QTimer>
 
+#include <Core/Containers/MakeShared.hpp>
 
 #include <GuiBase/Viewer/Viewer.hpp>
 #include <GuiBase/TimerData/FrameTimerData.hpp>
 
+#include <Engine/Renderer/Light/SpotLight.hpp>
 #include <Engine/Managers/EntityManager/EntityManager.hpp>
 #include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
 
@@ -104,6 +106,11 @@ int main(int argc, char* argv[])
     bpConfig.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Cartoon.vert.glsl");
     bpConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Cartoon.frag.glsl");
     Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfig);
+
+    // Create and add a new light to the scene
+    auto light = Ra::Core::make_shared<Ra::Engine::SpotLight>();
+    light->setPosition(Ra::Core::Vector3(-30.f, 0.f, 0.f));
+    app._viewer.getRenderer()->addLight(light);
 
     // Create one system
     Ra::Engine::System* sys = new MinimalSystem;
