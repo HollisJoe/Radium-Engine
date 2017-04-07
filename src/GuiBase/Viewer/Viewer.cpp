@@ -114,6 +114,11 @@ namespace Ra
         return m_currentRenderer;
     }
 
+    Engine::Renderer* Gui::Viewer::getRenderer()
+    {
+        return m_currentRenderer;
+    }
+
     void Gui::Viewer::onAboutToCompose()
     {
         // This slot function is called from the main thread as part of the event loop
