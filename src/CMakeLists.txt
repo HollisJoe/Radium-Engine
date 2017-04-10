@@ -56,7 +56,7 @@ file(GLOB_RECURSE engine_inlines Engine/*.inl)
 
 file(GLOB_RECURSE engine_glsl ../Shaders/*.glsl)
 
-set( engine_shaders ${engine_glsl})
+set( engine_shaders ${engine_glsl} Engine/Renderer/Renderers/PhotoStudioRenderer.cpp Engine/Renderer/Renderers/PhotoStudioRenderer.hpp)
 
 set(engine_libs
     radiumCore
