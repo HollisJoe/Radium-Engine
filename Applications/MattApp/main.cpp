@@ -12,14 +12,20 @@
 
 #include <MattApp.hpp>
 
+#include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
+#include <Engine/Renderer/RenderObject/RenderObject.hpp>
+#include <Engine/Renderer/Mesh/Mesh.hpp>
+
+#include <Engine/RadiumEngine.hpp>
+
 /* This file contains a minimal radium/qt application which shows the
 classic "Spinning Cube" demo. */
 
     /// Our minimal application uses QTimer to be called at a regular frame rate.
-    class MinimalApp : public QApplication
+    class MattApp : public QApplication
     {
     public:
-        MinimalApp(int& argc, char** argv)
+        MattApp(int& argc, char** argv)
                 : QApplication(argc, argv), _engine(Ra::Engine::RadiumEngine::createInstance()),
                   _task_queue(new Ra::Core::TaskQueue(std::thread::hardware_concurrency() - 1)), _frame_timer(nullptr),
                   _target_fps(60)
@@ -27,10 +33,37 @@ classic "Spinning Cube" demo. */
 
             _frame_timer = new QTimer(this);
             _frame_timer->setInterval(1000 / _target_fps);
-            connect(_frame_timer, &QTimer::timeout, this, &MinimalApp::frame);
+            connect(_frame_timer, &QTimer::timeout, this, &MattApp::frame);
         }
 
-        ~MinimalApp()
+        void fitToScene()
+        {
+            Ra::Core::Aabb aabb;
+
+            std::vector<std::shared_ptr<Ra::Engine::RenderObject>> ros;
+            _engine->getRenderObjectManager()->getRenderObjects( ros );
+
+            for ( auto ro : ros )
+            {
+                auto mesh = ro->getMesh();
+                auto pos = mesh->getGeometry().m_vertices;
+
+                for ( auto& p : pos )
+                {
+                    p = ro->getLocalTransform() * p;
+                }
+
+                Ra::Core::Vector3 bmin = pos.getMap().rowwise().minCoeff().head<3>();
+                Ra::Core::Vector3 bmax = pos.getMap().rowwise().maxCoeff().head<3>();
+
+                aabb.extend( bmin );
+                aabb.extend( bmax );
+            }
+
+            _viewer.fitCameraToScene( aabb );
+        }
+
+        ~MattApp()
         {
             _engine->cleanup();
         }
@@ -97,31 +130,34 @@ int main(int argc, char* argv[])
     QSurfaceFormat::setDefaultFormat( format );
 
     // Create app
-    MinimalApp app(argc, argv);
+    MattApp app(argc, argv);
     app._engine->initialize();
     app._viewer.show();
 
     // Load Blinn-Phong shader
-    Ra::Engine::ShaderConfiguration bpConfig("Cartoon");
-    bpConfig.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Cartoon.vert.glsl");
-    bpConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Cartoon.frag.glsl");
+    Ra::Engine::ShaderConfiguration bpConfig("BlinnPhong");
+    bpConfig.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/BlinnPhong.vert.glsl");
+    bpConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/BlinnPhong.frag.glsl");
     Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfig);
-
-    // Create and add a new light to the scene
-    auto light = Ra::Core::make_shared<Ra::Engine::SpotLight>();
-    light->setPosition(Ra::Core::Vector3(-30.f, 0.f, 0.f));
-    app._viewer.getRenderer()->addLight(light);
 
     // Create one system
     Ra::Engine::System* sys = new MinimalSystem;
     app._engine->registerSystem("Minimal system", sys);
 
     // Create and initialize entity and component
-    Ra::Engine::Entity* e = app._engine->getEntityManager()->createEntity("Cube");
-    Ra::Engine::Component* c = new MinimalComponent;
-    e->addComponent(c);
-    sys->registerComponent(e, c);
-    c->initialize();
+
+    srand(time(NULL));
+
+    for(int i = 0 ; i < 10 ; ++i)
+    {
+        Ra::Engine::Entity *e = app._engine->getEntityManager()->createEntity(std::to_string(i));
+        Ra::Engine::Component *c = new MinimalComponent;
+        e->addComponent(c);
+        sys->registerComponent(e, c);
+        c->initialize();
+    };
+
+    app.fitToScene();
 
     // Start the app.
     app._frame_timer->start();
