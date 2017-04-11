@@ -3,6 +3,7 @@
 
 #include <Engine/RadiumEngine.hpp>
 #include <Engine/Renderer/Renderer.hpp>
+#include <Engine/Renderer/Light/DirLight.hpp>
 
 namespace Ra
 {
@@ -30,8 +31,12 @@ namespace Ra
             private:
                 void initShaders();
                 void initBuffers();
+                void initLights();
 
                 void updateShadowMaps();
+                void configureLights();
+                void compute3PointsLighting( const RenderData& renderData, const std::vector<RenderObjectPtr>& renderObjects );
+                Core::Aabb getAabb();
 
             private:
                 enum RendererTextures
@@ -61,6 +66,11 @@ namespace Ra
                 static const int ShadowMapSize = 1024;
                 std::vector<std::shared_ptr<Texture>> m_shadowMaps;
                 std::vector<Core::Matrix4> m_lightMatrices;
+
+                std::unique_ptr<DirectionalLight> m_keyLight;
+                std::unique_ptr<DirectionalLight> m_fillLight;
+                std::unique_ptr<DirectionalLight> m_backLight;
+
         };
 
     } // namespace Engine
