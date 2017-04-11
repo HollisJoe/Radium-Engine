@@ -86,7 +86,7 @@ namespace Ra
 
         m_currentRenderer = m_renderers[0].get();
 
-        /*auto light = Ra::Core::make_shared<Engine::DirectionalLight>();
+        auto light = Ra::Core::make_shared<Engine::DirectionalLight>();
 
         for ( auto& renderer : m_renderers )
         {
@@ -96,7 +96,7 @@ namespace Ra
             }
         }
 
-        m_camera->attachLight( light );*/
+        m_camera->attachLight( light );
 
         emit rendererReady();
     }

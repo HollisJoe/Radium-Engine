@@ -30,6 +30,7 @@
 #include <Engine/Renderer/Texture/TextureManager.hpp>
 #include <Engine/Renderer/Texture/Texture.hpp>
 #include <Engine/Renderer/Renderers/DebugRender.hpp>
+#include <Engine/Managers/SystemDisplay/SystemDisplay.hpp>
 
 //#define NO_TRANSPARENCY
 namespace Ra
@@ -66,6 +67,7 @@ namespace Ra
         {
             initShaders();
             initBuffers();
+            initLights();
 
             DebugRender::createInstance();
             DebugRender::getInstance()->initialize();
@@ -128,6 +130,82 @@ namespace Ra
             m_secondaryTextures["OIT Revealage"]    = m_textures[RendererTextures_OITRevealage].get();
         }
 
+        /// Initializes our lights (key, fill, back) pointers
+        void PhotoStudioRenderer::initLights()
+        {
+            m_keyLight.reset(new DirectionalLight());
+            m_fillLight.reset(new DirectionalLight());
+            m_backLight.reset(new DirectionalLight());
+        }
+
+        /// Sets our lights (key, fill, back) directions and positions
+        void PhotoStudioRenderer::configureLights()
+        {
+            Core::Aabb aabb = getAabb();
+            Core::Vector3 top_left, bottom_right, center;
+
+            top_left = aabb.corner( aabb.TopLeftCeil );
+            bottom_right = aabb.corner( aabb.BottomRightFloor );
+            center = aabb.center();
+
+            /* I specified an arbitrary offset because I don't want light directions to be exactly the same,
+             * we don't want a perfectly symetric lighting. */
+            m_keyLight->setDirection( center + Ra::Core::Vector3( 0.3f, -1.0f, 0.0f ) );
+            m_fillLight->setDirection( center + Ra::Core::Vector3( -0.2f, 0.5f, 0.0f ) );
+            m_backLight->setDirection( center + Ra::Core::Vector3( -0.3f, 1.0f, 0.0f ) );
+
+            /* I set the key light to the top-left position of the aabb defining the scene, the fill light is located
+             * at the bottom-right corner of the aabb but we invert the z coeff to have it in front of our scene, not
+             * in the back. Finally, the back light is at the top (y-axis), centered (x-axis) and behind our scene. */
+            m_keyLight->setPosition( top_left );
+            m_fillLight->setPosition( Core::Vector3( bottom_right.coeff(0, 0), bottom_right.coeff(1, 0), -1.f * bottom_right.coeff(2, 0) ) );
+            m_backLight->setPosition( Core::Vector3( bottom_right.coeff(0, 0) / 2.f, -1.f * bottom_right.coeff(1, 0), bottom_right.coeff(2, 0) ) );
+        }
+
+        /// Renders every renderObject in the RenderObjectPtr vector using our lights parameters
+        void PhotoStudioRenderer::compute3PointsLighting( const RenderData& renderData, const std::vector<RenderObjectPtr>& renderObjects )
+        {
+            RenderParameters key_params, fill_params, back_params;
+
+            m_keyLight->getRenderParameters( key_params );
+            m_fillLight->getRenderParameters( fill_params );
+            m_backLight->getRenderParameters( back_params );
+
+            for ( const auto& ro : renderObjects )
+            {
+                ro->render(key_params, renderData);
+                ro->render(fill_params, renderData);
+                ro->render(back_params, renderData);
+            }
+        }
+
+        /// Returns the aabb defining the current scene
+        Core::Aabb PhotoStudioRenderer::getAabb()
+        {
+            Core::Aabb aabb;
+            std::vector<std::shared_ptr<Engine::RenderObject>> ros;
+            Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObjects( ros );
+
+            for ( auto ro : ros )
+            {
+                auto mesh = ro->getMesh();
+                auto pos = mesh->getGeometry().m_vertices;
+
+                for ( auto& p : pos )
+                {
+                    p = ro->getLocalTransform() * p;
+                }
+
+                Ra::Core::Vector3 bmin = pos.getMap().rowwise().minCoeff().head<3>();
+                Ra::Core::Vector3 bmax = pos.getMap().rowwise().maxCoeff().head<3>();
+
+                aabb.extend( bmin );
+                aabb.extend( bmax );
+            }
+
+            return aabb;
+        }
+
         void PhotoStudioRenderer::updateStepInternal( const RenderData& renderData )
         {
 #ifndef NO_TRANSPARENCY
@@ -158,33 +236,6 @@ namespace Ra
 
         void PhotoStudioRenderer::renderInternal( const RenderData& renderData )
         {
-            Ra::Core::Aabb aabb;
-            std::vector<std::shared_ptr<Engine::RenderObject>> ros;
-            Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObjects( ros );
-
-            for ( auto ro : ros )
-            {
-                auto mesh = ro->getMesh();
-                auto pos = mesh->getGeometry().m_vertices;
-
-                for ( auto& p : pos )
-                {
-                    p = ro->getLocalTransform() * p;
-                }
-
-                Ra::Core::Vector3 bmin = pos.getMap().rowwise().minCoeff().head<3>();
-                Ra::Core::Vector3 bmax = pos.getMap().rowwise().maxCoeff().head<3>();
-
-                aabb.extend( bmin );
-                aabb.extend( bmax );
-            }
-
-            Ra::Core::Vector3 top_left, bottom_right, center;
-
-            top_left = aabb.corner( aabb.TopLeftCeil );
-            bottom_right = aabb.corner( aabb.BottomRightFloor );
-            center = aabb.center();
-
             const ShaderProgram* shader;
 
             m_fbo->useAsTarget();
@@ -258,39 +309,9 @@ namespace Ra
                     }
                 }
             }
-            else
-            {
-                DirectionalLight key, fill, back;
 
-                key.setDirection( center + Ra::Core::Vector3( 0.3f, -1.0f, 0.0f ) );
-                fill.setDirection( center + Ra::Core::Vector3( -0.2f, 0.5f, 0.0f ) );
-                back.setDirection( center + Ra::Core::Vector3( -0.3f, 1.0f, 0.0f ) );
-
-                key.setPosition( top_left );
-                fill.setPosition( Core::Vector3( bottom_right.coeff(0, 0), bottom_right.coeff(1, 0), -1.f * bottom_right.coeff(2, 0) ) );
-                back.setPosition( Core::Vector3( bottom_right.coeff(0, 0) / 2.f, -1.f * bottom_right.coeff(1, 0), bottom_right.coeff(2, 0) ) );
-
-                RenderParameters key_params, fill_params, back_params;
-
-                key.getRenderParameters( key_params );
-                fill.getRenderParameters( fill_params );
-                back.getRenderParameters( back_params );
-
-                for ( const auto& ro : m_fancyRenderObjects )
-                {
-                    ro->render(key_params, renderData);
-                }
-
-                for ( const auto& ro : m_fancyRenderObjects )
-                {
-                    ro->render(fill_params, renderData);
-                }
-
-                for ( const auto& ro : m_fancyRenderObjects )
-                {
-                    ro->render(back_params, renderData);
-                }
-            }
+            configureLights();
+            compute3PointsLighting( renderData, m_fancyRenderObjects );
 
 #ifndef NO_TRANSPARENCY
             m_fbo->unbind();
@@ -324,43 +345,9 @@ namespace Ra
                     }
                 }
             }
-            else
-            {
-                DirectionalLight key, fill, back;
 
-                key.setDirection( center + Ra::Core::Vector3( 0.3f, -1.0f, 0.0f ) );
-                fill.setDirection( center + Ra::Core::Vector3( -0.2f, 0.5f, 0.0f ) );
-                back.setDirection( center + Ra::Core::Vector3( -0.3f, 1.0f, 0.0f ) );
-
-                key.setPosition( top_left );
-                fill.setPosition( Core::Vector3( bottom_right.coeff(0, 0), bottom_right.coeff(1, 0), -1.f * bottom_right.coeff(2, 0) ) );
-                back.setPosition( Core::Vector3( bottom_right.coeff(0, 0) / 2.f, -1.f * bottom_right.coeff(1, 0), bottom_right.coeff(2, 0) ) );
-
-                RenderParameters key_params, fill_params, back_params;
-
-                key.getRenderParameters( key_params );
-                fill.getRenderParameters( fill_params );
-                back.getRenderParameters( back_params );
-
-                for (size_t i = 0 ; i < m_fancyTransparentCount ; ++i)
-                {
-                    auto& ro = m_transparentRenderObjects[i];
-                    ro->render(key_params, renderData, shader);
-                }
-
-                for (size_t i = 0 ; i < m_fancyTransparentCount ; ++i)
-                {
-                    auto& ro = m_transparentRenderObjects[i];
-                    ro->render(fill_params, renderData, shader);
-                }
-
-                for (size_t i = 0 ; i < m_fancyTransparentCount ; ++i)
-                {
-                    auto& ro = m_transparentRenderObjects[i];
-                    ro->render(back_params, renderData, shader);
-                }
-
-            }
+            configureLights();
+            compute3PointsLighting( renderData, m_transparentRenderObjects );
 
             m_oitFbo->unbind();
 
@@ -416,57 +403,10 @@ namespace Ra
                         }
                     }
                 }
-                else
-                {
-                    DirectionalLight key, fill, back;
 
-                    key.setDirection( center + Ra::Core::Vector3( 0.3f, -1.0f, 0.0f ) );
-                    fill.setDirection( center + Ra::Core::Vector3( -0.2f, 0.5f, 0.0f ) );
-                    back.setDirection( center + Ra::Core::Vector3( -0.3f, 1.0f, 0.0f ) );
-
-                    key.setPosition( top_left );
-                    fill.setPosition( Core::Vector3( bottom_right.coeff(0, 0), bottom_right.coeff(1, 0), -1.f * bottom_right.coeff(2, 0) ) );
-                    back.setPosition( Core::Vector3( bottom_right.coeff(0, 0) / 2.f, -1.f * bottom_right.coeff(1, 0), bottom_right.coeff(2, 0) ) );
-
-                    RenderParameters key_params, fill_params, back_params;
-
-                    key.getRenderParameters( key_params );
-                    fill.getRenderParameters( fill_params );
-                    back.getRenderParameters( back_params );
-
-                    for ( const auto& ro : m_fancyRenderObjects )
-                    {
-                        ro->render(key_params, renderData);
-                    }
-
-                    for (size_t i = 0 ; i < m_fancyTransparentCount ; ++i)
-                    {
-                        auto& ro = m_transparentRenderObjects[i];
-                        ro->render(key_params, renderData);
-                    }
-
-                    for ( const auto& ro : m_fancyRenderObjects )
-                    {
-                        ro->render(fill_params, renderData);
-                    }
-
-                    for (size_t i = 0 ; i < m_fancyTransparentCount ; ++i)
-                    {
-                        auto& ro = m_transparentRenderObjects[i];
-                        ro->render(fill_params, renderData);
-                    }
-
-                    for ( const auto& ro : m_fancyRenderObjects )
-                    {
-                        ro->render(back_params, renderData);
-                    }
-
-                    for (size_t i = 0 ; i < m_fancyTransparentCount ; ++i)
-                    {
-                        auto& ro = m_transparentRenderObjects[i];
-                        ro->render(back_params, renderData);
-                    }
-                }
+                configureLights();
+                compute3PointsLighting( renderData, m_fancyRenderObjects );
+                compute3PointsLighting( renderData, m_transparentRenderObjects );
 
                 glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 glDisable(GL_POLYGON_OFFSET_LINE);

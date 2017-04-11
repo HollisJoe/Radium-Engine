@@ -145,17 +145,11 @@ int main(int argc, char* argv[])
     app._engine->registerSystem("Minimal system", sys);
 
     // Create and initialize entity and component
-
-    srand(time(NULL));
-
-    for(int i = 0 ; i < 10 ; ++i)
-    {
-        Ra::Engine::Entity *e = app._engine->getEntityManager()->createEntity(std::to_string(i));
-        Ra::Engine::Component *c = new MinimalComponent;
-        e->addComponent(c);
-        sys->registerComponent(e, c);
-        c->initialize();
-    };
+    Ra::Engine::Entity *e = app._engine->getEntityManager()->createEntity("Torus");
+    Ra::Engine::Component *c = new MinimalComponent;
+    e->addComponent(c);
+    sys->registerComponent(e, c);
+    c->initialize();
 
     app.fitToScene();
 
