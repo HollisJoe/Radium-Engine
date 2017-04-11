@@ -36,6 +36,7 @@
 
 #include <GuiBase/Viewer/TrackballCamera.hpp>
 #include <GuiBase/Utils/Keyboard.hpp>
+#include <GuiBase/Utils/KeyMapping.hpp>
 
 
 namespace Ra
@@ -157,7 +158,40 @@ namespace Ra
 
     void Gui::Viewer::mousePressEvent( QMouseEvent* event )
     {
-        switch ( event->button() )
+
+        if( event->button() == Gui::getKeyFromAction( Gui::KeyMappingAction::VIEWER_LEFT_BUTTON_PICKING_QUERY ) )
+        {
+            if ( isKeyPressed( Gui::getKeyFromAction( Gui::KeyMappingAction::VIEWER_RAYCAST_QUERY ) ) )
+            {
+                LOG( logINFO ) << "Raycast query launched";
+                Core::Ray r = m_camera->getCamera()->getRayFromScreen(Core::Vector2(event->x(), event->y()));
+                RA_DISPLAY_POINT(r.origin(), Core::Colors::Cyan(), 0.1f);
+                RA_DISPLAY_RAY(r, Core::Colors::Yellow());
+                auto ents = Engine::RadiumEngine::getInstance()->getEntityManager()->getEntities();
+                for (auto e : ents)
+                {
+                    e->rayCastQuery(r);
+                }
+            }
+            else
+            {
+                Engine::Renderer::PickingQuery query  = { Core::Vector2(event->x(), height() - event->y()), Core::MouseButton::RA_MOUSE_LEFT_BUTTON };
+                m_currentRenderer->addPickingRequest(query);
+                m_gizmoManager->handleMousePressEvent(event);
+            }
+        }
+        else if ( event->button() == Gui::getKeyFromAction( Gui::KeyMappingAction::TRACKBALL_CAMERA_MANIPULATION ) )
+        {
+            m_camera->handleMousePressEvent(event);
+        }
+        else if ( event->button() == Gui::getKeyFromAction( Gui::KeyMappingAction::VIEWER_RIGHT_BUTTON_PICKING_QUERY ) )
+        {
+            // Check picking
+            Engine::Renderer::PickingQuery query  = { Core::Vector2(event->x(), height() - event->y()), Core::MouseButton::RA_MOUSE_RIGHT_BUTTON };
+            m_currentRenderer->addPickingRequest(query);
+        }
+
+        /*switch ( event->button() )
         {
             case Qt::LeftButton:
             {
@@ -213,7 +247,7 @@ namespace Ra
             default:
             {
             } break;
-        }
+        }*/
     }
 
     void Gui::Viewer::mouseReleaseEvent( QMouseEvent* event )
@@ -247,7 +281,7 @@ namespace Ra
         keyReleased(event->key());
         m_camera->handleKeyReleaseEvent( event );
 
-        if (event->key() == Qt::Key_Z && !event->isAutoRepeat())
+        if (event->key() == Gui::getKeyFromAction( Gui::KeyMappingAction::VIEWER_TOGGLE_WIREFRAME ) && !event->isAutoRepeat())
         {
             m_currentRenderer->toggleWireframe();
         }

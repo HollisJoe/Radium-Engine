@@ -17,6 +17,7 @@
 #include <Engine/Renderer/Mesh/Mesh.hpp>
 
 #include <Engine/RadiumEngine.hpp>
+#include <GuiBase/Utils/KeyMapping.hpp>
 
 /* This file contains a minimal radium/qt application which shows the
 classic "Spinning Cube" demo. */
@@ -140,6 +141,12 @@ int main(int argc, char* argv[])
     bpConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/BlinnPhong.frag.glsl");
     Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfig);
 
+    // Load Lines shader (raycast)
+    Ra::Engine::ShaderConfiguration bpConfigLines("Lines");
+    bpConfigLines.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Lines.vert.glsl");
+    bpConfigLines.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Lines.frag.glsl");
+    Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfigLines);
+
     // Create one system
     Ra::Engine::System* sys = new MinimalSystem;
     app._engine->registerSystem("Minimal system", sys);
@@ -152,6 +159,16 @@ int main(int argc, char* argv[])
     c->initialize();
 
     app.fitToScene();
+
+    /* GIZMO_MANIPULATION and VIEWER_LEFT_BUTTON_PICKING_QUERY have to be mapped to the same key /!\ */
+    Ra::Gui::mapKeyToAction( Qt::LeftButton, Ra::Gui::KeyMappingAction::TRACKBALL_CAMERA_MANIPULATION );
+    Ra::Gui::mapKeyToAction( Qt::Key_F, Ra::Gui::KeyMappingAction::TRACKBALL_CAMERA_ROTATE_AROUND );
+    Ra::Gui::mapKeyToAction( Qt::MiddleButton, Ra::Gui::KeyMappingAction::VIEWER_RIGHT_BUTTON_PICKING_QUERY );
+    Ra::Gui::mapKeyToAction( Qt::RightButton, Ra::Gui::KeyMappingAction::VIEWER_LEFT_BUTTON_PICKING_QUERY );
+    Ra::Gui::mapKeyToAction( Qt::Key_Space, Ra::Gui::KeyMappingAction::VIEWER_RAYCAST_QUERY );
+    Ra::Gui::mapKeyToAction( Qt::Key_W, Ra::Gui::KeyMappingAction::VIEWER_TOGGLE_WIREFRAME );
+    Ra::Gui::mapKeyToAction( Qt::RightButton, Ra::Gui::KeyMappingAction::GIZMO_MANIPULATION );
+    Ra::Gui::mapKeyToAction( Qt::RightButton, Ra::Gui::KeyMappingAction::COLORWIDGET_PRESSBUTTON );
 
     // Start the app.
     app._frame_timer->start();
