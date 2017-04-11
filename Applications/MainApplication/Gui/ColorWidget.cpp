@@ -5,6 +5,7 @@
 #include <QColorDialog>
 
 #include <Core/Log/Log.hpp>
+#include <GuiBase/Utils/KeyMapping.hpp>
 
 namespace Ra
 {
@@ -34,7 +35,7 @@ namespace Ra
 
         void ColorWidget::mousePressEvent( QMouseEvent* e )
         {
-            if ( e->button() == Qt::LeftButton )
+            if ( e->button() == getKeyFromAction( KeyMappingAction::COLORWIDGET_PRESSBUTTON ) )
             {
                 QColor color = QColorDialog::getColor( m_currentColor );
                 if ( color != m_currentColor )

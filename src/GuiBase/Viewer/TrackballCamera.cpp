@@ -10,6 +10,7 @@
 #include <Core/Event/KeyEvent.hpp>
 #include <Engine/Renderer/Camera/Camera.hpp>
 #include <Engine/Renderer/Light/Light.hpp>
+#include <GuiBase/Utils/KeyMapping.hpp>
 
 namespace Ra
 {
@@ -54,7 +55,8 @@ namespace Ra
     bool Gui::TrackballCamera::handleMousePressEvent( QMouseEvent* event )
     {
         // Whole manipulation is done with middle button and modifiers
-        if ( event->button() != Qt::MiddleButton )
+        /*if ( event->button() != Qt::MiddleButton )*/
+        if ( event->button() != Gui::getKeyFromAction( Gui::KeyMappingAction::TRACKBALL_CAMERA_MANIPULATION ) )
         {
             return false;
         }
@@ -155,7 +157,7 @@ namespace Ra
 
     bool Gui::TrackballCamera::handleKeyPressEvent( QKeyEvent* e )
     {
-        if ( e->key() == Qt::Key_F )
+        if ( e->key() == Ra::Gui::getKeyFromAction( Ra::Gui::KeyMappingAction::TRACKBALL_CAMERA_ROTATE_AROUND ) )
         {
             m_rotateAround = !m_rotateAround;
             return true;
