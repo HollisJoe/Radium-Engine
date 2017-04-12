@@ -176,6 +176,8 @@ int main(int argc, char* argv[])
     Ra::Gui::mapKeyToAction( Qt::RightButton, Ra::Gui::KeyMappingAction::GIZMO_MANIPULATION );
     Ra::Gui::mapKeyToAction( Qt::RightButton, Ra::Gui::KeyMappingAction::COLORWIDGET_PRESSBUTTON );
 
+    Ra::Gui::saveKeymapConfiguration( "config_matthieu.txt" );
+
     // Start the app.
     app._frame_timer->start();
     return app.exec();

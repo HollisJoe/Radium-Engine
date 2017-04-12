@@ -46,6 +46,8 @@ namespace Ra
                     configFile << it->first << std::endl;
                     configFile << it->second << std::endl;
                 }
+
+                configFile.close();
             }
             else
             {
