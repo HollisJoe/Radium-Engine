@@ -141,7 +141,13 @@ int main(int argc, char* argv[])
     bpConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/BlinnPhong.frag.glsl");
     Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfig);
 
-    // Load Lines shader (raycast)
+    // Load Cartoon shader
+    Ra::Engine::ShaderConfiguration bpConfigCartoon("Cartoon");
+    bpConfigCartoon.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Cartoon.vert.glsl");
+    bpConfigCartoon.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Cartoon.frag.glsl");
+    Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfigCartoon);
+
+    // Load Lines shader (raycast, debug)
     Ra::Engine::ShaderConfiguration bpConfigLines("Lines");
     bpConfigLines.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Lines.vert.glsl");
     bpConfigLines.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Lines.frag.glsl");
@@ -151,12 +157,12 @@ int main(int argc, char* argv[])
     Ra::Engine::System* sys = new MinimalSystem;
     app._engine->registerSystem("Minimal system", sys);
 
-    // Create and initialize entity and component
-    Ra::Engine::Entity *e = app._engine->getEntityManager()->createEntity("Torus");
-    Ra::Engine::Component *c = new MinimalComponent;
-    e->addComponent(c);
-    sys->registerComponent(e, c);
-    c->initialize();
+    // Create and initialize entity and component (BlinnPhongTorus)
+    Ra::Engine::Entity * e_simpleTorus = app._engine->getEntityManager()->createEntity("BlinnPhongTorus");
+    Ra::Engine::Component * c_simpleTorus = new SimpleTorus;
+    e_simpleTorus->addComponent(c_simpleTorus);
+    sys->registerComponent(e_simpleTorus, c_simpleTorus);
+    c_simpleTorus->initialize();
 
     app.fitToScene();
 
