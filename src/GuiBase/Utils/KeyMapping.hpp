@@ -22,6 +22,9 @@ namespace Ra
 
         int getKeyFromAction( const KeyMappingAction action );
         void mapKeyToAction( const int key, const KeyMappingAction action );
+        void loadDefaultKeymapConfiguration();
+        void saveKeymapConfiguration( const std::string filename );
+        void loadKeymapConfiguration( const std::string filename );
     }
 }
 

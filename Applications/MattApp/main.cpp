@@ -142,16 +142,16 @@ int main(int argc, char* argv[])
     Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfig);
 
     // Load Cartoon shader
-    Ra::Engine::ShaderConfiguration bpConfigCartoon("Cartoon");
-    bpConfigCartoon.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Cartoon.vert.glsl");
-    bpConfigCartoon.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Cartoon.frag.glsl");
-    Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfigCartoon);
+    Ra::Engine::ShaderConfiguration cConfig("Cartoon");
+    cConfig.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Cartoon.vert.glsl");
+    cConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Cartoon.frag.glsl");
+    Ra::Engine::ShaderConfigurationFactory::addConfiguration(cConfig);
 
     // Load Lines shader (raycast, debug)
-    Ra::Engine::ShaderConfiguration bpConfigLines("Lines");
-    bpConfigLines.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Lines.vert.glsl");
-    bpConfigLines.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Lines.frag.glsl");
-    Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfigLines);
+    Ra::Engine::ShaderConfiguration lConfig("Lines");
+    lConfig.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Lines.vert.glsl");
+    lConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/Lines.frag.glsl");
+    Ra::Engine::ShaderConfigurationFactory::addConfiguration(lConfig);
 
     // Create one system
     Ra::Engine::System* sys = new MinimalSystem;
