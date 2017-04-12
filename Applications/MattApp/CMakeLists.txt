@@ -32,7 +32,7 @@ include_directories(
 #file( GLOB file_sources *.cpp *.c )
 #file( GLOB file_headers *.hpp *.h )
 file( GLOB file_sources main.cpp MattApp.cpp)
-file( GLOB file_headers MattApp.hpp)
+file( GLOB file_headers MattApp.hpp config.txt)
 
 
 # Generate an executable
