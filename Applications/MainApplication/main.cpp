@@ -15,7 +15,7 @@ int main( int argc, char** argv )
     Ra::Core::Timer::TimePoint t0, t1;
 
     // Ra::Gui::loadDefaultKeymapConfiguration();
-    Ra::Gui::loadKeymapConfiguration( "/home/mlocusso/Radium-Engine/Radium-Engine/Applications/MainApplication/config_matthieu.txt" );
+    Ra::Gui::loadKeymapConfiguration( "../../Applications/MainApplication/config_matthieu.txt" );
 
     while ( app.isRunning() )
     {
