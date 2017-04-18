@@ -1,16 +1,14 @@
 #include <GuiBase/Viewer/TrackballCamera.hpp>
 
-#include <iostream>
 #include <QMessageBox>
 #include <QApplication>
 
-#include <Core/Log/Log.hpp>
-#include <Core/Math/Math.hpp>
 #include <Core/Event/MouseEvent.hpp>
 #include <Core/Event/KeyEvent.hpp>
 #include <Engine/Renderer/Camera/Camera.hpp>
 #include <Engine/Renderer/Light/Light.hpp>
-#include <GuiBase/Utils/KeyMapping.hpp>
+
+#include <GuiBase/Utils/KeyMappingManager.hpp>
 
 namespace Ra
 {
@@ -56,7 +54,7 @@ namespace Ra
     {
         // Whole manipulation is done with middle button and modifiers
         /*if ( event->button() != Qt::MiddleButton )*/
-        if ( event->button() != Gui::getKeyFromAction( Gui::KeyMappingAction::TRACKBALL_CAMERA_MANIPULATION ) )
+        if ( event->button() != Gui::KeyMappingManager::getInstance()->getKeyFromAction(Gui::KeyMappingManager::TRACKBALL_CAMERA_MANIPULATION) )
         {
             return false;
         }
@@ -157,7 +155,7 @@ namespace Ra
 
     bool Gui::TrackballCamera::handleKeyPressEvent( QKeyEvent* e )
     {
-        if ( e->key() == Ra::Gui::getKeyFromAction( Ra::Gui::KeyMappingAction::TRACKBALL_CAMERA_ROTATE_AROUND ) )
+        if ( e->key() == Gui::KeyMappingManager::getInstance()->getKeyFromAction( Gui::KeyMappingManager::TRACKBALL_CAMERA_ROTATE_AROUND ) )
         {
             m_rotateAround = !m_rotateAround;
             return true;
