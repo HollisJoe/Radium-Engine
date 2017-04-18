@@ -17,8 +17,9 @@
 #include <Engine/Renderer/Mesh/Mesh.hpp>
 
 #include <Engine/RadiumEngine.hpp>
-#include <GuiBase/Utils/KeyMapping.hpp>
+
 #include <Engine/Renderer/Light/DirLight.hpp>
+#include <GuiBase/Utils/KeyMappingManager.hpp>
 
 /* This file contains a minimal radium/qt application which shows the
 classic "Spinning Cube" demo. */
@@ -167,7 +168,8 @@ int main(int argc, char* argv[])
 
     app.fitToScene();
 
-    Ra::Gui::loadKeymapConfiguration( "../../Applications/MattApp/config_matthieu.txt" );
+    Ra::Gui::KeyMappingManager::createInstance();
+    Ra::Gui::KeyMappingManager::getInstance()->loadConfiguration( "../../Applications/MattApp/config_matthieu.xml" );
 
     // Start the app.
     app._frame_timer->start();

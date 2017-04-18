@@ -15,6 +15,7 @@
 #include <Engine/Renderer/RenderTechnique/RenderTechnique.hpp>
 
 #include <GuiBase/Utils/Keyboard.hpp>
+#include <GuiBase/Utils/KeyMappingManager.hpp>
 
 /* This file contains a minimal radium/qt application which shows the
 classic "Spinning Cube" demo. */
@@ -67,6 +68,12 @@ void SimpleTorus::spin()
                 m_renderObjects[0]);
         Ra::Core::Transform t = ro->getLocalTransform();
         ro->setLocalTransform(rot * t);
+    }
+
+    if(Ra::Gui::isKeyPressed(Qt::Key_F3))
+    {
+        Ra::Gui::keyReleased(Qt::Key_F3);
+        Ra::Gui::KeyMappingManager::getInstance()->reloadConfiguration();
     }
 }
 
