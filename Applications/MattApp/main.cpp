@@ -169,7 +169,7 @@ int main(int argc, char* argv[])
     app.fitToScene();
 
     Ra::Gui::KeyMappingManager::createInstance();
-    Ra::Gui::KeyMappingManager::getInstance()->loadConfiguration( "../../Applications/MattApp/config_matthieu.xml" );
+    Ra::Gui::KeyMappingManager::getInstance()->loadConfiguration();
 
     // Start the app.
     app._frame_timer->start();
