@@ -38,7 +38,7 @@ file( GLOB file_headers MattApp.hpp config.txt)
 # Generate an executable
 add_executable( ${app_target} ${file_sources} ${file_headers} )
 
-add_dependencies( ${app_target}  radium_assets)
+add_dependencies( ${app_target}  radium_assets radium_configs )
 
 
 # Link good libraries
