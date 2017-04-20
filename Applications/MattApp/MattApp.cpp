@@ -34,7 +34,7 @@ void SimpleTorus::initialize()
     // Create a cube mesh render object.
 
     std::shared_ptr<Ra::Engine::Mesh> display(new Ra::Engine::Mesh("SimpleTorus"));
-    display->loadGeometry(Ra::Core::MeshUtils::makeParametricTorus(0.25, 0.1));
+    display->loadGeometry(Ra::Core::MeshUtils::makeParametricTorus<100, 40>(0.25, 0.1));
 
     auto *material = new Ra::Engine::Material("MattMaterial");
 
