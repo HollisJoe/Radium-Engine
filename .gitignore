@@ -90,5 +90,9 @@ include/
 # Json
 *.json
 
+# Ignore Debug and Release folders
+Debug/
+Release/
+
 #Auto-generated plugins registration file
 src/Core/Utils/Version.cpp
