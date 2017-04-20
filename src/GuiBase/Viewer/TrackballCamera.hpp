@@ -29,6 +29,8 @@ namespace Ra
             /// @return true if the event has been taken into account, false otherwise
             virtual bool handleKeyReleaseEvent( QKeyEvent* event ) override;
 
+            void set_cameraRadius(Scalar rad);
+
         public slots:
             virtual void setCameraPosition( const Core::Vector3& position ) override;
             virtual void setCameraTarget( const Core::Vector3& target ) override;
@@ -36,15 +38,15 @@ namespace Ra
 
             virtual void resetCamera() override;
 
-        private:
-            void handleCameraRotate( Scalar dx, Scalar dy );
-            void handleCameraPan( Scalar dx, Scalar dy );
-            void handleCameraZoom( Scalar dx, Scalar dy );
-            void handleCameraZoom( Scalar z );
+        protected:
+            virtual void handleCameraRotate( Scalar dx, Scalar dy );
+            virtual void handleCameraPan( Scalar dx, Scalar dy );
+            virtual void handleCameraZoom( Scalar dx, Scalar dy );
+            virtual void handleCameraZoom( Scalar z );
 
             void updatePhiTheta();
 
-        private:
+        protected:
             Core::Vector3 m_trackballCenter;
 
             Scalar m_lastMouseX;

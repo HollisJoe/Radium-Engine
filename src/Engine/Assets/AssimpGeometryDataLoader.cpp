@@ -7,6 +7,8 @@
 #include <Engine/Assets/GeometryData.hpp>
 #include <Engine/Assets/AssimpWrapper.hpp>
 
+#include <Engine/Managers/SystemDisplay/SystemDisplay.hpp>
+
 namespace Ra {
     namespace Asset {
 
@@ -268,9 +270,21 @@ namespace Ra {
             const uint size = mesh.mNumVertices;
             std::vector<Core::Vector3> normal(data.getVerticesSize(), Core::Vector3::Zero());
 #pragma omp parallel for
+//            std::cout<<data.getName()<<std::endl;
             for( int i = 0; i < int(size); ++i )
             {
+//                if(data.getName() == "Cube.001")
+//                {
+//                    RA_DISPLAY_VECTOR( data.getVertices()[data.m_duplicateTable.at(i)],
+//                                   assimpToCore(mesh.mNormals[i]), Ra::Core::Colors::Red());
+//                }
                 normal.at( data.m_duplicateTable.at( i ) ) += assimpToCore( mesh.mNormals[i] );
+
+//                LOG(logINFO) << data.m_duplicateTable.at(i) << "\n";
+//                LOG(logINFO)  << normal.at(data.m_duplicateTable.at( i ))[0]
+//                        << " " << normal.at(data.m_duplicateTable.at( i ))[1]
+//                        << " " << normal.at(data.m_duplicateTable.at( i ))[2] << "\n";
+
             }
 
 #pragma omp parallel for
