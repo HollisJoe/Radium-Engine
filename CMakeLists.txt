@@ -112,8 +112,6 @@ add_subdirectory(src)
 #   Set Base directories for dependencies
 
 add_subdirectory(Applications)
-
-
 # ----------------------------------------------------------------------------------------------------------------------
 #   External plugins
 # FIXME(Charly) Not sure this is really the greatest idea ever
@@ -154,6 +152,8 @@ endif(DOXYGEN_FOUND)
 ################################################################################
 #
 set(SHADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Shaders")
+
+
 
 add_custom_target( radium_assets
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${SHADER_DIR} "${EXECUTABLE_OUTPUT_PATH}/Shaders"
