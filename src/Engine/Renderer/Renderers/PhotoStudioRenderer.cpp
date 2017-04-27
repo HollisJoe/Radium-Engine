@@ -133,9 +133,9 @@ namespace Ra
         /// Initializes our lights (key, fill, back) pointers
         void PhotoStudioRenderer::initLights()
         {
-            m_keyLight.reset(new DirectionalLight());
-            m_fillLight.reset(new DirectionalLight());
-            m_backLight.reset(new DirectionalLight());
+            m_keyLight.reset(new PointLight());
+            m_fillLight.reset(new PointLight());
+            m_backLight.reset(new PointLight());
         }
 
         /// Sets our lights (key, fill, back) directions and positions
@@ -148,11 +148,9 @@ namespace Ra
             bottom_right = aabb.corner( aabb.BottomRightFloor );
             center = aabb.center();
 
-            /* I specified an arbitrary offset because I don't want light directions to be exactly the same,
-             * we don't want a perfectly symetric lighting. */
-            m_keyLight->setDirection( center + Ra::Core::Vector3( 0.3f, -1.0f, 0.0f ) );
-            m_fillLight->setDirection( center + Ra::Core::Vector3( -0.2f, 0.5f, 0.0f ) );
-            m_backLight->setDirection( center + Ra::Core::Vector3( -0.3f, 1.0f, 0.0f ) );
+            m_keyLight->setDirection( center );
+            m_fillLight->setDirection( center );
+            m_backLight->setDirection( center );
 
             /* I set the key light to the top-left position of the aabb defining the scene, the fill light is located
              * at the bottom-right corner of the aabb but we invert the z coeff to have it in front of our scene, not

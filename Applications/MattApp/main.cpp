@@ -143,6 +143,12 @@ int main(int argc, char* argv[])
     bpConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/BlinnPhong.frag.glsl");
     Ra::Engine::ShaderConfigurationFactory::addConfiguration(bpConfig);
 
+    // Load Blinn-Phong PhotoStudio shader
+    Ra::Engine::ShaderConfiguration bppsConfig("BlinnPhongPhotoStudio");
+    bppsConfig.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/BlinnPhongPhotoStudio.vert.glsl");
+    bppsConfig.addShader(Ra::Engine::ShaderType_FRAGMENT, "Shaders/BlinnPhongPhotoStudio.frag.glsl");
+    Ra::Engine::ShaderConfigurationFactory::addConfiguration(bppsConfig);
+
     // Load Cartoon shader
     Ra::Engine::ShaderConfiguration cConfig("Cartoon");
     cConfig.addShader(Ra::Engine::ShaderType_VERTEX, "Shaders/Cartoon.vert.glsl");

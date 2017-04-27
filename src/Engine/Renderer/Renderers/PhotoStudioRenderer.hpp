@@ -4,6 +4,7 @@
 #include <Engine/RadiumEngine.hpp>
 #include <Engine/Renderer/Renderer.hpp>
 #include <Engine/Renderer/Light/DirLight.hpp>
+#include <Engine/Renderer/Light/PointLight.hpp>
 
 namespace Ra
 {
@@ -67,9 +68,9 @@ namespace Ra
                 std::vector<std::shared_ptr<Texture>> m_shadowMaps;
                 std::vector<Core::Matrix4> m_lightMatrices;
 
-                std::unique_ptr<DirectionalLight> m_keyLight;
-                std::unique_ptr<DirectionalLight> m_fillLight;
-                std::unique_ptr<DirectionalLight> m_backLight;
+                std::unique_ptr<PointLight> m_keyLight;
+                std::unique_ptr<PointLight> m_fillLight;
+                std::unique_ptr<PointLight> m_backLight;
 
         };
 

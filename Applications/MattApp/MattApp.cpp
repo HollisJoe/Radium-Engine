@@ -34,11 +34,13 @@ void SimpleTorus::initialize()
     // Create a cube mesh render object.
 
     std::shared_ptr<Ra::Engine::Mesh> display(new Ra::Engine::Mesh("SimpleTorus"));
-    display->loadGeometry(Ra::Core::MeshUtils::makeParametricTorus<100, 40>(0.25, 0.1));
+    display->loadGeometry(Ra::Core::MeshUtils::makeParametricTorus<50, 20>(0.25, 0.1));
 
     auto *material = new Ra::Engine::Material("MattMaterial");
 
-    material->m_kd = Ra::Core::Color(0.3f, 0.3f, 0.7f, 1.0f);
+    material->m_kd = Ra::Core::Color(1.0f, 1.0f, 1.0f, 1.0f);
+    material->m_ks = Ra::Core::Color(0.2f, 0.2f, 0.2f, 1.0f);
+    material->m_ns = 5.f;
 
     auto renderObject = Ra::Engine::RenderObject::createRenderObject("SimpleTorusRO", this,
                                                                      Ra::Engine::RenderObjectType::Fancy,
@@ -46,6 +48,30 @@ void SimpleTorus::initialize()
                                                                      Ra::Engine::ShaderConfigurationFactory::getConfiguration("BlinnPhong"),
                                                                      material);
     addRenderObject(renderObject);
+
+    /* TEST */
+
+    std::shared_ptr<Ra::Engine::Mesh> displayPlane(new Ra::Engine::Mesh("SimplePlane"));
+    displayPlane->loadGeometry(Ra::Core::MeshUtils::makeCurvedPlane(20, 20, 0.3f));
+
+    auto *materialPlane = new Ra::Engine::Material("MattMaterial2");
+
+    materialPlane->m_kd = Ra::Core::Color(0.8f, 0.0f, 0.0f, 1.0f);
+    materialPlane->m_ks = Ra::Core::Color(0.2f, 0.2f, 0.2f, 1.0f);
+    materialPlane->m_ns = 5.f;
+
+    auto renderObjectPlane = Ra::Engine::RenderObject::createRenderObject("SimplePlaneRO", this,
+                                                                     Ra::Engine::RenderObjectType::Fancy,
+                                                                     displayPlane,
+                                                                     Ra::Engine::ShaderConfigurationFactory::getConfiguration("BlinnPhongPhotoStudio"),
+                                                                     materialPlane);
+
+    /*Ra::Core::Transform scaleTsfm = Ra::Core::Transform::Identity();
+    scaleTsfm.scale( 5.0f );
+    renderObjectPlane->setLocalTransform( renderObjectPlane->getLocalTransform() * scaleTsfm );
+    renderObjectPlane->setLocalTransform( renderObjectPlane->getLocalTransform() * Ra::Core::Translation( 0.0f, -0.15f, -0.15f ) );*/
+
+    addRenderObject(renderObjectPlane);
 }
 
 /// This function will spin our cube
