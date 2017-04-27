@@ -63,6 +63,8 @@ namespace Ra
             /// towards tip with given base radius.
             RA_CORE_API TriangleMesh makeCone( const Vector3& base, const Vector3& tip, Scalar radius, uint nFaces = 32);
 
+            TriangleMesh makeCurvedPlane( const uint rows = 1, const uint cols = 1, Scalar curvature = 0.25f );
+
         }  // Mesh Utils
     } // Core
 } // Ra
