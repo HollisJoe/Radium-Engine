@@ -1,5 +1,7 @@
 #include <Core/Mesh/MeshPrimitives.hpp>
 #include <Core/Containers/Grid.hpp>
+#include <Core/Math/Spline.hpp>
+#include <Core/Log/Log.hpp>
 
 namespace Ra
 {
@@ -499,6 +501,59 @@ namespace Ra
                 }
 
                 return grid;
+            }
+
+
+
+
+            TriangleMesh makeCurvedPlane( uint rows, uint cols, Scalar curvature )
+            {
+                TriangleMesh curvedPlane;
+
+                VectorArray<Vector3> points;
+                points.push_back(Vector3( -0.5, 0.5, 0.0 ));
+                points.push_back(Vector3( -0.5, curvature, 0.0));
+                points.push_back(Vector3( -0.5, 0.0, 0.0 ));
+                points.push_back(Vector3( -0.5, 0.0, curvature ));
+                points.push_back(Vector3( -0.5, 0.0, 0.5f));
+
+                Spline<3, 4> spline;
+                spline.setCtrlPoints( points );
+
+                const uint R = (rows + 1);
+                const uint C = (cols + 1);
+                const uint v_size = C * R;
+
+                float step = 1.f / cols;
+
+                curvedPlane.m_vertices.resize( v_size );
+
+                for( uint i = 0 ; i < C ; ++i )
+                {
+                    for (uint j = 0; j < R; ++j)
+                    {
+                        float coeff = j * (1.f / (R - 1));
+
+                        Vector3 point = spline.f(coeff);
+                        point[0] += i * step;
+
+                        curvedPlane.m_vertices[i * R + j] = point;
+                    }
+                }
+
+                for( uint i = 1 ; i < C ; ++i )
+                {
+                    for (uint j = 0; j < R - 1; ++j)
+                    {
+                        curvedPlane.m_triangles.push_back( Triangle( ( i - 1 ) * R + j, i * R + j, i * R + 1 + j ) );
+                        curvedPlane.m_triangles.push_back( Triangle( ( i - 1 ) * R + j, i * R + 1 + j, ( i - 1 ) * R + 1 + j ) );
+                    }
+                }
+
+                getAutoNormals( curvedPlane, curvedPlane.m_normals );
+                checkConsistency( curvedPlane );
+
+                return curvedPlane;
             }
         } // MeshUtils
     } // Core
