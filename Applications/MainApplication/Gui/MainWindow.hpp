@@ -165,6 +165,7 @@ namespace Ra
             /// Widget to allow material edition.
             MaterialEditor* m_materialEditor;
 
+            //Ajout Axel
             ///Garde l'adresse du point traqué.
             Ra::Core::Vector3* m_trackedPoint;
         };

@@ -373,6 +373,7 @@ namespace Ra
     {
        m_realFrameRate = on;
     }
+
     void BaseApplication::setRecordFrames(bool on)
     {
         m_recordFrames = on;

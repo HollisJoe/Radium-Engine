@@ -100,11 +100,13 @@ namespace Ra
         connect(this, &MainWindow::selectedItem, m_viewer->getGizmoManager(), &GizmoManager::setEditable);
 
 
+        //Ajout Axel
         // ###TODO###
         // connecter signal du gizmoManager "a bougé" sur un slot de la mainwindow "a bougé"
         // ce slot met à jour la GUI en utilisant le RO suivi pour retrouver le point
 
-        connect(m_viewer->getGizmoManager(),&GizmoManager::GizmoMouseMove,this,&MainWindow::updateTrackedPointInfo);
+        //connect(m_viewer->getGizmoManager(),&GizmoManager::GizmoMouseMove,this,&MainWindow::updateTrackedPointInfo);
+        connect(m_viewer,&Viewer::updateTrackedPoint,this,&MainWindow::updateTrackedPointInfo);
 
         // Enable changing shaders
         connect(m_currentShaderBox, static_cast<void (QComboBox::*)(const QString&)>( &QComboBox::currentIndexChanged ),

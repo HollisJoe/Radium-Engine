@@ -315,6 +315,7 @@ namespace Ra
 
     void Gui::Viewer::waitForRendering()
     {
+        emit updateTrackedPoint();
     }
 
     void Gui::Viewer::handleFileLoading( const std::string& file )
@@ -342,13 +343,13 @@ namespace Ra
             }
             else if (query.m_button == Core::MouseButton::RA_MOUSE_RIGHT_BUTTON)
             {
+                 //Ajout Axel
+                //Origine -> Pas de bool pour le signal ET pas de if (ctrl)
                 if (isKeyPressed(Qt::Key_Control))
                     emit rightClickPicking(m_currentRenderer->getPickingResults()[i],true);
                 else
                     emit rightClickPicking(m_currentRenderer->getPickingResults()[i],false);
             }
-            //Ajout Axel
-            // Rajouter un if ou autre si clic droit + ctrl ?
         }
     }
 

@@ -116,7 +116,7 @@ namespace Ra
                 setTransform( newTransform );
 
 
-
+                //Ajout Axel
                 // ###TODO###
                 // emettre signal pour dire qu'on a bougé
 
