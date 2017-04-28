@@ -208,6 +208,17 @@ namespace Ra
                 // Check picking
                 Engine::Renderer::PickingQuery query  = { Core::Vector2(event->x(), height() - event->y()), Core::MouseButton::RA_MOUSE_RIGHT_BUTTON };
                 m_currentRenderer->addPickingRequest(query);
+
+                //Ajout Axel
+
+//                if (isKeyPressed(Qt::Key_Control))
+//                {
+//                    std::cout << "Coucou" << std::endl;
+
+                    // ### TO DO ###
+                    // Faire le lien avec la MainWindow pour sélectionner le point
+//                    emit pointSelected();
+//                }
             }
             break;
 
@@ -331,8 +342,13 @@ namespace Ra
             }
             else if (query.m_button == Core::MouseButton::RA_MOUSE_RIGHT_BUTTON)
             {
-                emit rightClickPicking(m_currentRenderer->getPickingResults()[i]);
+                if (isKeyPressed(Qt::Key_Control))
+                    emit rightClickPicking(m_currentRenderer->getPickingResults()[i],true);
+                else
+                    emit rightClickPicking(m_currentRenderer->getPickingResults()[i],false);
             }
+            //Ajout Axel
+            // Rajouter un if ou autre si clic droit + ctrl ?
         }
     }
 

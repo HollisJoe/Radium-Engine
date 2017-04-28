@@ -118,7 +118,10 @@ namespace Ra
         signals:
             void rendererReady();               //! Emitted when the rendered is correctly initialized
             void leftClickPicking ( int id );   //! Emitted when the result of a left click picking is known
-            void rightClickPicking( int id );   //! Emitted when the resut of a right click picking is known
+            void rightClickPicking( int id, bool ctrl );   //! Emitted when the resut of a right click picking is known
+
+            //Ajout Axel*
+            void pointSelected ();
 
         public slots:
             /// Tell the renderer to reload all shaders.

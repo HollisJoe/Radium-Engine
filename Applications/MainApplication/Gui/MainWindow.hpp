@@ -69,6 +69,7 @@ namespace Ra
             /// Update the UI ( most importantly gizmos ) to the modifications of the engine/
             void onFrameComplete();
 
+
         public slots:
             /// Callback to rebuild the item model when the engine objects change.
             void onItemAdded( const Engine::ItemEntry& ent );
@@ -95,6 +96,10 @@ namespace Ra
 
             /// Cleanup resources.
             void cleanup();
+
+            //Rajout Axel
+
+            void updateTrackedPointInfo();
 
         signals:
             /// Emitted when the closed button has been hit.
@@ -129,7 +134,8 @@ namespace Ra
             void changeRenderer(const QString& rendererName);
 
             /// Slot for the picking results from the viewer.
-            void handlePicking( int ROIndex );
+            //Ajout Axel ctrl
+            void handlePicking(int ROIndex , bool ctrl = false);
 
             /// Slot to accept a new renderer
             void onRendererReady();
@@ -148,6 +154,7 @@ namespace Ra
             void on_actionDeferred_triggered();
             void on_actionExperimental_triggered();
 
+
         private:
             /// Stores the internal model of engine objects for selection.
             GuiBase::ItemModel* m_itemModel;
@@ -157,6 +164,9 @@ namespace Ra
 
             /// Widget to allow material edition.
             MaterialEditor* m_materialEditor;
+
+            ///Garde l'adresse du point traqué.
+            Ra::Core::Vector3* m_trackedPoint;
         };
 
     } // namespace Gui

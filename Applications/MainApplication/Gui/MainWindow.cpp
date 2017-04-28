@@ -24,6 +24,7 @@
 #include <MainApplication.hpp>
 #include <PluginBase/RadiumPluginInterface.hpp>
 
+
 using Ra::Engine::ItemEntry;
 
 namespace Ra
@@ -51,6 +52,7 @@ namespace Ra
         createConnections();
 
         mainApp->framesCountForStatsChanged((uint) m_avgFramesCount->value());
+        m_trackedPoint = nullptr;
     }
 
     Gui::MainWindow::~MainWindow()
@@ -96,6 +98,13 @@ namespace Ra
         connect(this, &MainWindow::selectedItem, mainApp, &MainApplication::onSelectedItem);
         connect(this, &MainWindow::selectedItem, m_viewer->getGizmoManager(), &GizmoManager::setEditable);
         connect(this, &MainWindow::selectedItem, m_viewer->getGizmoManager(), &GizmoManager::setEditable);
+
+
+        // ###TODO###
+        // connecter signal du gizmoManager "a bougé" sur un slot de la mainwindow "a bougé"
+        // ce slot met à jour la GUI en utilisant le RO suivi pour retrouver le point
+
+        connect(m_viewer->getGizmoManager(),&GizmoManager::GizmoMouseMove,this,&MainWindow::updateTrackedPointInfo);
 
         // Enable changing shaders
         connect(m_currentShaderBox, static_cast<void (QComboBox::*)(const QString&)>( &QComboBox::currentIndexChanged ),
@@ -217,7 +226,8 @@ namespace Ra
         return m_selectionManager;
     }
 
-    void Gui::MainWindow::handlePicking(int pickingResult)
+    //Ajout Axel : type bool en parametre
+    void Gui::MainWindow::handlePicking(int pickingResult, bool ctrl)
     {
         Ra::Core::Index roIndex(pickingResult);
         Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
@@ -232,6 +242,23 @@ namespace Ra
                 // For now we don't enable group selection.
                 m_selectionManager->setCurrentEntry(ItemEntry(ent, comp, roIndex),
                                                     QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+
+
+                //Ajout Axel
+
+                // ###TODO###
+                // si il y a une selection
+                // récupérer l'indice du premier point du mesh
+                // m-a-j de l'interface
+
+
+                if (ctrl)
+                {
+                    m_trackedPoint = &(ro ->getMesh()->getGeometry().m_vertices[0]);
+                    updateTrackedPointInfo();
+                }
+                // enregistrer le RO à suivre
+
             }
         }
         else
@@ -502,6 +529,18 @@ namespace Ra
         actionForward->setChecked( false );
         actionDeferred->setChecked( false );
         actionDeferred->setChecked( true );
+    }
+
+    //Ajout Axel
+
+    void Gui::MainWindow::updateTrackedPointInfo()
+    {
+        if (m_trackedPoint)
+        {
+            m_valueX -> setText(QString::fromStdString(std::to_string((*m_trackedPoint)[0])));
+            m_valueY -> setText(QString::fromStdString(std::to_string((*m_trackedPoint)[1])));
+            m_valueZ -> setText(QString::fromStdString(std::to_string((*m_trackedPoint)[2])));
+        }
     }
 
 } // namespace Ra
