@@ -5,6 +5,7 @@
 #include <Engine/Renderer/Renderer.hpp>
 #include <Engine/Renderer/Light/DirLight.hpp>
 #include <Engine/Renderer/Light/PointLight.hpp>
+#include <Engine/Component/Component.hpp>
 
 namespace Ra
 {
@@ -33,6 +34,7 @@ namespace Ra
                 void initShaders();
                 void initBuffers();
                 void initLights();
+                void initCurvedPlane();
 
                 void updateShadowMaps();
                 void configureLights();
@@ -74,6 +76,13 @@ namespace Ra
 
         };
 
+        class PlaneComponent : public Component
+        {
+        public:
+            PlaneComponent() : Component("PhotoStudio_Plane_Component") {};
+
+            void initialize() override;
+        };
     } // namespace Engine
 } // namespace Ra
 

@@ -11,6 +11,7 @@
 #include <Core/Containers/Algorithm.hpp>
 #include <Core/Containers/MakeShared.hpp>
 
+#include <Engine/Managers/EntityManager/EntityManager.hpp>
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
 #include <Engine/RadiumEngine.hpp>
@@ -31,6 +32,7 @@
 #include <Engine/Renderer/Texture/Texture.hpp>
 #include <Engine/Renderer/Renderers/DebugRender.hpp>
 #include <Engine/Managers/SystemDisplay/SystemDisplay.hpp>
+#include <Core/Mesh/MeshPrimitives.hpp>
 
 //#define NO_TRANSPARENCY
 namespace Ra
@@ -68,6 +70,7 @@ namespace Ra
             initShaders();
             initBuffers();
             initLights();
+            initCurvedPlane();
 
             DebugRender::createInstance();
             DebugRender::getInstance()->initialize();
@@ -75,6 +78,7 @@ namespace Ra
 
         void PhotoStudioRenderer::initShaders()
         {
+            m_shaderMgr->addShaderProgram("BlinnPhongPhotoStudio", "Shaders/BlinnPhongPhotoStudio.vert.glsl", "Shaders/BlinnPhongPhotoStudio.frag.glsl");
             m_shaderMgr->addShaderProgram("DepthMap", "Shaders/DepthMap.vert.glsl", "Shaders/DepthMap.frag.glsl");
             m_shaderMgr->addShaderProgram("DepthAmbientPass", "Shaders/BlinnPhong.vert.glsl", "Shaders/DepthAmbientPass.frag.glsl");
             m_shaderMgr->addShaderProgram("FinalCompose", "Shaders/Basic2D.vert.glsl", "Shaders/FinalCompose.frag.glsl");
@@ -136,6 +140,14 @@ namespace Ra
             m_keyLight.reset(new PointLight());
             m_fillLight.reset(new PointLight());
             m_backLight.reset(new PointLight());
+        }
+
+        void PhotoStudioRenderer::initCurvedPlane()
+        {
+            Ra::Engine::Entity * planeEntity = Ra::Engine::RadiumEngine::getInstance()->getEntityManager()->createEntity("PhotoStudio_Plane_Entity");
+            Ra::Engine::Component * planeComponent = new PlaneComponent;
+            planeEntity->addComponent( planeComponent );
+            planeComponent->initialize();
         }
 
         /// Sets our lights (key, fill, back) directions and positions
@@ -653,5 +665,24 @@ namespace Ra
             GL_ASSERT( glReadBuffer( GL_BACK ) );
         }
 
+        void PlaneComponent::initialize()
+        {
+            std::shared_ptr<Ra::Engine::Mesh> planeDisplay(new Ra::Engine::Mesh("PhotoStudio_Plane_Display"));
+            planeDisplay->loadGeometry(Ra::Core::MeshUtils::makeCurvedPlane(20, 20, 0.3f));
+
+            auto * planeMaterial = new Ra::Engine::Material("PhotoStudio_Plane_Material");
+
+            planeMaterial->m_kd = Ra::Core::Color(0.0f, 0.0f, 0.8f, 1.0f);
+            planeMaterial->m_ks = Ra::Core::Color(0.2f, 0.2f, 0.2f, 1.0f);
+            planeMaterial->m_ns = 5.f;
+
+            auto planeRenderObject = Ra::Engine::RenderObject::createRenderObject("PhotoStudio_Plane_RO", this,
+                                                                                  Ra::Engine::RenderObjectType::Fancy,
+                                                                                  planeDisplay,
+                                                                                  Ra::Engine::ShaderProgramManager::getInstance()->getShaderProgram("BlinnPhongPhotoStudio")->getBasicConfiguration(),
+                                                                                  planeMaterial);
+
+            Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->addRenderObject( planeRenderObject );
+        }
     }
 } // namespace Ra
