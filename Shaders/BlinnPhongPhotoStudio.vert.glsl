@@ -21,23 +21,6 @@ layout (location = 5) out mat4 out_mvp;
 
 void main()
 {
-/*
-    // scale + translate
-    mat4 rot = mat4( 4,           0,            0,  0,
-                     0,           4,            0,  0,
-                     0,           0,            4,  0,
-                     0,          -1,            0,  1);
-*/
-/*
-    // try rotate
-    mat4 rot = mat4( 4,            0,            0,  0,
-                     0,            4,            0,  0,
-                     0,            0,            4,  0,
-                     0,            -0.5,            -1,  1);
-*/
-
-    // mat4 mvp = transform.proj * transform.view * transform.model;
-
     mat4 newModel = transform.model;
 
     newModel[0].xyz *= -transform.view[3].z;
@@ -57,8 +40,6 @@ void main()
 
     gl_Position = newMvp * vec4(in_position, 1.0);
 
-    out_mvp = newMvp;
-
     vec4 pos = transform.model * vec4(in_position, 1.0);
     pos /= pos.w;
     vec3 normal = mat3(transform.worldNormal) * in_normal;
@@ -71,4 +52,6 @@ void main()
     out_tangent  = in_tangent;
 
     out_texcoord = in_texcoord;
+
+    out_mvp = newModel;
 }
