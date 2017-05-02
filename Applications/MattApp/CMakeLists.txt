@@ -12,6 +12,14 @@ set( Qt5_LIBRARIES
      ${Qt5Widgets_LIBRARIES}
      ${Qt5OpenGL_LIBRARIES} )
 
+set(app_libs
+        ${RADIUM_LIBRARIES}             # Radium libs
+        ${GLBINDING_LIBRARIES}          # Radium dep
+        ${ASSIMP_LIBRARIES}             # Radium dep
+        ${Qt5_LIBRARIES}                # the Qt beast
+        ${OPENGL_LIBRARIES}
+        )
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -38,14 +46,10 @@ file( GLOB file_headers MattApp.hpp config.txt)
 # Generate an executable
 add_executable( ${app_target} ${file_sources} ${file_headers} )
 
-add_dependencies( ${app_target}  radium_assets radium_configs )
+add_dependencies( ${app_target} radiumEngine radiumGuiBase radiumCore radium_assets radium_configs )
 
 
 # Link good libraries
 target_link_libraries( ${app_target} # target
-
-    ${RA_GUIBASE_LIB}           # gui
-    ${RA_ENGINE_LIB}            # engine
-    ${RA_CORE_LIB}              # core
-    ${Qt5_LIBRARIES}                # the Qt beast
+                       ${app_libs}
 )
