@@ -118,7 +118,7 @@ namespace Ra
 
         //connect(m_viewer->getGizmoManager(),&GizmoManager::GizmoMouseMove,this,&MainWindow::updateTrackedPointInfo);
 
-        connect(m_viewer,&Viewer::pointSelected,m_vertexPickingManager,&VertexPickingManager::saveRay);
+        connect(m_viewer,&Viewer::raySent,m_vertexPickingManager,&VertexPickingManager::saveRay);
         connect(spinBox_VertexIndex,SIGNAL(valueChanged(int)),this,SLOT(spinBoxManualUpdate(int)));
 //        connect(mainApp,&BaseApplication::OriginalRONumber,this,&MainWindow::setMinimumRONb);
         //-------------------------------------------------------------------------------------

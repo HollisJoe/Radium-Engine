@@ -205,20 +205,24 @@ namespace Ra
 
             case Qt::RightButton:
             {
+                //Added by Axel
+                //------------------------------------------------------------------
+
+                if (isKeyPressed(Qt::Key_Control))
+                {
+
+//                     ### TO DO ###
+//                     Faire le lien avec la MainWindow pour sélectionner le point
+
+                    Core::Ray r = m_camera->getCamera()->getRayFromScreen(Core::Vector2(event->x(), event->y()));
+
+                    emit raySent(r);
+                }
+                //-------------------------------------------------------------------
+
                 // Check picking
                 Engine::Renderer::PickingQuery query  = { Core::Vector2(event->x(), height() - event->y()), Core::MouseButton::RA_MOUSE_RIGHT_BUTTON };
                 m_currentRenderer->addPickingRequest(query);
-
-                //Ajout Axel
-
-//                if (isKeyPressed(Qt::Key_Control))
-//                {
-//                    std::cout << "Coucou" << std::endl;
-
-                    // ### TO DO ###
-                    // Faire le lien avec la MainWindow pour sélectionner le point
-//                    emit pointSelected();
-//                }
             }
             break;
 
@@ -315,7 +319,6 @@ namespace Ra
 
     void Gui::Viewer::waitForRendering()
     {
-        emit updateTrackedPoint();
     }
 
     void Gui::Viewer::handleFileLoading( const std::string& file )
@@ -343,12 +346,11 @@ namespace Ra
             }
             else if (query.m_button == Core::MouseButton::RA_MOUSE_RIGHT_BUTTON)
             {
-                 //Ajout Axel
-                //Origine -> Pas de bool pour le signal ET pas de if (ctrl)
-                if (isKeyPressed(Qt::Key_Control))
-                    emit rightClickPicking(m_currentRenderer->getPickingResults()[i],true);
-                else
-                    emit rightClickPicking(m_currentRenderer->getPickingResults()[i],false);
+                //Added by Axel
+                //-------------------------------------------------------------------------
+                //Origine -> Pas de "isKeyPressed(Qt::Key_Control)" dans le signal
+                emit rightClickPicking(m_currentRenderer->getPickingResults()[i],isKeyPressed(Qt::Key_Control));
+                //-------------------------------------------------------------------------
             }
         }
     }
