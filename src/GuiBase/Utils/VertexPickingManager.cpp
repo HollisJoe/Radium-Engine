@@ -14,6 +14,7 @@ namespace Ra
             m_currentRenderObject(nullptr),
             m_originalNumRenderObjects(0)
         {
+            defineMinimumNumRenderObjects();
         }
 
         Gui::VertexPickingManager::~VertexPickingManager()

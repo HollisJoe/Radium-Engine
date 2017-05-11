@@ -48,8 +48,6 @@ namespace Ra
              --- OTHER METHODS ---
             ======================*/
 
-            void defineMinimumNumRenderObjects();
-
             bool vertexSelected();
 
             int getVertexIndex(std::shared_ptr<Engine::RenderObject> ro);
@@ -60,6 +58,10 @@ namespace Ra
 
             void saveRay(Core::Ray r);
 
+
+        private:
+
+            void defineMinimumNumRenderObjects();
 
         private:
 
