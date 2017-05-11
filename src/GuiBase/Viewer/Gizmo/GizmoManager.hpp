@@ -55,8 +55,6 @@ namespace Ra
             /// Retrieve the transform from the editable and update the gizmos.
             void updateValues() override;
 
-            //Ajout Axel
-
         signals:
 
             void GizmoMouseMove ();

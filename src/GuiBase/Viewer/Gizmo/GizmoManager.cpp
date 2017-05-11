@@ -114,14 +114,6 @@ namespace Ra
                 const Engine::Camera& cam = *static_cast<Viewer*>(parent())->getCameraInterface()->getCamera();
                 Core::Transform newTransform = m_currentGizmo->mouseMove(cam, currentXY);
                 setTransform( newTransform );
-
-
-                //Ajout Axel
-                // ###TODO###
-                // emettre signal pour dire qu'on a bougé
-
-                emit GizmoMouseMove();
-
             }
             return (m_currentGizmo != nullptr);
         }
