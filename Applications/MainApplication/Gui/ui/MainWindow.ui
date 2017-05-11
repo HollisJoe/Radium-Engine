@@ -459,7 +459,7 @@
                <item>
                 <widget class="QLabel" name="Vector3Info">
                  <property name="text">
-                  <string>Vector3 information :</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Tracked vertex information :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -468,7 +468,7 @@
                </item>
                <item>
                 <layout class="QFormLayout" name="formLayout">
-                 <item row="0" column="0">
+                 <item row="1" column="0">
                   <widget class="QLabel" name="coordX">
                    <property name="text">
                     <string>X :</string>
@@ -478,7 +478,7 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
+                 <item row="1" column="1">
                   <widget class="QLabel" name="m_valueX">
                    <property name="cursor">
                     <cursorShape>ArrowCursor</cursorShape>
@@ -488,35 +488,35 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0">
+                 <item row="2" column="0">
                   <widget class="QLabel" name="coordY">
                    <property name="text">
                     <string>Y:</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
+                 <item row="2" column="1">
                   <widget class="QLabel" name="m_valueY">
                    <property name="text">
                     <string/>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
+                 <item row="3" column="0">
                   <widget class="QLabel" name="coordZ">
                    <property name="text">
                     <string>Z :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
+                 <item row="3" column="1">
                   <widget class="QLabel" name="m_valueZ">
                    <property name="text">
                     <string/>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1">
+                 <item row="4" column="1">
                   <spacer name="verticalSpacer">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
@@ -528,6 +528,20 @@
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_index">
+                   <property name="text">
+                    <string>Index :</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QSpinBox" name="spinBox_VertexIndex">
+                   <property name="maximum">
+                    <number>100000</number>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
