@@ -59,6 +59,11 @@ namespace Ra
             /// Return the total number of vertices drawn
             uint getNumVertices() const;
 
+            //Added by Axel
+            //-----------------------
+            uint getNumRenderObjects();
+            //-----------------------
+
         private:
             Core::IndexMap<std::shared_ptr<RenderObject>> m_renderObjects;
 

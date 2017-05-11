@@ -72,7 +72,7 @@ namespace Ra
         void Gui::VertexPickingManager::defineMinimumNumRenderObjects()
         {
             Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
-            m_originalNumRenderObjects = engine ->getRenderObjectManager() -> getNumRenderObject();
+            m_originalNumRenderObjects = engine ->getRenderObjectManager() -> getNumRenderObjects();
         }
 
 

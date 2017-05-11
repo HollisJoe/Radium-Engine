@@ -85,6 +85,14 @@ namespace Ra
             }
         }
 
+        //Added by Axel
+        //-----------------------
+        uint RenderObjectManager::getNumRenderObjects()
+        {
+            return m_renderObjects.size();
+        }
+        //-----------------------
+
         void RenderObjectManager::getRenderObjectsByType( const RenderData& renderData,
                                                           std::vector<std::shared_ptr<RenderObject>>& objectsOut,
                                                           const RenderObjectType& type ) const
