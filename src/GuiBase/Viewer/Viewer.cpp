@@ -208,7 +208,7 @@ namespace Ra
                 //Added by Axel
                 //------------------------------------------------------------------
 
-                if (isKeyPressed(Qt::Key_Control))
+                if (isKeyPressed(Qt::Key_V))
                 {
 
 //                     ### TO DO ###
@@ -349,7 +349,7 @@ namespace Ra
                 //Added by Axel
                 //-------------------------------------------------------------------------
                 //Origine -> Pas de "isKeyPressed(Qt::Key_Control)" dans le signal
-                emit rightClickPicking(m_currentRenderer->getPickingResults()[i],isKeyPressed(Qt::Key_Control));
+                emit rightClickPicking(m_currentRenderer->getPickingResults()[i],isKeyPressed(Qt::Key_V));
                 //-------------------------------------------------------------------------
             }
         }
