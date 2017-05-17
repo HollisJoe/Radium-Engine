@@ -275,14 +275,12 @@ namespace Ra
                     if (spinBox_VertexIndex->isReadOnly())
                         spinBox_VertexIndex->setReadOnly(false);
 
-                    int idx = m_vertexPickingManager -> getVertexIndex(ro);
+                    m_vertexPickingManager -> computeVertexIndex(ro);
 
-                    if (idx != -1)
+                    if (m_vertexPickingManager -> isVertexIndexValid())
                     {
                         m_vertexPickingManager -> setCurrentRenderObject(ro);
-                        m_vertexPickingManager -> setTrackedVertex(&(ro ->getMesh()->getGeometry().m_vertices[idx]));
-
-                        spinBox_VertexIndex -> setValue(idx);
+                                                spinBox_VertexIndex -> setValue(m_vertexPickingManager -> getVertexIndex());
                         spinBox_VertexIndex->setMaximum(ro ->getMesh()->getGeometry().m_vertices.size() - 1); //A Factoriser
 
                         updateTrackedVertInfo();
@@ -575,20 +573,18 @@ namespace Ra
 
     void Gui::MainWindow::spinBoxManualUpdate (int value)
     {
-        std::shared_ptr<Engine::RenderObject> ro = m_vertexPickingManager -> getCurrentRenderObject();
-        m_vertexPickingManager -> setTrackedVertex(&(ro ->getMesh()->getGeometry().m_vertices[value]));
-        updateTrackedVertInfo();
+        m_vertexPickingManager -> setVertexIndex(value);
     }
 
 
     void Gui::MainWindow::updateTrackedVertInfo()
     {
-        if (m_vertexPickingManager -> vertexSelected())
+        if (m_vertexPickingManager -> isVertexSelected())
         {
-            m_valueX -> setText(QString::number(m_vertexPickingManager->getTrackedVertex()[0]));
-            m_valueY -> setText(QString::number(m_vertexPickingManager->getTrackedVertex()[1]));
-            m_valueZ -> setText(QString::number(m_vertexPickingManager->getTrackedVertex()[2]));
-            RA_DISPLAY_SPHERE(m_vertexPickingManager->getTrackedVertex(),0.1,Ra::Core::Color(1.f,0.f,0.f,1.f));
+            m_valueX -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[0]));
+            m_valueY -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[1]));
+            m_valueZ -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[2]));
+            RA_DISPLAY_SPHERE(m_vertexPickingManager->getVertexPosition(),0.1,Ra::Core::Color(1.f,0.f,0.f,1.f));
         }
     }
     //------------------------------------------------------------------------------------------

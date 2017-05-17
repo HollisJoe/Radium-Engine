@@ -10,12 +10,12 @@ namespace Ra
         ================================*/
 
         Gui::VertexPickingManager::VertexPickingManager() :
-            m_trackedVertex(nullptr),
-            m_currentRenderObject(nullptr),
-            m_originalNumRenderObjects(0)
+            m_vertexIndex(-1),
+            m_originalNumRenderObjects(0),
+            m_currentRenderObject(nullptr)
         {
-            defineMinimumNumRenderObjects();
         }
+
 
         Gui::VertexPickingManager::~VertexPickingManager()
         {
@@ -26,17 +26,6 @@ namespace Ra
          --- GETTERS & SETTERS ---
         =========================*/
 
-        //TrackedVertex
-
-        void Gui::VertexPickingManager::setTrackedVertex(Ra::Core::Vector3* vertex)
-        {
-            m_trackedVertex = vertex;
-        }
-
-        Core::Vector3& Gui::VertexPickingManager::getTrackedVertex()
-        {
-            return *m_trackedVertex;
-        }
 
         //OriginalNumrenderObject
 
@@ -44,6 +33,7 @@ namespace Ra
         {
             return int(m_originalNumRenderObjects);
         }
+
 
         //CurrentRenderObject
 
@@ -58,9 +48,34 @@ namespace Ra
         }
 
 
+        //VertexIndex
+
+        int Gui::VertexPickingManager::getVertexIndex() const
+        {
+            return m_vertexIndex;
+        }
+
+        void Gui::VertexPickingManager::setVertexIndex (int index)
+        {
+            m_vertexIndex = index;
+        }
+
         /*======================
          --- OTHER METHODS ---
         ======================*/
+
+        //Boolean Controlers
+
+        bool Gui::VertexPickingManager::isVertexSelected() const
+        {
+            return m_currentRenderObject != nullptr;
+        }
+
+
+        bool Gui::VertexPickingManager::isVertexIndexValid() const
+        {
+            return m_vertexIndex > -1;
+        }
 
 
         void Gui::VertexPickingManager::saveRay(Core::Ray r) //Mettre arg input en reference
@@ -72,12 +87,11 @@ namespace Ra
         void Gui::VertexPickingManager::defineMinimumNumRenderObjects()
         {
             Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
-            m_originalNumRenderObjects = engine ->getRenderObjectManager() -> getNumRenderObjects();
+            m_originalNumRenderObjects = engine -> getRenderObjectManager() -> getNumRenderObjects();
         }
 
 
-
-        int Gui::VertexPickingManager::getVertexIndex(std::shared_ptr<Engine::RenderObject> ro)
+        void Gui::VertexPickingManager::computeVertexIndex(std::shared_ptr<Engine::RenderObject> ro)
         {
             const Ra::Core::Transform& t = ro->getLocalTransform();
             Core::Ray transformedRay = Ra::Core::transformRay(m_ray, t.inverse());
@@ -87,15 +101,26 @@ namespace Ra
 
             if (tidx >= 0)
             {
-                return result.m_nearestVertex;
+                m_vertexIndex = result.m_nearestVertex;
             }
-
-            return -1;
+            else
+            {
+                m_vertexIndex = -1;
+            }
         }
 
-        bool Gui::VertexPickingManager::vertexSelected()
+
+        //GET Vertex Information
+
+        Core::Vector3 Gui::VertexPickingManager::getVertexPosition() const
         {
-            return m_trackedVertex;
+            return m_currentRenderObject -> getMesh() -> getGeometry().m_vertices[m_vertexIndex];
+        }
+
+
+        Core::Vector3 Gui::VertexPickingManager::getVertexNormal() const
+        {
+            return m_currentRenderObject -> getMesh() -> getGeometry().m_normals[m_vertexIndex];
         }
     }
 }

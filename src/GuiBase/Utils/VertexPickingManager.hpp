@@ -33,46 +33,45 @@ namespace Ra
              --- GETTERS & SETTERS ---
             =========================*/
 
-            void setTrackedVertex(Ra::Core::Vector3* vertex);
-
-            Ra::Core::Vector3& getTrackedVertex();
-
             int getOriginalNumRenderObjects();
 
             void setCurrentRenderObject(std::shared_ptr<Engine::RenderObject> renderObject);
 
             std::shared_ptr<Engine::RenderObject> getCurrentRenderObject();
 
+            int getVertexIndex() const;
+
+            void setVertexIndex (int index);
 
             /*======================
              --- OTHER METHODS ---
             ======================*/
 
-            bool vertexSelected();
+            bool isVertexSelected() const;
 
-            int getVertexIndex(std::shared_ptr<Engine::RenderObject> ro);
+            bool isVertexIndexValid() const;
 
+            void computeVertexIndex(std::shared_ptr<Engine::RenderObject> ro);
 
+            void defineMinimumNumRenderObjects();
+
+            Ra::Core::Vector3 getVertexPosition() const;
+
+            Ra::Core::Vector3 getVertexNormal() const;
 
         public slots:
 
             void saveRay(Core::Ray r);
 
-
         private:
 
-            void defineMinimumNumRenderObjects();
-
-        private:
-
-            /// Stores the address of a selected vertex.
-            Ra::Core::Vector3* m_trackedVertex;
+            int m_vertexIndex;
 
             Ra::Core::Ray m_ray;
 
-            std::shared_ptr<Engine::RenderObject> m_currentRenderObject;
-
             uint m_originalNumRenderObjects;
+
+            std::shared_ptr<Engine::RenderObject> m_currentRenderObject;
         };
     } // namespace Gui
 } // namespace Ra
