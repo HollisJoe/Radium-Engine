@@ -584,6 +584,11 @@ namespace Ra
             m_valueX -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[0]));
             m_valueY -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[1]));
             m_valueZ -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[2]));
+
+            label_normValue -> setText("( " + QString::number(m_vertexPickingManager->getVertexNormal()[0]) +
+                                       " ; " + QString::number(m_vertexPickingManager->getVertexNormal()[1]) +
+                                       " ; " + QString::number(m_vertexPickingManager->getVertexNormal()[2]) + " )");
+
             RA_DISPLAY_SPHERE(m_vertexPickingManager->getVertexPosition(),0.1,Ra::Core::Color(1.f,0.f,0.f,1.f));
         }
     }
