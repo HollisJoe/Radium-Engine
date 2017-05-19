@@ -7,13 +7,41 @@
 
 #include <Engine/RaEngine.hpp>
 #include <Engine/RadiumEngine.hpp>
-
-//Class added by Axel
+#include <Core/Mesh/MeshPrimitives.hpp>
+#include <Engine/Component/Component.hpp>
+#include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
+#include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
 
 namespace Ra
 {
     namespace Gui
     {
+
+        //Sphere Component
+
+        class SphereComponent : public Ra::Engine::Component
+        {
+        public :
+
+            SphereComponent();
+
+            /// This function is called when the component is properly
+            /// setup, i.e. it has an entity.
+            void initialize() override;
+
+    //                Ra::Core::Vector3 position
+            void setPosition (Ra::Core::Vector3 position);
+
+            Engine::RenderObject* getSphereRo ();
+
+        private:
+            Ra::Core::TriangleMesh m_sphere;
+            Engine::RenderObject* m_sphereRo;
+        };
+
+
+        //VertexPickingManager
+
         class VertexPickingManager : public QObject
         {
             Q_OBJECT
@@ -55,6 +83,10 @@ namespace Ra
 
             void defineMinimumNumRenderObjects();
 
+            void displaySphere ();
+
+            void setSpherePosition ();
+
             Ra::Core::Vector3 getVertexPosition() const;
 
             Ra::Core::Vector3 getVertexNormal() const;
@@ -72,6 +104,8 @@ namespace Ra
             uint m_originalNumRenderObjects;
 
             std::shared_ptr<Engine::RenderObject> m_currentRenderObject;
+
+            Ra::Gui::SphereComponent* m_sphereComponent;
         };
     } // namespace Gui
 } // namespace Ra

@@ -272,15 +272,19 @@ namespace Ra
                 if (pointSelected && ro && ro -> isVisible()
                         && roIndex >= m_vertexPickingManager->getOriginalNumRenderObjects())
                 {
-                    if (spinBox_VertexIndex->isReadOnly())
-                        spinBox_VertexIndex->setReadOnly(false);
-
                     m_vertexPickingManager -> computeVertexIndex(ro);
 
                     if (m_vertexPickingManager -> isVertexIndexValid())
                     {
                         m_vertexPickingManager -> setCurrentRenderObject(ro);
-                                                spinBox_VertexIndex -> setValue(m_vertexPickingManager -> getVertexIndex());
+
+                        if (spinBox_VertexIndex->isReadOnly())
+                        {
+                            spinBox_VertexIndex->setReadOnly(false);
+                            m_vertexPickingManager -> displaySphere();
+                        }
+
+                        spinBox_VertexIndex -> setValue(m_vertexPickingManager -> getVertexIndex());
                         spinBox_VertexIndex->setMaximum(ro ->getMesh()->getGeometry().m_vertices.size() - 1); //A Factoriser
 
                         updateTrackedVertInfo();
@@ -585,11 +589,11 @@ namespace Ra
             m_valueY -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[1]));
             m_valueZ -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[2]));
 
-            label_normValue -> setText("( " + QString::number(m_vertexPickingManager->getVertexNormal()[0]) +
-                                       " ; " + QString::number(m_vertexPickingManager->getVertexNormal()[1]) +
-                                       " ; " + QString::number(m_vertexPickingManager->getVertexNormal()[2]) + " )");
+            label_nxValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[0]));
+            label_nyValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[1]));
+            label_nzValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[2]));
 
-            RA_DISPLAY_SPHERE(m_vertexPickingManager->getVertexPosition(),0.1,Ra::Core::Color(1.f,0.f,0.f,1.f));
+            m_vertexPickingManager -> setSpherePosition();
         }
     }
     //------------------------------------------------------------------------------------------
