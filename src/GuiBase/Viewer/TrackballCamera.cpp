@@ -54,9 +54,13 @@ namespace Ra
 
     }
 
-    void Gui::TrackballCamera::set_cameraRadius(Scalar rad)
+    void Gui::TrackballCamera::setCameraRadius(Scalar rad)
     {
         m_cameraRadius=rad;
+    }
+    Scalar Gui::TrackballCamera::getCameraRadius()
+    {
+        return m_cameraRadius;
     }
 
     bool Gui::TrackballCamera::handleMousePressEvent( QMouseEvent* event )

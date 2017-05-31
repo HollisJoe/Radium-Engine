@@ -29,7 +29,8 @@ namespace Ra
             /// @return true if the event has been taken into account, false otherwise
             virtual bool handleKeyReleaseEvent( QKeyEvent* event ) override;
 
-            void set_cameraRadius(Scalar rad);
+            void setCameraRadius(Scalar rad);
+            Scalar getCameraRadius();
 
         public slots:
             virtual void setCameraPosition( const Core::Vector3& position ) override;
