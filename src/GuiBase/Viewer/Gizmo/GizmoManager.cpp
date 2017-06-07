@@ -7,13 +7,6 @@
 #include <Engine/Renderer/Camera/Camera.hpp>
 #include <Engine/Managers/SystemDisplay/SystemDisplay.hpp>
 
-
-#include <GuiBase/Viewer/Viewer.hpp>
-#include <GuiBase/Viewer/CameraInterface.hpp>
-
-include <QtWidgets/QtWidgets>
-
-
 namespace Ra
 {
     namespace Gui

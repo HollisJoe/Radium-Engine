@@ -11,16 +11,12 @@
 #include <Engine/Managers/EntityManager/EntityManager.hpp>
 
 #include <Engine/Renderer/RenderTechnique/RenderTechnique.hpp>
-#include <Engine/Renderer/RenderTechnique/ShaderProgram.hpp>
 #include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>
 #include <Engine/Renderer/Mesh/Mesh.hpp>
-#include <Engine/Renderer/Renderer.hpp>
 
-#include <Engine/RadiumEngine.hpp>
 #include <Engine/Entity/Entity.hpp>
-#include <Engine/Component/Component.hpp>
 
 #include <PluginBase/RadiumPluginInterface.hpp>
 
@@ -28,12 +24,16 @@
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
 
 #include <Gui/MaterialEditor.hpp>
-#include <Gui/MainWindow.hpp>
 
 #include <MainApplication.hpp>
 
+#if 0
+#include <Engine/Renderer/RenderTechnique/ShaderProgram.hpp>
+#include <Engine/Renderer/Renderer.hpp>
+#include <Engine/RadiumEngine.hpp>
+#include <Engine/Component/Component.hpp>
 #include <Engine/Managers/SystemDisplay/SystemDisplay.hpp>
-
+#endif
 
 using Ra::Engine::ItemEntry;
 
@@ -273,11 +273,6 @@ namespace Ra
 
                 //Added by Axel
                 //-------------------------------------------------------------------
-                // ###TODO###
-                // si il y a une selection
-                // récupérer l'indice du premier point du mesh
-                // m-a-j de l'interface
-
                 if (pointSelected && ro && ro -> isVisible()
                         && roIndex >= m_vertexPickingManager->getOriginalNumRenderObjects())
                 {
@@ -299,7 +294,6 @@ namespace Ra
                         updateTrackedVertInfo();
                     }
                 }
-                // enregistrer le RO à suivre?
                 //----------------------------------------------------------------------
             }
         }
@@ -325,7 +319,7 @@ namespace Ra
                 m_materialEditor->changeRenderObject(ent.m_roIndex);
                 const std::string& shaderName = mainApp->m_engine->getRenderObjectManager()
                                                        ->getRenderObject(ent.m_roIndex)->getRenderTechnique()
-                                                       ->shader->getBasicConfiguration().m_name;
+                                                       ->getBasicConfiguration().m_name;
 
                 if (m_currentShaderBox->findText(shaderName.c_str()) == -1)
                 {

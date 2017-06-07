@@ -2,6 +2,11 @@
 #include <Engine/Entity/Entity.hpp>
 #include <Core/Containers/MakeShared.hpp>
 
+#include <Engine/Renderer/RenderObject/RenderObject.hpp>
+#include <Engine/Managers/EntityManager/EntityManager.hpp>
+#include <Engine/Renderer/Mesh/Mesh.hpp>
+#include <Engine/Renderer/RenderTechnique/Material.hpp>
+
 namespace Ra
 {
     namespace Gui
@@ -159,10 +164,15 @@ namespace Ra
             // Create a cube mesh render object.
             std::shared_ptr<Ra::Engine::Mesh> display(new Ra::Engine::Mesh("VertexpickingManagerSphere"));
             display->loadGeometry(m_sphere);
-            auto material = new Ra::Engine::Material("VertexPickingManageSphereMaterial");
-            material -> m_kd = Ra::Core::Color(1.f,0.f,0.f,1.f);
-            m_sphereRo = Ra::Engine::RenderObject::createRenderObject("VertexpickingManagerSphereRO", this,           //Debug
-                                                                             Ra::Engine::RenderObjectType::Fancy, display, Ra::Engine::ShaderConfigurationFactory::getConfiguration("BlinnPhong"), material);
+            std::shared_ptr<Ra::Engine::Material> material;
+            material.reset( new Ra::Engine::Material("VertexPickingManageSphereMaterial") );
+            material-> m_kd = Ra::Core::Color(1.f,0.f,0.f,1.f);
+            m_sphereRo = Ra::Engine::RenderObject::createRenderObject("VertexpickingManagerSphereRO",
+                                                                      this,
+                                                                      Ra::Engine::RenderObjectType::Fancy,
+                                                                      display,
+                                                                      Ra::Engine::ShaderConfigurationFactory::getConfiguration("BlinnPhong"),
+                                                                      material);
             addRenderObject(m_sphereRo);
         }
 

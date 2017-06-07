@@ -464,7 +464,8 @@
                <spacer name="verticalSpacer_2">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
-               </property>
+                </property>
+               </spacer>
               </item>
              </layout>
             </widget>
@@ -629,6 +630,7 @@
                </item>
               </layout>
              </widget>
+            </widget>
            </widget>
           </item>
          </layout>

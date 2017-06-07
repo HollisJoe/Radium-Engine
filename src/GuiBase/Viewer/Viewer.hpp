@@ -113,6 +113,8 @@ namespace Ra
         signals:
             void rendererReady();               //! Emitted when the rendered is correctly initialized
             void leftClickPicking ( int id );   //! Emitted when the result of a left click picking is known
+
+            // modified by Axel: ctrl is true when <v> is pressed when picking
             void rightClickPicking( int id, bool ctrl );   //! Emitted when the resut of a right click picking is known
 
             //Added by Axel

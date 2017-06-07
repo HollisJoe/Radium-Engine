@@ -54,7 +54,6 @@ namespace AnimationPlugin
         void toggleSlowMotion( const bool status );
         void setAnimation( const uint i );
 
-        uint getBoneIdx(Ra::Core::Index index) const ;
         Scalar getTime() const;
 
 

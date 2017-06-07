@@ -14,7 +14,6 @@
 #include <GuiBase/Utils/VertexPickingManager.hpp>
 #include <GuiBase/TimerData/FrameTimerData.hpp>
 
-
 namespace Ra
 {
     namespace Engine

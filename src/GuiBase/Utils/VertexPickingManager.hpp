@@ -3,14 +3,14 @@
 
 #include <GuiBase/RaGuiBase.hpp>
 
-#include <QObject>
-
 #include <Engine/RaEngine.hpp>
 #include <Engine/RadiumEngine.hpp>
 #include <Core/Mesh/MeshPrimitives.hpp>
 #include <Engine/Component/Component.hpp>
 #include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
+
+#include <QObject>
 
 namespace Ra
 {

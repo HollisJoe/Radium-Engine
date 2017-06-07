@@ -207,18 +207,6 @@ namespace AnimationPlugin
     }
 
 
-    uint AnimationComponent::getBoneIdx( Ra::Core::Index roIndex ) const
-    {
-        for (auto bd : m_boneDrawables)
-        {
-            if (bd->getRenderObjectIndex() == roIndex){
-                return bd->getBoneIndex();
-            }
-        }
-        return uint(-1);
-    }
-
-
     void AnimationComponent::createSkeleton( const Ra::Asset::HandleData* data, std::map< uint, uint >& indexTable )
     {
         const uint size = data->getComponentDataSize();
