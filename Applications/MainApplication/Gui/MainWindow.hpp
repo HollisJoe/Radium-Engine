@@ -11,8 +11,13 @@
 
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
 #include <GuiBase/SelectionManager/SelectionManager.hpp>
-#include <GuiBase/Utils/VertexPickingManager.hpp>
 #include <GuiBase/TimerData/FrameTimerData.hpp>
+
+
+//-------------------------------------------------------------------
+//Added by Axel
+#include <GuiBase/Utils/VertexPickingManager.hpp>
+//-------------------------------------------------------------------
 
 namespace Ra
 {
@@ -62,10 +67,10 @@ namespace Ra
             /// Access the selection manager.
             GuiBase::SelectionManager* getSelectionManager();
 
+            //---------------------------------------------------------------------
             //Added by Axel
-            //-------------------------
             Gui::VertexPickingManager* getVertexPickingManager();
-            //-------------------------
+            //-------------------------------------------------------------------
 
             /// Update the ui from the plugins loaded.
             void updateUi( Plugins::RadiumPluginInterface* plugin );
@@ -104,16 +109,11 @@ namespace Ra
             /// Cleanup resources.
             void cleanup();
 
+            //-------------------------------------------------------------------
             //Added by Axel
-            //--------------------------------------
             void updateTrackedVertInfo();
-
-//            void saveRay(Core::Ray r);
-
             void spinBoxManualUpdate(int value);
-
-//            void setMinimumNumRenderObjects();
-            //--------------------------------------
+            //-------------------------------------------------------------------
 
         signals:
             /// Emitted when the closed button has been hit.
@@ -133,11 +133,6 @@ namespace Ra
             void createConnections();
 
             virtual void closeEvent( QCloseEvent* event ) override;
-
-            //Added by Axel
-            //-----------------------------------------
-//            int getVertexIndex(std::shared_ptr<Engine::RenderObject> ro);
-            //-----------------------------------------
 
         private slots:
             /// Slot for the "load file" menu.
@@ -183,20 +178,11 @@ namespace Ra
             /// Widget to allow material edition.
             MaterialEditor* m_materialEditor;
 
+            //-------------------------------------------------------------------
             //Added by Axel
-            //-----------------------------------------
 
             VertexPickingManager* m_vertexPickingManager;
-
-            /// Stores the address of a selected vertex.
-//            Ra::Core::Vector3* m_trackedVertex;
-
-//            Core::Ray m_ray;
-
-//            std::shared_ptr<Engine::RenderObject> m_ro;
-
-//            uint m_Original_RO_Nb;
-            //-----------------------------------------
+            //-------------------------------------------------------------------
         };
 
     } // namespace Gui

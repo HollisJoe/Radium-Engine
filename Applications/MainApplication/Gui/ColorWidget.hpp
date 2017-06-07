@@ -20,7 +20,6 @@ namespace Ra
 
         signals:
             void newColorPicked( const QColor& color );
-            void newFrame();
 
         private:
             void colorChanged();

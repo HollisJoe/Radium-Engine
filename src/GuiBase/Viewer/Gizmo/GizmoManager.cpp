@@ -43,7 +43,7 @@ namespace Ra
                 if (g)
                 {
                     g->show(false);
-                    }
+                }
             }
 
             if (canEdit())

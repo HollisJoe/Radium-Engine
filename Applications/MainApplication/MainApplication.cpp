@@ -173,7 +173,10 @@ namespace Ra
         setupScene();
         emit starting();
 
+        //-------------------------------------------------------------------
+        //Added by Axel
         m_mainWindow -> getVertexPickingManager() -> defineMinimumNumRenderObjects();
+        //-------------------------------------------------------------------
 
         // A file has been required, load it.
         if (parser.isSet(fileOpt))

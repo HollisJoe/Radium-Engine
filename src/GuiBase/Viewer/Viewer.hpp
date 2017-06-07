@@ -117,10 +117,10 @@ namespace Ra
             // modified by Axel: ctrl is true when <v> is pressed when picking
             void rightClickPicking( int id, bool ctrl );   //! Emitted when the resut of a right click picking is known
 
+            //-------------------------------------------------------------------
             //Added by Axel
-            //------------------------
             void raySent(Core::Ray r);
-            //------------------------
+            //-------------------------------------------------------------------
 
         public slots:
             /// Tell the renderer to reload all shaders.

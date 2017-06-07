@@ -58,19 +58,20 @@ namespace Ra
         m_materialEditor = new MaterialEditor();
         m_selectionManager = new GuiBase::SelectionManager(m_itemModel, this);
         m_entitiesTreeView->setSelectionModel(m_selectionManager);
+
+        //-------------------------------------------------------------------
+        //Added by Axel
         m_vertexPickingManager = new VertexPickingManager();
+        //-------------------------------------------------------------------
 
         createConnections();
 
         mainApp->framesCountForStatsChanged((uint) m_avgFramesCount->value());
 
+        //-------------------------------------------------------------------
         //Added by Axel
-        //---------------------------
-//        m_trackedVertex = nullptr;
-//        m_ro = nullptr;
         spinBox_VertexIndex->setReadOnly(true);
-//        m_Original_RO_Nb = 0;
-        //---------------------------
+        //-------------------------------------------------------------------
     }
 
     Gui::MainWindow::~MainWindow()
@@ -118,18 +119,11 @@ namespace Ra
         connect(this, &MainWindow::selectedItem, m_viewer->getGizmoManager(), &GizmoManager::setEditable);
 
 
+        //-------------------------------------------------------------------
         //Added by Axel
-        //-------------------------------------------------------------------------------------
-        // ###TODO###
-        // connecter signal du gizmoManager "a bougé" sur un slot de la mainwindow "a bougé"
-        // ce slot met à jour la GUI en utilisant le RO suivi pour retrouver le point
-
-        //connect(m_viewer->getGizmoManager(),&GizmoManager::GizmoMouseMove,this,&MainWindow::updateTrackedPointInfo);
-
         connect(m_viewer,&Viewer::raySent,m_vertexPickingManager,&VertexPickingManager::saveRay);
         connect(spinBox_VertexIndex,SIGNAL(valueChanged(int)),this,SLOT(spinBoxManualUpdate(int)));
-//        connect(mainApp,&BaseApplication::OriginalRONumber,this,&MainWindow::setMinimumRONb);
-        //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------
 
         // Enable changing shaders
         connect(m_currentShaderBox, static_cast<void (QComboBox::*)(const QString&)>( &QComboBox::currentIndexChanged ),
@@ -254,7 +248,9 @@ namespace Ra
         return m_selectionManager;
     }
 
-    //Added by Axel : bool parameter to know if the key "Ctrl" is pressed.
+    //-------------------------------------------------------------------
+    //Added by Axel : bool parameter to know if the key <v> is pressed.
+    //-------------------------------------------------------------------
     void Gui::MainWindow::handlePicking(int pickingResult, bool pointSelected)
     {
         Ra::Core::Index roIndex(pickingResult);
@@ -271,8 +267,8 @@ namespace Ra
                 m_selectionManager->setCurrentEntry(ItemEntry(ent, comp, roIndex),
                                                     QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
 
-                //Added by Axel
                 //-------------------------------------------------------------------
+                //Added by Axel
                 if (pointSelected && ro && ro -> isVisible()
                         && roIndex >= m_vertexPickingManager->getOriginalNumRenderObjects())
                 {
@@ -383,7 +379,7 @@ namespace Ra
             const auto& ro = mainApp->m_engine->getRenderObjectManager()->getRenderObject(ro_index);
             if (ro->getRenderTechnique()->getBasicConfiguration().m_name != name)
             {
-            ro->getRenderTechnique()->changeShader(config);
+                ro->getRenderTechnique()->changeShader(config);
             }
         }
     }
@@ -468,8 +464,10 @@ namespace Ra
         tab_edition->updateValues();
         m_viewer->getGizmoManager()->updateValues();
 
+        //-------------------------------------------------------------------
         //Added by Axel
         updateTrackedVertInfo();
+        //-------------------------------------------------------------------
     }
 
     void Gui::MainWindow::onItemAdded(const Engine::ItemEntry& ent)
@@ -574,20 +572,19 @@ namespace Ra
         m_viewer->fitCameraToScene(Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getSceneAabb());
     }
 
+    //-------------------------------------------------------------------
     //Added by Axel
-    //-----------------------------------------------------------------------------------------
 
     Gui::VertexPickingManager* Gui::MainWindow::getVertexPickingManager()
     {
         return m_vertexPickingManager;
     }
 
-
-    void Gui::MainWindow::spinBoxManualUpdate (int value)
+    void Gui::MainWindow::spinBoxManualUpdate(int value)
     {
         m_vertexPickingManager -> setVertexIndex(value);
+        m_vertexPickingManager -> setSpherePosition();
     }
-
 
     void Gui::MainWindow::updateTrackedVertInfo()
     {
