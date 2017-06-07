@@ -197,6 +197,21 @@ namespace Ra
 
             case Qt::RightButton:
             {
+                //Added by Axel
+                //------------------------------------------------------------------
+
+                if (isKeyPressed(Qt::Key_V))
+                {
+
+//                     ### TO DO ###
+//                     Faire le lien avec la MainWindow pour sélectionner le point
+
+                    Core::Ray r = m_camera->getCamera()->getRayFromScreen(Core::Vector2(event->x(), event->y()));
+
+                    emit raySent(r);
+                }
+                //-------------------------------------------------------------------
+
                 // Check picking
                 Engine::Renderer::PickingQuery query  = { Core::Vector2(event->x(), height() - event->y()), Core::MouseButton::RA_MOUSE_RIGHT_BUTTON };
                 m_currentRenderer->addPickingRequest(query);
@@ -323,7 +338,11 @@ namespace Ra
             }
             else if (query.m_button == Core::MouseButton::RA_MOUSE_RIGHT_BUTTON)
             {
-                emit rightClickPicking(m_currentRenderer->getPickingResults()[i]);
+                //Added by Axel
+                //-------------------------------------------------------------------------
+                //Origine -> Pas de "isKeyPressed(Qt::Key_Control)" dans le signal
+                emit rightClickPicking(m_currentRenderer->getPickingResults()[i],isKeyPressed(Qt::Key_V));
+                //-------------------------------------------------------------------------
             }
         }
     }

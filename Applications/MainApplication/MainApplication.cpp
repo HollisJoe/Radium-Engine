@@ -173,6 +173,8 @@ namespace Ra
         setupScene();
         emit starting();
 
+        m_mainWindow -> getVertexPickingManager() -> defineMinimumNumRenderObjects();
+
         // A file has been required, load it.
         if (parser.isSet(fileOpt))
         {
@@ -305,6 +307,15 @@ namespace Ra
         m_taskQueue->waitForTasks();
         timerData.taskData = m_taskQueue->getTimerData();
         m_taskQueue->flushTaskQueue();
+#if 0
+        std::cout << "Tasks time:" << std::endl;
+        for (const auto& t : timerData.taskData)
+        {
+            std::cout << t.taskName << ": " << Ra::Core::Timer::getIntervalMicro(t.start, t.end) << std::endl;
+        }
+        std::cout << std::endl;
+        std::cout << std::endl;
+#endif
 
         timerData.tasksEnd = Core::Timer::Clock::now();
 
@@ -359,6 +370,7 @@ namespace Ra
     {
        m_realFrameRate = on;
     }
+
     void BaseApplication::setRecordFrames(bool on)
     {
         m_recordFrames = on;

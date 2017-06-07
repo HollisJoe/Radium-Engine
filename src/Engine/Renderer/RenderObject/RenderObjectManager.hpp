@@ -61,6 +61,11 @@ namespace Ra
             /// Return the AABB of all visible render objects
             Core::Aabb getSceneAabb() const;
 
+            //Added by Axel
+            //-----------------------
+            uint getNumRenderObjects();
+            //-----------------------
+
         private:
             Core::IndexMap<std::shared_ptr<RenderObject>> m_renderObjects;
 

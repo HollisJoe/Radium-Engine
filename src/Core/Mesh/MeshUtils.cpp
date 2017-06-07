@@ -126,6 +126,7 @@ namespace Ra
                         if (dSq < minDist)
                         {
                             result.m_nearestVertex = mesh.m_triangles[result.m_hitTriangle][i];
+                            minDist = dSq; //Added by Axel
                         }
                     }
                     result.m_t = minT;

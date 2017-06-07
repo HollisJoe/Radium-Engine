@@ -16,8 +16,11 @@
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>
 #include <Engine/Renderer/Mesh/Mesh.hpp>
+#include <Engine/Renderer/Renderer.hpp>
 
+#include <Engine/RadiumEngine.hpp>
 #include <Engine/Entity/Entity.hpp>
+#include <Engine/Component/Component.hpp>
 
 #include <PluginBase/RadiumPluginInterface.hpp>
 
@@ -25,8 +28,11 @@
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
 
 #include <Gui/MaterialEditor.hpp>
+#include <Gui/MainWindow.hpp>
 
 #include <MainApplication.hpp>
+
+#include <Engine/Managers/SystemDisplay/SystemDisplay.hpp>
 
 
 using Ra::Engine::ItemEntry;
@@ -52,10 +58,19 @@ namespace Ra
         m_materialEditor = new MaterialEditor();
         m_selectionManager = new GuiBase::SelectionManager(m_itemModel, this);
         m_entitiesTreeView->setSelectionModel(m_selectionManager);
+        m_vertexPickingManager = new VertexPickingManager();
 
         createConnections();
 
         mainApp->framesCountForStatsChanged((uint) m_avgFramesCount->value());
+
+        //Added by Axel
+        //---------------------------
+//        m_trackedVertex = nullptr;
+//        m_ro = nullptr;
+        spinBox_VertexIndex->setReadOnly(true);
+//        m_Original_RO_Nb = 0;
+        //---------------------------
     }
 
     Gui::MainWindow::~MainWindow()
@@ -101,6 +116,20 @@ namespace Ra
         connect(this, &MainWindow::selectedItem, mainApp, &MainApplication::onSelectedItem);
         connect(this, &MainWindow::selectedItem, m_viewer->getGizmoManager(), &GizmoManager::setEditable);
         connect(this, &MainWindow::selectedItem, m_viewer->getGizmoManager(), &GizmoManager::setEditable);
+
+
+        //Added by Axel
+        //-------------------------------------------------------------------------------------
+        // ###TODO###
+        // connecter signal du gizmoManager "a bougé" sur un slot de la mainwindow "a bougé"
+        // ce slot met à jour la GUI en utilisant le RO suivi pour retrouver le point
+
+        //connect(m_viewer->getGizmoManager(),&GizmoManager::GizmoMouseMove,this,&MainWindow::updateTrackedPointInfo);
+
+        connect(m_viewer,&Viewer::raySent,m_vertexPickingManager,&VertexPickingManager::saveRay);
+        connect(spinBox_VertexIndex,SIGNAL(valueChanged(int)),this,SLOT(spinBoxManualUpdate(int)));
+//        connect(mainApp,&BaseApplication::OriginalRONumber,this,&MainWindow::setMinimumRONb);
+        //-------------------------------------------------------------------------------------
 
         // Enable changing shaders
         connect(m_currentShaderBox, static_cast<void (QComboBox::*)(const QString&)>( &QComboBox::currentIndexChanged ),
@@ -160,6 +189,7 @@ namespace Ra
         QSettings settings;
         QString path = settings.value("files/load", QDir::homePath()).toString();
         path = QFileDialog::getOpenFileName(this, "Open File", path, filter);
+
         if (path.size() > 0)
         {
             settings.setValue("files/load", path);
@@ -172,7 +202,6 @@ namespace Ra
         QString framesA2B = QString("Frames #%1 to #%2 stats :")
                 .arg(stats.front().numFrame).arg(stats.back().numFrame);
         m_frameA2BLabel->setText(framesA2B);
-
 
         auto romgr = mainApp->m_engine->getRenderObjectManager();
 
@@ -225,7 +254,8 @@ namespace Ra
         return m_selectionManager;
     }
 
-    void Gui::MainWindow::handlePicking(int pickingResult)
+    //Added by Axel : bool parameter to know if the key "Ctrl" is pressed.
+    void Gui::MainWindow::handlePicking(int pickingResult, bool pointSelected)
     {
         Ra::Core::Index roIndex(pickingResult);
         Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
@@ -240,6 +270,37 @@ namespace Ra
                 // For now we don't enable group selection.
                 m_selectionManager->setCurrentEntry(ItemEntry(ent, comp, roIndex),
                                                     QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+
+                //Added by Axel
+                //-------------------------------------------------------------------
+                // ###TODO###
+                // si il y a une selection
+                // récupérer l'indice du premier point du mesh
+                // m-a-j de l'interface
+
+                if (pointSelected && ro && ro -> isVisible()
+                        && roIndex >= m_vertexPickingManager->getOriginalNumRenderObjects())
+                {
+                    m_vertexPickingManager -> computeVertexIndex(ro);
+
+                    if (m_vertexPickingManager -> isVertexIndexValid())
+                    {
+                        m_vertexPickingManager -> setCurrentRenderObject(ro);
+
+                        if (spinBox_VertexIndex->isReadOnly())
+                        {
+                            spinBox_VertexIndex->setReadOnly(false);
+                            m_vertexPickingManager -> displaySphere();
+                        }
+
+                        spinBox_VertexIndex -> setValue(m_vertexPickingManager -> getVertexIndex());
+                        spinBox_VertexIndex->setMaximum(ro ->getMesh()->getGeometry().m_vertices.size() - 1); //A Factoriser
+
+                        updateTrackedVertInfo();
+                    }
+                }
+                // enregistrer le RO à suivre?
+                //----------------------------------------------------------------------
             }
         }
         else
@@ -262,10 +323,9 @@ namespace Ra
                 m_editRenderObjectButton->setEnabled(true);
 
                 m_materialEditor->changeRenderObject(ent.m_roIndex);
-                const std::string& shaderName = mainApp->m_engine->getRenderObjectManager()->getRenderObject(
-                                                               ent.m_roIndex)
-                                                       ->getRenderTechnique()->getBasicConfiguration().m_name;
-
+                const std::string& shaderName = mainApp->m_engine->getRenderObjectManager()
+                                                       ->getRenderObject(ent.m_roIndex)->getRenderTechnique()
+                                                       ->shader->getBasicConfiguration().m_name;
 
                 if (m_currentShaderBox->findText(shaderName.c_str()) == -1)
                 {
@@ -313,7 +373,6 @@ namespace Ra
         // m_viewer->changeRenderer(m_currentRendererCombo->currentIndex());
     }
 
-
     void Gui::MainWindow::changeRenderObjectShader(const QString& shaderName)
     {
         std::string name = shaderName.toStdString();
@@ -330,7 +389,7 @@ namespace Ra
             const auto& ro = mainApp->m_engine->getRenderObjectManager()->getRenderObject(ro_index);
             if (ro->getRenderTechnique()->getBasicConfiguration().m_name != name)
             {
-                ro->getRenderTechnique()->changeShader(config);
+            ro->getRenderTechnique()->changeShader(config);
             }
         }
     }
@@ -414,6 +473,9 @@ namespace Ra
     {
         tab_edition->updateValues();
         m_viewer->getGizmoManager()->updateValues();
+
+        //Added by Axel
+        updateTrackedVertInfo();
     }
 
     void Gui::MainWindow::onItemAdded(const Engine::ItemEntry& ent)
@@ -517,5 +579,37 @@ namespace Ra
     {
         m_viewer->fitCameraToScene(Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getSceneAabb());
     }
+
+    //Added by Axel
+    //-----------------------------------------------------------------------------------------
+
+    Gui::VertexPickingManager* Gui::MainWindow::getVertexPickingManager()
+    {
+        return m_vertexPickingManager;
+    }
+
+
+    void Gui::MainWindow::spinBoxManualUpdate (int value)
+    {
+        m_vertexPickingManager -> setVertexIndex(value);
+    }
+
+
+    void Gui::MainWindow::updateTrackedVertInfo()
+    {
+        if (m_vertexPickingManager -> isVertexSelected())
+        {
+            m_valueX -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[0]));
+            m_valueY -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[1]));
+            m_valueZ -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[2]));
+
+            label_nxValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[0]));
+            label_nyValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[1]));
+            label_nzValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[2]));
+
+            m_vertexPickingManager -> setSpherePosition();
+        }
+    }
+    //------------------------------------------------------------------------------------------
 
 } // namespace Ra
