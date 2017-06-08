@@ -4,36 +4,30 @@
 #include <QFileDialog>
 #include <QToolButton>
 
-#include <Core/Utils/File/OBJFileManager.hpp>
 #include <assimp/Importer.hpp>
 
-#include <Engine/Managers/SignalManager/SignalManager.hpp>
-#include <Engine/Managers/EntityManager/EntityManager.hpp>
+#include <Core/Utils/File/OBJFileManager.hpp>
 
-#include <Engine/Renderer/RenderTechnique/RenderTechnique.hpp>
-#include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
+#include <Engine/Managers/EntityManager/EntityManager.hpp>
+#include <Engine/Managers/SignalManager/SignalManager.hpp>
+
+#include <Engine/Renderer/Mesh/Mesh.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>
-#include <Engine/Renderer/Mesh/Mesh.hpp>
+#include <Engine/Renderer/RenderTechnique/RenderTechnique.hpp>
+#include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
 
 #include <Engine/Entity/Entity.hpp>
 
 #include <PluginBase/RadiumPluginInterface.hpp>
 
-#include <GuiBase/Viewer/CameraInterface.hpp>
-#include <GuiBase/TreeModel/EntityTreeModel.hpp>
-
 #include <Gui/MaterialEditor.hpp>
 
-#include <MainApplication.hpp>
+#include <GuiBase/SelectionManager/SelectionManager.hpp>
+#include <GuiBase/Utils/FeaturePickingManager.hpp>
+#include <GuiBase/Viewer/CameraInterface.hpp>
 
-#if 0
-#include <Engine/Renderer/RenderTechnique/ShaderProgram.hpp>
-#include <Engine/Renderer/Renderer.hpp>
-#include <Engine/RadiumEngine.hpp>
-#include <Engine/Component/Component.hpp>
-#include <Engine/Managers/SystemDisplay/SystemDisplay.hpp>
-#endif
+#include <MainApplication.hpp>
 
 using Ra::Engine::ItemEntry;
 
@@ -58,11 +52,6 @@ namespace Ra
         m_materialEditor = new MaterialEditor();
         m_selectionManager = new GuiBase::SelectionManager(m_itemModel, this);
         m_entitiesTreeView->setSelectionModel(m_selectionManager);
-
-        //-------------------------------------------------------------------
-        //Added by Axel
-        m_vertexPickingManager = new VertexPickingManager();
-        //-------------------------------------------------------------------
 
         createConnections();
 
@@ -121,7 +110,6 @@ namespace Ra
 
         //-------------------------------------------------------------------
         //Added by Axel
-        connect(m_viewer,&Viewer::raySent,m_vertexPickingManager,&VertexPickingManager::saveRay);
         connect(spinBox_VertexIndex,SIGNAL(valueChanged(int)),this,SLOT(spinBoxManualUpdate(int)));
         //-------------------------------------------------------------------
 
@@ -248,10 +236,7 @@ namespace Ra
         return m_selectionManager;
     }
 
-    //-------------------------------------------------------------------
-    //Added by Axel : bool parameter to know if the key <v> is pressed.
-    //-------------------------------------------------------------------
-    void Gui::MainWindow::handlePicking(int pickingResult, bool pointSelected)
+    void Gui::MainWindow::handlePicking(int pickingResult)
     {
         Ra::Core::Index roIndex(pickingResult);
         Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
@@ -262,35 +247,11 @@ namespace Ra
             {
                 Ra::Engine::Component* comp = ro->getComponent();
                 Ra::Engine::Entity* ent = comp->getEntity();
+                const auto& fdata = m_viewer->getFeaturePickingManager()->getFeatureData();
 
                 // For now we don't enable group selection.
-                m_selectionManager->setCurrentEntry(ItemEntry(ent, comp, roIndex),
-                                                    QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
-
-                //-------------------------------------------------------------------
-                //Added by Axel
-                if (pointSelected && ro && ro -> isVisible()
-                        && roIndex >= m_vertexPickingManager->getOriginalNumRenderObjects())
-                {
-                    m_vertexPickingManager -> computeVertexIndex(ro);
-
-                    if (m_vertexPickingManager -> isVertexIndexValid())
-                    {
-                        m_vertexPickingManager -> setCurrentRenderObject(ro);
-
-                        if (spinBox_VertexIndex->isReadOnly())
-                        {
-                            spinBox_VertexIndex->setReadOnly(false);
-                            m_vertexPickingManager -> displaySphere();
-                        }
-
-                        spinBox_VertexIndex -> setValue(m_vertexPickingManager -> getVertexIndex());
-                        spinBox_VertexIndex->setMaximum(ro ->getMesh()->getGeometry().m_vertices.size() - 1); //A Factoriser
-
-                        updateTrackedVertInfo();
-                    }
-                }
-                //----------------------------------------------------------------------
+                m_selectionManager->setCurrentEntry( ItemEntry(ent, comp, roIndex, fdata),
+                                                     QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current );
             }
         }
         else
@@ -466,6 +427,9 @@ namespace Ra
 
         //-------------------------------------------------------------------
         //Added by Axel
+        // FIXME: todo: connect a new slot connected to SelectionManager::selectionChanged
+        //               -> update current feature data
+        //              then use current feature data to properly update GUI
         updateTrackedVertInfo();
         //-------------------------------------------------------------------
     }
@@ -574,31 +538,27 @@ namespace Ra
 
     //-------------------------------------------------------------------
     //Added by Axel
-
-    Gui::VertexPickingManager* Gui::MainWindow::getVertexPickingManager()
-    {
-        return m_vertexPickingManager;
-    }
+    // FIXME: todo: use current feature data to properly update GUI
 
     void Gui::MainWindow::spinBoxManualUpdate(int value)
     {
-        m_vertexPickingManager -> setVertexIndex(value);
-        m_vertexPickingManager -> setSpherePosition();
+        m_viewer->getFeaturePickingManager() -> setVertexIndex(value);
+        m_viewer->getFeaturePickingManager() -> setSpherePosition();
     }
 
     void Gui::MainWindow::updateTrackedVertInfo()
     {
-        if (m_vertexPickingManager -> isVertexSelected())
+        if (m_viewer->getFeaturePickingManager() -> isVertexSelected())
         {
-            m_valueX -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[0]));
-            m_valueY -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[1]));
-            m_valueZ -> setText(QString::number(m_vertexPickingManager->getVertexPosition()[2]));
+            m_valueX -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexPosition()[0]));
+            m_valueY -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexPosition()[1]));
+            m_valueZ -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexPosition()[2]));
 
-            label_nxValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[0]));
-            label_nyValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[1]));
-            label_nzValue -> setText(QString::number(m_vertexPickingManager->getVertexNormal()[2]));
+            label_nxValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexNormal()[0]));
+            label_nyValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexNormal()[1]));
+            label_nzValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexNormal()[2]));
 
-            m_vertexPickingManager -> setSpherePosition();
+            m_viewer->getFeaturePickingManager() -> setSpherePosition();
         }
     }
     //------------------------------------------------------------------------------------------

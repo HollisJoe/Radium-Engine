@@ -10,14 +10,7 @@
 #include <QEvent>
 
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
-#include <GuiBase/SelectionManager/SelectionManager.hpp>
 #include <GuiBase/TimerData/FrameTimerData.hpp>
-
-
-//-------------------------------------------------------------------
-//Added by Axel
-#include <GuiBase/Utils/VertexPickingManager.hpp>
-//-------------------------------------------------------------------
 
 namespace Ra
 {
@@ -34,6 +27,10 @@ namespace Ra
         class EntityTreeModel;
         class Viewer;
         class MaterialEditor;
+    }
+    namespace GuiBase
+    {
+        class SelectionManager;
     }
 }
 
@@ -66,11 +63,6 @@ namespace Ra
 
             /// Access the selection manager.
             GuiBase::SelectionManager* getSelectionManager();
-
-            //---------------------------------------------------------------------
-            //Added by Axel
-            Gui::VertexPickingManager* getVertexPickingManager();
-            //-------------------------------------------------------------------
 
             /// Update the ui from the plugins loaded.
             void updateUi( Plugins::RadiumPluginInterface* plugin );
@@ -111,6 +103,7 @@ namespace Ra
 
             //-------------------------------------------------------------------
             //Added by Axel
+            // FIXME: todo: use current feature data to properly update GUI
             void updateTrackedVertInfo();
             void spinBoxManualUpdate(int value);
             //-------------------------------------------------------------------
@@ -148,8 +141,7 @@ namespace Ra
             void changeRenderer(const QString& rendererName);
 
             /// Slot for the picking results from the viewer.
-            //Ajout Axel ctrl
-            void handlePicking(int ROIndex , bool pointSelected = false);
+            void handlePicking(int pickingResult);
 
             /// Slot to accept a new renderer
             void onRendererReady();
@@ -172,17 +164,11 @@ namespace Ra
             /// Stores the internal model of engine objects for selection.
             GuiBase::ItemModel* m_itemModel;
 
-            /// Stores and manage the current selection.
+            /// Stores and manages the current selection.
             GuiBase::SelectionManager* m_selectionManager;
 
             /// Widget to allow material edition.
             MaterialEditor* m_materialEditor;
-
-            //-------------------------------------------------------------------
-            //Added by Axel
-
-            VertexPickingManager* m_vertexPickingManager;
-            //-------------------------------------------------------------------
         };
 
     } // namespace Gui

@@ -7,6 +7,7 @@
 #include <Engine/RadiumEngine.hpp>
 #include <Core/Mesh/MeshPrimitives.hpp>
 #include <Engine/Component/Component.hpp>
+#include <Engine/Renderer/Renderer.hpp>
 #include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
 
@@ -16,7 +17,6 @@ namespace Ra
 {
     namespace Gui
     {
-
         //Sphere Component
 
         class SphereComponent : public Ra::Engine::Component
@@ -29,7 +29,6 @@ namespace Ra
             /// setup, i.e. it has an entity.
             void initialize() override;
 
-    //                Ra::Core::Vector3 position
             void setPosition (Ra::Core::Vector3 position);
 
             Engine::RenderObject* getSphereRo ();
@@ -42,58 +41,86 @@ namespace Ra
 
         //VertexPickingManager
 
-        class VertexPickingManager : public QObject
+        class FeaturePickingManager
         {
-            Q_OBJECT
+        public:
+
+            struct FeatureData
+            {
+                Engine::Renderer::PickingMode m_featureType;
+                std::vector< int > m_data;
+            };
 
         public:
 
-            /*================================
-             --- CONSTRUCTOR & DESTRUCTOR ---
-            ================================*/
+            FeaturePickingManager();
 
-            VertexPickingManager();
+            ~FeaturePickingManager();
 
-            ~VertexPickingManager();
+            void defineMinimumNumRenderObjects();
 
+            void doPicking( Engine::Renderer::PickingQuery, int roIndex );
+
+            inline const FeatureData& getFeatureData() const
+            {
+                return m_FeatureData;
+            }
+
+            inline FeatureData& getFeatureData()
+            {
+                return m_FeatureData;
+            }
+
+            void clearPicking();
+
+        private:
+            FeatureData m_FeatureData;
+
+        public:
 
             /*=========================
              --- GETTERS & SETTERS ---
             =========================*/
 
+            /**/
             int getOriginalNumRenderObjects();
 
+            /**/
             void setCurrentRenderObject(std::shared_ptr<Engine::RenderObject> renderObject);
 
+            /**/
             std::shared_ptr<Engine::RenderObject> getCurrentRenderObject();
 
+            /**/
             int getVertexIndex() const;
 
+            /**/
             void setVertexIndex (int index);
 
             /*======================
              --- OTHER METHODS ---
             ======================*/
 
+            /**/
             bool isVertexSelected() const;
 
+            /**/
             bool isVertexIndexValid() const;
 
+            /**/
             void computeVertexIndex(std::shared_ptr<Engine::RenderObject> ro);
 
-            void defineMinimumNumRenderObjects();
-
+            /**/
             void displaySphere ();
 
+            /**/
             void setSpherePosition ();
 
+            /**/
             Ra::Core::Vector3 getVertexPosition() const;
 
+            /**/
             Ra::Core::Vector3 getVertexNormal() const;
-
-        public slots:
-
-            void saveRay(Core::Ray r);
 
         private:
 

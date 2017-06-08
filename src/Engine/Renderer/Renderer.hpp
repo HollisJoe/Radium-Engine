@@ -67,10 +67,20 @@ namespace Ra
                 Core::Timer::TimePoint renderEnd;
             };
 
+            enum PickingMode
+            {
+                RO = 0,
+                VERTEX,
+                EDGE,
+                TRIANGLE,
+                FACE
+            };
+
             struct PickingQuery
             {
                 Core::Vector2 m_screenCoords;
                 Core::MouseButton::MouseButton m_button;
+                PickingMode m_mode;
             };
 
         public:
@@ -78,38 +88,38 @@ namespace Ra
             virtual ~Renderer();
 
             // -=-=-=-=-=-=-=-=- FINAL -=-=-=-=-=-=-=-=- //
-            virtual const TimerData& getTimerData() const final
+            inline virtual const TimerData& getTimerData() const final
             {
                 return m_timerData;
             }
 
-            virtual Texture* getDisplayTexture() const
+            inline virtual Texture* getDisplayTexture() const
             {
                 return m_displayedTexture;
             }
 
             // Lock the renderer (for MT access)
-            virtual void lockRendering() final
+            inline virtual void lockRendering() final
             {
                 m_renderMutex.lock();
             }
 
-            virtual void unlockRendering() final
+            inline virtual void unlockRendering() final
             {
                 m_renderMutex.unlock();
             }
 
-            virtual void toggleWireframe() final
+            inline virtual void toggleWireframe() final
             {
                 m_wireframe = !m_wireframe;
             }
 
-            virtual void setWireframe(bool wireframe) final
+            inline virtual void setWireframe(bool wireframe) final
             {
                 m_wireframe = wireframe;
             }
 
-            virtual void enablePostProcess(bool enabled) final
+            inline virtual void enablePostProcess(bool enabled) final
             {
                 m_postProcessEnabled = enabled;
             }
@@ -155,7 +165,7 @@ namespace Ra
 
             // FIXME(Charly): Not sure the lights should be handled by the renderer.
             //                How to do this ?
-            virtual void addLight( const std::shared_ptr<Light>& light )
+            inline virtual void addLight( const std::shared_ptr<Light>& light )
             {
                 m_lights.push_back( light );
             }
@@ -166,7 +176,7 @@ namespace Ra
             // FIXME(Charly): Final ?
             virtual void handleFileLoading( const std::string& filename ) final;
 
-            virtual void addPickingRequest(const PickingQuery& query)
+            inline virtual void addPickingRequest(const PickingQuery& query)
             {
                 m_pickingQueries.push_back( query );
             }

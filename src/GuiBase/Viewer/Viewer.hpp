@@ -11,6 +11,7 @@
 
 #include <Core/Math/LinearAlgebra.hpp>
 #include <GuiBase/Viewer/Gizmo/GizmoManager.hpp>
+#include <GuiBase/Utils/FeaturePickingManager.hpp>
 
 // Forward declarations
 namespace Ra
@@ -81,6 +82,9 @@ namespace Ra
             /// Read-only access to renderer
             const Engine::Renderer* getRenderer() const;
 
+            /// Access to the feature picking manager
+            FeaturePickingManager* getFeaturePickingManager();
+
             //
             // Rendering management
             //
@@ -111,16 +115,9 @@ namespace Ra
             void grabFrame( const std::string& filename );
 
         signals:
-            void rendererReady();               //! Emitted when the rendered is correctly initialized
-            void leftClickPicking ( int id );   //! Emitted when the result of a left click picking is known
-
-            // modified by Axel: ctrl is true when <v> is pressed when picking
-            void rightClickPicking( int id, bool ctrl );   //! Emitted when the resut of a right click picking is known
-
-            //-------------------------------------------------------------------
-            //Added by Axel
-            void raySent(Core::Ray r);
-            //-------------------------------------------------------------------
+            void rendererReady();             //! Emitted when the rendered is correctly initialized
+            void leftClickPicking ( int id ); //! Emitted when the result of a left click picking is known
+            void rightClickPicking( int id ); //! Emitted when the resut of a right click picking is known
 
         public slots:
             /// Tell the renderer to reload all shaders.
@@ -186,6 +183,9 @@ namespace Ra
             /// Owning pointer to the renderers.
             std::vector<std::unique_ptr<Engine::Renderer>> m_renderers;
             Engine::Renderer* m_currentRenderer;
+
+            /// Owning Pointer to the feature picking manager.
+            FeaturePickingManager* m_featurePickingManager;
 
             /// Owning pointer to the camera.
             std::unique_ptr<CameraInterface> m_camera;

@@ -175,7 +175,7 @@ namespace Ra
 
         //-------------------------------------------------------------------
         //Added by Axel
-        m_mainWindow -> getVertexPickingManager() -> defineMinimumNumRenderObjects();
+        m_mainWindow->getViewer()->getVertexPickingManager()->defineMinimumNumRenderObjects();
         //-------------------------------------------------------------------
 
         // A file has been required, load it.

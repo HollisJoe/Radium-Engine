@@ -35,7 +35,7 @@
 
 #include <GuiBase/Viewer/TrackballCamera.hpp>
 #include <GuiBase/Utils/Keyboard.hpp>
-
+#include <GuiBase/Utils/FeaturePickingManager.hpp>
 
 namespace Ra
 {
@@ -50,6 +50,7 @@ namespace Ra
         setMinimumSize( QSize( 800, 600 ) );
 
         m_camera.reset( new Gui::TrackballCamera( width(), height() ) );
+        m_featurePickingManager = new FeaturePickingManager();
 
         /// Intercept events to properly lock the renderer when it is compositing.
 
@@ -114,6 +115,11 @@ namespace Ra
         return m_currentRenderer;
     }
 
+    Gui::FeaturePickingManager* Gui::Viewer::getFeaturePickingManager()
+    {
+        return m_featurePickingManager;
+    }
+
     void Gui::Viewer::onAboutToCompose()
     {
         // This slot function is called from the main thread as part of the event loop
@@ -146,6 +152,28 @@ namespace Ra
         // Renderer should have been locked by previous events.
         m_camera->resizeViewport( width, height );
         m_currentRenderer->resize( width, height );
+    }
+
+
+    Engine::Renderer::PickingMode getPickingMode()
+    {
+        if (isKeyPressed( Qt::Key_V))
+        {
+            return Engine::Renderer::VERTEX;
+        }
+        if (isKeyPressed( Qt::Key_E))
+        {
+            return Engine::Renderer::EDGE;
+        }
+        if (isKeyPressed( Qt::Key_T))
+        {
+            return Engine::Renderer::TRIANGLE;
+        }
+        if (isKeyPressed( Qt::Key_F))
+        {
+            return Engine::Renderer::FACE;
+        }
+        return Engine::Renderer::RO;
     }
 
     void Gui::Viewer::mousePressEvent( QMouseEvent* event )
@@ -182,8 +210,9 @@ namespace Ra
                 }
                 else
                 {
-                    Engine::Renderer::PickingQuery query  = { Core::Vector2(event->x(), height() - event->y()), Core::MouseButton::RA_MOUSE_LEFT_BUTTON };
-                    m_currentRenderer->addPickingRequest(query);
+                    m_currentRenderer->addPickingRequest({ Core::Vector2(event->x(), height() - event->y()),
+                                                           Core::MouseButton::RA_MOUSE_LEFT_BUTTON,
+                                                           Engine::Renderer::RO });
                     m_gizmoManager->handleMousePressEvent(event);
                 }
             }
@@ -197,17 +226,10 @@ namespace Ra
 
             case Qt::RightButton:
             {
-                //-------------------------------------------------------------------
-                //Added by Axel
-                if (isKeyPressed(Qt::Key_V))
-                {
-                    Core::Ray r = m_camera->getCamera()->getRayFromScreen(Core::Vector2(event->x(), event->y()));
-                    emit raySent(r);
-                }
-                //-------------------------------------------------------------------
-
                 // Check picking
-                Engine::Renderer::PickingQuery query  = { Core::Vector2(event->x(), height() - event->y()), Core::MouseButton::RA_MOUSE_RIGHT_BUTTON };
+                Engine::Renderer::PickingQuery query  = { Core::Vector2(event->x(), height() - event->y()),
+                                                          Core::MouseButton::RA_MOUSE_RIGHT_BUTTON,
+                                                          getPickingMode() };
                 m_currentRenderer->addPickingRequest(query);
             }
             break;
@@ -332,11 +354,10 @@ namespace Ra
             }
             else if (query.m_button == Core::MouseButton::RA_MOUSE_RIGHT_BUTTON)
             {
-                //-------------------------------------------------------------------
-                //Added by Axel
-                //Origine -> Pas de "isKeyPressed(Qt::Key_Control)" dans le signal
-                emit rightClickPicking(m_currentRenderer->getPickingResults()[i],isKeyPressed(Qt::Key_V));
-                //-------------------------------------------------------------------
+                const int roIdx = m_currentRenderer->getPickingResults()[i];
+                // FIXME: this is safe as soon as there is no "queued connection" related to the signal
+                m_featurePickingManager->doPicking(query, roIdx);
+                emit rightClickPicking(roIdx);
             }
         }
     }

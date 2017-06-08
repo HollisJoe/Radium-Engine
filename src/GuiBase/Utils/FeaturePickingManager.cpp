@@ -1,4 +1,4 @@
-#include <GuiBase/Utils/VertexPickingManager.hpp>
+#include <GuiBase/Utils/FeaturePickingManager.hpp>
 #include <Engine/Entity/Entity.hpp>
 #include <Core/Containers/MakeShared.hpp>
 
@@ -15,7 +15,7 @@ namespace Ra
          --- CONSTRUCTOR & DESTRUCTOR ---
         ================================*/
 
-        Gui::VertexPickingManager::VertexPickingManager() :
+        FeaturePickingManager::FeaturePickingManager() :
             m_vertexIndex(-1),
             m_originalNumRenderObjects(0),
             m_currentRenderObject(nullptr),
@@ -24,7 +24,7 @@ namespace Ra
         }
 
 
-        Gui::VertexPickingManager::~VertexPickingManager()
+        FeaturePickingManager::~FeaturePickingManager()
         {
             delete m_sphereComponent;
         }
@@ -37,7 +37,7 @@ namespace Ra
 
         //OriginalNumrenderObject
 
-        int Gui::VertexPickingManager::getOriginalNumRenderObjects()
+        int FeaturePickingManager::getOriginalNumRenderObjects()
         {
             return int(m_originalNumRenderObjects);
         }
@@ -45,12 +45,12 @@ namespace Ra
 
         //CurrentRenderObject
 
-        void Gui::VertexPickingManager::setCurrentRenderObject(std::shared_ptr<Engine::RenderObject> renderObject)
+        void FeaturePickingManager::setCurrentRenderObject(std::shared_ptr<Engine::RenderObject> renderObject)
         {
             m_currentRenderObject = renderObject;
         }
 
-        std::shared_ptr<Engine::RenderObject> Gui::VertexPickingManager::getCurrentRenderObject()
+        std::shared_ptr<Engine::RenderObject> FeaturePickingManager::getCurrentRenderObject()
         {
             return m_currentRenderObject;
         }
@@ -58,12 +58,12 @@ namespace Ra
 
         //VertexIndex
 
-        int Gui::VertexPickingManager::getVertexIndex() const
+        int FeaturePickingManager::getVertexIndex() const
         {
             return m_vertexIndex;
         }
 
-        void Gui::VertexPickingManager::setVertexIndex (int index)
+        void FeaturePickingManager::setVertexIndex (int index)
         {
             m_vertexIndex = index;
         }
@@ -74,32 +74,33 @@ namespace Ra
 
         //Boolean Controlers
 
-        bool Gui::VertexPickingManager::isVertexSelected() const
+        bool FeaturePickingManager::isVertexSelected() const
         {
             return m_currentRenderObject != nullptr;
         }
 
 
-        bool Gui::VertexPickingManager::isVertexIndexValid() const
+        bool FeaturePickingManager::isVertexIndexValid() const
         {
             return m_vertexIndex > -1;
         }
 
 
-        void Gui::VertexPickingManager::saveRay(Core::Ray r) //Mettre arg input en reference
+        void FeaturePickingManager::saveRay(Core::Ray r) //Mettre arg input en reference
         {
             m_ray = r;
         }
 
 
-        void Gui::VertexPickingManager::defineMinimumNumRenderObjects()
+        // Here to avoid selecting features on static grid or static frame or gizmos
+        void FeaturePickingManager::defineMinimumNumRenderObjects()
         {
             Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
             m_originalNumRenderObjects = engine -> getRenderObjectManager() -> getNumRenderObjects();
         }
 
 
-        void Gui::VertexPickingManager::computeVertexIndex(std::shared_ptr<Engine::RenderObject> ro)
+        void FeaturePickingManager::computeVertexIndex(std::shared_ptr<Engine::RenderObject> ro)
         {
             const Ra::Core::Transform& t = ro->getLocalTransform();
             Core::Ray transformedRay = Ra::Core::transformRay(m_ray, t.inverse());
@@ -117,7 +118,7 @@ namespace Ra
             }
         }
 
-        void Gui::VertexPickingManager::displaySphere ()
+        void FeaturePickingManager::displaySphere ()
         {
             Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
             Ra::Engine::Entity* e = engine->getEntityManager()->createEntity("Sphere");
@@ -126,7 +127,7 @@ namespace Ra
             m_sphereComponent -> initialize();
         }
 
-        void Gui::VertexPickingManager::setSpherePosition ()
+        void FeaturePickingManager::setSpherePosition ()
         {
             auto sphereRoName = m_sphereComponent -> getSphereRo() -> getName();
             auto currentRoName = m_currentRenderObject -> getName();
@@ -139,13 +140,13 @@ namespace Ra
 
         //GET Vertex Information
 
-        Core::Vector3 Gui::VertexPickingManager::getVertexPosition() const
+        Core::Vector3 FeaturePickingManager::getVertexPosition() const
         {
             return m_currentRenderObject -> getMesh() -> getGeometry().m_vertices[m_vertexIndex];
         }
 
 
-        Core::Vector3 Gui::VertexPickingManager::getVertexNormal() const
+        Core::Vector3 FeaturePickingManager::getVertexNormal() const
         {
             return m_currentRenderObject -> getMesh() -> getGeometry().m_normals[m_vertexIndex];
         }
@@ -159,15 +160,15 @@ namespace Ra
         }
 
 
-        void Gui::SphereComponent::initialize()
+        void SphereComponent::initialize()
         {
             // Create a cube mesh render object.
-            std::shared_ptr<Ra::Engine::Mesh> display(new Ra::Engine::Mesh("VertexpickingManagerSphere"));
+            std::shared_ptr<Ra::Engine::Mesh> display(new Ra::Engine::Mesh("FeaturePickingManagerSphere"));
             display->loadGeometry(m_sphere);
             std::shared_ptr<Ra::Engine::Material> material;
             material.reset( new Ra::Engine::Material("VertexPickingManageSphereMaterial") );
             material-> m_kd = Ra::Core::Color(1.f,0.f,0.f,1.f);
-            m_sphereRo = Ra::Engine::RenderObject::createRenderObject("VertexpickingManagerSphereRO",
+            m_sphereRo = Ra::Engine::RenderObject::createRenderObject("FeaturePickingManagerSphereRO",
                                                                       this,
                                                                       Ra::Engine::RenderObjectType::Fancy,
                                                                       display,
@@ -177,7 +178,7 @@ namespace Ra
         }
 
 
-        void Gui::SphereComponent::setPosition (Ra::Core::Vector3 position)
+        void SphereComponent::setPosition (Ra::Core::Vector3 position)
         {
             if (m_sphereRo)
             {
@@ -187,7 +188,7 @@ namespace Ra
             }
         }
 
-        Engine::RenderObject* Gui::SphereComponent::getSphereRo ()
+        Engine::RenderObject* SphereComponent::getSphereRo ()
         {
             return m_sphereRo;
         }
