@@ -128,7 +128,7 @@ namespace Ra
             if( m_sphereComponent )
             {
                 m_sphereComponent->setPosition( getFeaturePosition() );
-                m_sphereComponent->vvvvvvvvvvvvsetScale( getScaleFromFeature() );
+                m_sphereComponent->setScale( getScaleFromFeature() );
             }
             m_sphereComponent->getSphereRo()->setVisible( m_FeatureData.m_featureType != Engine::Renderer::RO );
         }
