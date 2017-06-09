@@ -308,6 +308,16 @@ namespace Ra
         }
     }
 
+    void Gui::Viewer::handleFileLoading(const Ra::Asset::FileData &filedata) {
+        for ( auto& renderer : m_renderers )
+        {
+            if (renderer)
+            {
+                renderer->handleFileLoading( filedata );
+            }
+        }
+    }
+
     void Gui::Viewer::processPicking()
     {
         CORE_ASSERT( m_currentRenderer->getPickingQueries().size() == m_currentRenderer->getPickingResults().size(),
@@ -332,6 +342,10 @@ namespace Ra
         if (!aabb.isEmpty())
         {
             m_camera->fitScene(aabb);
+        }
+        else
+        {
+            LOG( logINFO ) << "Unable to fit the camera to the scene : empty Bbox.";
         }
     }
 
@@ -391,4 +405,6 @@ namespace Ra
     {
         m_camera.reset( new Gui::TrackballCamera( width(), height() ) );
     }
+
+
 } // namespace Ra
