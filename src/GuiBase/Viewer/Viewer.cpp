@@ -157,19 +157,19 @@ namespace Ra
 
     Engine::Renderer::PickingMode getPickingMode()
     {
-        if (isKeyPressed( Qt::Key_V))
+        if (Gui::isKeyPressed(Qt::Key_V))
         {
             return Engine::Renderer::VERTEX;
         }
-        if (isKeyPressed( Qt::Key_E))
+        if (Gui::isKeyPressed(Qt::Key_E))
         {
             return Engine::Renderer::EDGE;
         }
-        if (isKeyPressed( Qt::Key_T))
+        if (Gui::isKeyPressed(Qt::Key_T))
         {
             return Engine::Renderer::TRIANGLE;
         }
-        if (isKeyPressed( Qt::Key_F))
+        if (Gui::isKeyPressed(Qt::Key_F))
         {
             return Engine::Renderer::FACE;
         }
@@ -355,8 +355,9 @@ namespace Ra
             else if (query.m_button == Core::MouseButton::RA_MOUSE_RIGHT_BUTTON)
             {
                 const int roIdx = m_currentRenderer->getPickingResults()[i];
+                const Core::Ray ray = m_camera->getCamera()->getRayFromScreen({query.m_screenCoords(0), height()-query.m_screenCoords(1)});
                 // FIXME: this is safe as soon as there is no "queued connection" related to the signal
-                m_featurePickingManager->doPicking(query, roIdx);
+                m_featurePickingManager->doPicking(roIdx, query, ray);
                 emit rightClickPicking(roIdx);
             }
         }

@@ -30,6 +30,7 @@ namespace Ra
             void initialize() override;
 
             void setPosition (Ra::Core::Vector3 position);
+            void setScale (Scalar scale);
 
             Engine::RenderObject* getSphereRo ();
 
@@ -39,17 +40,19 @@ namespace Ra
         };
 
 
-        //VertexPickingManager
+        struct FeatureData
+        {
+            FeatureData() : m_featureType(Engine::Renderer::RO), m_roIdx(-1)
+            {}
+
+            Engine::Renderer::PickingMode m_featureType;
+            std::vector< int > m_data;
+            uint m_roIdx;
+        };
 
         class FeaturePickingManager
         {
         public:
-
-            struct FeatureData
-            {
-                Engine::Renderer::PickingMode m_featureType;
-                std::vector< int > m_data;
-            };
 
         public:
 
@@ -57,9 +60,13 @@ namespace Ra
 
             ~FeaturePickingManager();
 
-            void defineMinimumNumRenderObjects();
+            /// Registers the index of the first RenderObject from which feature picking is enabled.
+            inline void setMinRenderObjectIndex(uint id)
+            {
+                m_firstRO = id;
+            }
 
-            void doPicking( Engine::Renderer::PickingQuery, int roIndex );
+            void doPicking( int roIndex, const Engine::Renderer::PickingQuery& query, const Core::Ray& ray );
 
             inline const FeatureData& getFeatureData() const
             {
@@ -71,66 +78,37 @@ namespace Ra
                 return m_FeatureData;
             }
 
-            void clearPicking();
+            void clearFeature();
 
         private:
             FeatureData m_FeatureData;
 
         public:
 
-            /*=========================
-             --- GETTERS & SETTERS ---
-            =========================*/
-
             /**/
-            int getOriginalNumRenderObjects();
-
-            /**/
-            void setCurrentRenderObject(std::shared_ptr<Engine::RenderObject> renderObject);
-
-            /**/
-            std::shared_ptr<Engine::RenderObject> getCurrentRenderObject();
-
-            /**/
-            int getVertexIndex() const;
-
-            /**/
-            void setVertexIndex (int index);
-
-            /*======================
-             --- OTHER METHODS ---
-            ======================*/
+            void setVertexIndex(int id);
 
             /**/
             bool isVertexSelected() const;
 
             /**/
-            bool isVertexIndexValid() const;
+            void setSpherePosition();
 
             /**/
-            void computeVertexIndex(std::shared_ptr<Engine::RenderObject> ro);
+            Ra::Core::Vector3 getFeaturePosition() const;
 
             /**/
-            void displaySphere ();
-
-            /**/
-            void setSpherePosition ();
-
-            /**/
-            Ra::Core::Vector3 getVertexPosition() const;
-
-            /**/
-            Ra::Core::Vector3 getVertexNormal() const;
+            Ra::Core::Vector3 getFeatureVector() const;
 
         private:
+            /**/
+            Scalar getScaleFromFeature() const;
 
             int m_vertexIndex;
 
             Ra::Core::Ray m_ray;
 
-            uint m_originalNumRenderObjects;
-
-            std::shared_ptr<Engine::RenderObject> m_currentRenderObject;
+            uint m_firstRO;
 
             Ra::Gui::SphereComponent* m_sphereComponent;
         };

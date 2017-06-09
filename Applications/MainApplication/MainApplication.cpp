@@ -149,7 +149,7 @@ namespace Ra
         // initialized the OpenGL context..)
         processEvents();
 
-        Ra::Engine::RadiumEngine::getInstance()->getEntityManager()->createEntity("Test");
+        m_engine->getEntityManager()->createEntity("Test");
         // Load plugins
         if ( !loadPlugins( pluginsPath, parser.values(pluginLoadOpt), parser.values(pluginIgnoreOpt) ) )
         {
@@ -173,10 +173,7 @@ namespace Ra
         setupScene();
         emit starting();
 
-        //-------------------------------------------------------------------
-        //Added by Axel
-        m_mainWindow->getViewer()->getVertexPickingManager()->defineMinimumNumRenderObjects();
-        //-------------------------------------------------------------------
+        m_mainWindow->getViewer()->getFeaturePickingManager()->setMinRenderObjectIndex(m_engine->getRenderObjectManager()->getNumRenderObjects());
 
         // A file has been required, load it.
         if (parser.isSet(fileOpt))
@@ -196,20 +193,20 @@ namespace Ra
     {
         using namespace Engine::DrawPrimitives;
 
-        Engine::SystemEntity::uiCmp()->addRenderObject(
-            Primitive(Engine::SystemEntity::uiCmp(), Grid(
-                    Core::Vector3::Zero(), Core::Vector3::UnitX(),
-                    Core::Vector3::UnitZ(), Core::Colors::Grey(0.6f))));
+        auto grid = Primitive(Engine::SystemEntity::uiCmp(),
+                              Grid( Core::Vector3::Zero(), Core::Vector3::UnitX(),
+                                    Core::Vector3::UnitZ(), Core::Colors::Grey(0.6f)));
+        grid->setPickable( false );
+        Engine::SystemEntity::uiCmp()->addRenderObject(grid);
 
-        Engine::SystemEntity::uiCmp()->addRenderObject(
-                    Primitive(Engine::SystemEntity::uiCmp(), Frame(Ra::Core::Transform::Identity(), 0.05f)));
+        auto frame = Primitive(Engine::SystemEntity::uiCmp(), Frame(Ra::Core::Transform::Identity(), 0.05f));
+        frame->setPickable( false );
+        Engine::SystemEntity::uiCmp()->addRenderObject(frame);
 
-
-        auto em =  Ra::Engine::RadiumEngine::getInstance()->getEntityManager();
+        auto em = Ra::Engine::RadiumEngine::getInstance()->getEntityManager();
         Ra::Engine::Entity* e = em->entityExists("Test") ?
             Ra::Engine::RadiumEngine::getInstance()->getEntityManager()->getEntity("Test"):
             Ra::Engine::RadiumEngine::getInstance()->getEntityManager()->createEntity("Test");
-
         for (auto& c: e->getComponents())
         {
             c->initialize();

@@ -11,144 +11,260 @@ namespace Ra
 {
     namespace Gui
     {
-        /*================================
-         --- CONSTRUCTOR & DESTRUCTOR ---
-        ================================*/
 
         FeaturePickingManager::FeaturePickingManager() :
             m_vertexIndex(-1),
-            m_originalNumRenderObjects(0),
-            m_currentRenderObject(nullptr),
+            m_firstRO(0),
             m_sphereComponent(nullptr)
         {
+            Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
+            Ra::Engine::Entity* e = engine->getEntityManager()->createEntity("Sphere");
+            m_sphereComponent = new SphereComponent;
+            e->addComponent(m_sphereComponent);
+            m_sphereComponent->initialize();
+            m_sphereComponent->getSphereRo()->setVisible(false);
+            m_sphereComponent->getSphereRo()->setPickable(false);
         }
-
 
         FeaturePickingManager::~FeaturePickingManager()
         {
             delete m_sphereComponent;
         }
 
-
-        /*=========================
-         --- GETTERS & SETTERS ---
-        =========================*/
-
-
-        //OriginalNumrenderObject
-
-        int FeaturePickingManager::getOriginalNumRenderObjects()
+        void FeaturePickingManager::doPicking( int roIndex, const Engine::Renderer::PickingQuery &query, const Core::Ray& ray )
         {
-            return int(m_originalNumRenderObjects);
+            // first clear the feature data.
+            m_FeatureData.m_featureType = query.m_mode;
+            m_FeatureData.m_data.clear();
+            m_FeatureData.m_roIdx = roIndex;
+            if (roIndex < m_firstRO || roIndex == -1)
+            {
+                m_FeatureData.m_featureType = Engine::Renderer::RO;
+            }
+            // if picking is on the RO, the nothing to be done here
+            if (query.m_mode == Engine::Renderer::RO)
+            {
+                return;
+            }
+
+            // pick triangle through raycasting
+            auto ro = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(roIndex);
+            const Ra::Core::Transform& t = ro->getLocalTransform();
+            const Core::Ray transformedRay = Ra::Core::transformRay(ray, t.inverse());
+            const auto result = Ra::Core::MeshUtils::castRay(ro->getMesh()->getGeometry(), transformedRay);
+            const int& tidx = result.m_hitTriangle;
+
+            // fill feature data
+            if (tidx<0) // didn't select any
+            {
+                m_FeatureData.m_featureType = Engine::Renderer::RO;
+                return;
+            }
+            switch (query.m_mode)
+            {
+            case Engine::Renderer::VERTEX:
+            {
+                // data is the vertex index
+                m_FeatureData.m_data.push_back( result.m_nearestVertex );
+                break;
+            }
+            case Engine::Renderer::EDGE:
+            {
+                // data are the edge vertices indices
+                // FIXME: some issues there
+                m_FeatureData.m_data.push_back( result.m_edgeVertex0 );
+                m_FeatureData.m_data.push_back( result.m_edgeVertex1 );
+                break;
+            }
+            case Engine::Renderer::TRIANGLE:
+            {
+                // data is the triangle index, along with its vertices indices
+                m_FeatureData.m_data.push_back( tidx );
+                const auto& T = ro->getMesh()->getGeometry().m_triangles[ tidx ];
+                m_FeatureData.m_data.push_back( T(0) );
+                m_FeatureData.m_data.push_back( T(1) );
+                m_FeatureData.m_data.push_back( T(2) );
+                break;
+            }
+            case Engine::Renderer::FACE:
+            {
+                // FIXME: for this, castRay should be able to use TriangleMesh::m_faces instead of TriangleMesh::m_triangles
+                //        See PR#196 about cleaning TriangleMesh...
+                std::cerr << "Face selection not implemented yet. \
+                              For Triangle selection, please use the dedicated query mode." << std::endl;
+                m_FeatureData.m_featureType = Engine::Renderer::RO;
+                break;
+            }
+            default:
+                break;
+            }
         }
 
-
-        //CurrentRenderObject
-
-        void FeaturePickingManager::setCurrentRenderObject(std::shared_ptr<Engine::RenderObject> renderObject)
+        void FeaturePickingManager::clearFeature()
         {
-            m_currentRenderObject = renderObject;
+            m_FeatureData.m_featureType = Engine::Renderer::RO;
+            m_FeatureData.m_data.clear();
+            m_FeatureData.m_roIdx = -1;
+            m_sphereComponent->getSphereRo()->setVisible(false);
         }
 
-        std::shared_ptr<Engine::RenderObject> FeaturePickingManager::getCurrentRenderObject()
+        void FeaturePickingManager::setVertexIndex(int id)
         {
-            return m_currentRenderObject;
+            if (m_FeatureData.m_featureType == Engine::Renderer::VERTEX)
+            {
+                m_FeatureData.m_data[0] = id;
+            }
         }
-
-
-        //VertexIndex
-
-        int FeaturePickingManager::getVertexIndex() const
-        {
-            return m_vertexIndex;
-        }
-
-        void FeaturePickingManager::setVertexIndex (int index)
-        {
-            m_vertexIndex = index;
-        }
-
-        /*======================
-         --- OTHER METHODS ---
-        ======================*/
-
-        //Boolean Controlers
 
         bool FeaturePickingManager::isVertexSelected() const
         {
-            return m_currentRenderObject != nullptr;
+            return m_FeatureData.m_featureType == Engine::Renderer::VERTEX;
         }
 
-
-        bool FeaturePickingManager::isVertexIndexValid() const
-        {
-            return m_vertexIndex > -1;
-        }
-
-
-        void FeaturePickingManager::saveRay(Core::Ray r) //Mettre arg input en reference
-        {
-            m_ray = r;
-        }
-
-
-        // Here to avoid selecting features on static grid or static frame or gizmos
-        void FeaturePickingManager::defineMinimumNumRenderObjects()
-        {
-            Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
-            m_originalNumRenderObjects = engine -> getRenderObjectManager() -> getNumRenderObjects();
-        }
-
-
-        void FeaturePickingManager::computeVertexIndex(std::shared_ptr<Engine::RenderObject> ro)
-        {
-            const Ra::Core::Transform& t = ro->getLocalTransform();
-            Core::Ray transformedRay = Ra::Core::transformRay(m_ray, t.inverse());
-            auto result = Ra::Core::MeshUtils::castRay(ro -> getMesh() -> getGeometry(), transformedRay);
-
-            const int& tidx = result.m_hitTriangle;
-
-            if (tidx >= 0)
-            {
-                m_vertexIndex = result.m_nearestVertex;
-            }
-            else
-            {
-                m_vertexIndex = -1;
-            }
-        }
-
-        void FeaturePickingManager::displaySphere ()
-        {
-            Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
-            Ra::Engine::Entity* e = engine->getEntityManager()->createEntity("Sphere");
-            m_sphereComponent = new SphereComponent;
-            e->addComponent(m_sphereComponent);
-            m_sphereComponent -> initialize();
-        }
-
-        void FeaturePickingManager::setSpherePosition ()
+        void FeaturePickingManager::setSpherePosition()
         {
             auto sphereRoName = m_sphereComponent -> getSphereRo() -> getName();
-            auto currentRoName = m_currentRenderObject -> getName();
 
-            if( m_sphereComponent && (sphereRoName != currentRoName ) )
+            if( m_sphereComponent )
             {
-                m_sphereComponent -> setPosition(getVertexPosition());
+                m_sphereComponent->setPosition( getFeaturePosition() );
+                m_sphereComponent->vvvvvvvvvvvvsetScale( getScaleFromFeature() );
+            }
+            m_sphereComponent->getSphereRo()->setVisible( m_FeatureData.m_featureType != Engine::Renderer::RO );
+        }
+
+        Scalar FeaturePickingManager::getScaleFromFeature() const
+        {
+            if (m_FeatureData.m_featureType == Engine::Renderer::RO)
+            {
+                return 1.0;
+            }
+            auto ro = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(m_FeatureData.m_roIdx);
+            const auto& V = ro->getMesh()->getGeometry().m_vertices;
+            switch (m_FeatureData.m_featureType)
+            {
+            case Engine::Renderer::VERTEX:
+            {
+                // return half the edge length of the first edge we can find with the vertex
+                const auto& T = ro->getMesh()->getGeometry().m_triangles;
+                const auto& v = m_FeatureData.m_data[0];
+                for (const auto& t : T)
+                {
+                    if (t(0) == v || t(1) == v || t(2) == v)
+                    {
+                        const Core::Vector3& v0 = V[ v ];
+                        const Core::Vector3& v1 = V[ t(0)==v? t(1) : t(0) ];
+                        return (v1-v0).norm() / 2.0;
+                    }
+                }
+                return 1.0; // should never come here
+            }
+            case Engine::Renderer::EDGE:
+            {
+                // return half the edge length
+                const Core::Vector3& v0 = V[ m_FeatureData.m_data[0] ];
+                const Core::Vector3& v1 = V[ m_FeatureData.m_data[1] ];
+                return (v1-v0).norm() / 2.0;
+            }
+            case Engine::Renderer::TRIANGLE:
+            {
+                // return half the smallest distance from C to an edge
+                const Core::Vector3& v0 = V[ m_FeatureData.m_data[1] ];
+                const Core::Vector3& v1 = V[ m_FeatureData.m_data[2] ];
+                const Core::Vector3& v2 = V[ m_FeatureData.m_data[3] ];
+                const Core::Vector3 C = ( v0 + v1 + v2 ) / 3.0;
+                const Core::Vector3 C0 = C-v0;
+                const Core::Vector3 C1 = C-v1;
+                const Core::Vector3 C2 = C-v2;
+                return sqrt( std::min(std::min( C0.squaredNorm() * (v1-v0).normalized().cross(C0.normalized()).squaredNorm(),
+                                                C1.squaredNorm() * (v2-v1).normalized().cross(C1.normalized()).squaredNorm()),
+                                                C2.squaredNorm() * (v0-v2).normalized().cross(C2.normalized()).squaredNorm()) ) / 2.0;
+            }
+            default:
+                return 1.0;
             }
         }
 
         //GET Vertex Information
 
-        Core::Vector3 FeaturePickingManager::getVertexPosition() const
+        Core::Vector3 FeaturePickingManager::getFeaturePosition() const
         {
-            return m_currentRenderObject -> getMesh() -> getGeometry().m_vertices[m_vertexIndex];
+            if (m_FeatureData.m_featureType == Engine::Renderer::RO)
+            {
+                return Core::Vector3();
+            }
+
+            const auto& v = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(m_FeatureData.m_roIdx)
+                                                                   ->getMesh()->getGeometry().m_vertices;
+            Core::Vector3 P(0,0,0);
+            switch (m_FeatureData.m_featureType)
+            {
+            case Engine::Renderer::VERTEX:
+            {
+                P = v[ m_FeatureData.m_data[0] ];
+                break;
+            }
+            case Engine::Renderer::EDGE:
+            {
+                P = ( v[ m_FeatureData.m_data[0] ]
+                    + v[ m_FeatureData.m_data[1] ] ) / 2.0;
+                break;
+            }
+            case Engine::Renderer::TRIANGLE:
+            {
+                P = ( v[ m_FeatureData.m_data[1] ]
+                    + v[ m_FeatureData.m_data[2] ]
+                    + v[ m_FeatureData.m_data[3] ] ) / 3.0;
+                break;
+            }
+            default:
+                break;
+            }
+
+            return P;
         }
 
 
-        Core::Vector3 FeaturePickingManager::getVertexNormal() const
+        Core::Vector3 FeaturePickingManager::getFeatureVector() const
         {
-            return m_currentRenderObject -> getMesh() -> getGeometry().m_normals[m_vertexIndex];
+            if (m_FeatureData.m_featureType == Engine::Renderer::RO)
+            {
+                return Core::Vector3();
+            }
+
+            const auto& v = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(m_FeatureData.m_roIdx)
+                                                                   ->getMesh()->getGeometry().m_vertices;
+            const auto& n = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(m_FeatureData.m_roIdx)
+                                                                   ->getMesh()->getGeometry().m_normals;
+            Core::Vector3 V(0,0,0);
+            switch (m_FeatureData.m_featureType)
+            {
+            case Engine::Renderer::VERTEX:
+            {
+                // for vertices, the normal
+                V = n[ m_FeatureData.m_data[0] ];
+                break;
+            }
+            case Engine::Renderer::EDGE:
+            {
+                // for edges, the edge vector
+                V = v[ m_FeatureData.m_data[0] ] - v[ m_FeatureData.m_data[1] ];
+                break;
+            }
+            case Engine::Renderer::TRIANGLE:
+            {
+                // for triangles, the normal
+                const Core::Vector3& p0 = v[ m_FeatureData.m_data[1] ];
+                const Core::Vector3& p1 = v[ m_FeatureData.m_data[2] ];
+                const Core::Vector3& p2 = v[ m_FeatureData.m_data[3] ];
+                V = (p1-p0).cross(p2-p0).normalized();
+                break;
+            }
+            default:
+                break;
+            }
+
+            return V;
         }
 
 
@@ -184,7 +300,15 @@ namespace Ra
             {
                 Ra::Core::Translation aa(position);
                 Ra::Core::Transform rot(aa);
-                m_sphereRo -> setLocalTransform( rot );
+                m_sphereRo->setLocalTransform( rot );
+            }
+        }
+        void SphereComponent::setScale (Scalar scale)
+        {
+            if (m_sphereRo)
+            {
+                auto T = m_sphereRo->getLocalTransform();
+                m_sphereRo->setLocalTransform( T.scale( scale ) );
             }
         }
 

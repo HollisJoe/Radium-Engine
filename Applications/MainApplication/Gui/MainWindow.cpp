@@ -249,6 +249,19 @@ namespace Ra
                 Ra::Engine::Entity* ent = comp->getEntity();
                 const auto& fdata = m_viewer->getFeaturePickingManager()->getFeatureData();
 
+                //-------------------------------------------------------------------
+                //Added by Axel
+                if (spinBox_VertexIndex->isReadOnly())
+                {
+                    spinBox_VertexIndex->setReadOnly(false);
+                }
+                if (fdata.m_featureType == Ra::Engine::Renderer::VERTEX)
+                {
+                    spinBox_VertexIndex->setValue(fdata.m_data[0]);
+                }
+                spinBox_VertexIndex->setMaximum(ro->getMesh()->getGeometry().m_vertices.size() - 1);
+                //-------------------------------------------------------------------
+
                 // For now we don't enable group selection.
                 m_selectionManager->setCurrentEntry( ItemEntry(ent, comp, roIndex, fdata),
                                                      QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current );
@@ -550,16 +563,15 @@ namespace Ra
     {
         if (m_viewer->getFeaturePickingManager() -> isVertexSelected())
         {
-            m_valueX -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexPosition()[0]));
-            m_valueY -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexPosition()[1]));
-            m_valueZ -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexPosition()[2]));
+            m_valueX -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[0]));
+            m_valueY -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[1]));
+            m_valueZ -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[2]));
 
-            label_nxValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexNormal()[0]));
-            label_nyValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexNormal()[1]));
-            label_nzValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getVertexNormal()[2]));
-
-            m_viewer->getFeaturePickingManager() -> setSpherePosition();
+            label_nxValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[0]));
+            label_nyValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[1]));
+            label_nzValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[2]));
         }
+        m_viewer->getFeaturePickingManager()->setSpherePosition();
     }
     //------------------------------------------------------------------------------------------
 
