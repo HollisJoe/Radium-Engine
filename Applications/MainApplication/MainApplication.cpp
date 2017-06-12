@@ -173,7 +173,7 @@ namespace Ra
         setupScene();
         emit starting();
 
-        m_mainWindow->getViewer()->getFeaturePickingManager()->setMinRenderObjectIndex(m_engine->getRenderObjectManager()->getNumRenderObjects());
+        m_mainWindow->getViewer()->getFeaturePickingManager()->setMinRenderObjectIndex(m_engine->getRenderObjectManager()->getRenderObjectsCount());
 
         // A file has been required, load it.
         if (parser.isSet(fileOpt))

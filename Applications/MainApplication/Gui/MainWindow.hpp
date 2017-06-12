@@ -117,11 +117,8 @@ namespace Ra
             /// Connect qt signals and slots. Called once by the constructor.
             void createConnections();
 
-            //-------------------------------------------------------------------
-            //Added by Axel
-            // FIXME: todo: use current feature data to properly update GUI
-            void updateTrackedVertInfo();
-            //-------------------------------------------------------------------
+            // Updates the Tracking info according to the selected feature, if any.
+            void updateTrackedFeatureInfo();
 
             virtual void closeEvent( QCloseEvent* event ) override;
 
@@ -141,8 +138,9 @@ namespace Ra
             /// Slot for the picking results from the viewer.
             void handlePicking(int pickingResult);
 
-            /// Slot for tracking vertice info.
+            /// Slot for tracking info GUI.
             void on_m_vertexIdx_valueChanged(int arg1);
+            void on_m_triangleIdx_valueChanged(int arg1);
 
             /// Slot to accept a new renderer
             void onRendererReady();

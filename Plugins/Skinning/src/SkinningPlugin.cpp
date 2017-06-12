@@ -68,6 +68,16 @@ namespace SkinningPlugin
         }
     }
 
+    bool SkinningPluginC::doAddFeatureTrackingWidget()
+    {
+        return false;
+    }
+
+    QWidget* SkinningPluginC::getFeatureTrackingWidget()
+    {
+        return nullptr;
+    }
+
     void SkinningPluginC::onCurrentChanged( const QModelIndex& current, const QModelIndex& prev )
     {
         Ra::Engine::ItemEntry it = m_selectionManager->currentItem();

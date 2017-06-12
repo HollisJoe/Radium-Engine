@@ -77,6 +77,9 @@ public:
     virtual bool doAddAction( int& nb ) override;
     virtual QAction* getAction( int id ) override;
 
+    virtual bool doAddFeatureTrackingWidget() override;
+    virtual QWidget* getFeatureTrackingWidget() override;
+
 private slots:
     void onCurrentChanged( const QModelIndex& current , const QModelIndex& prev);
 

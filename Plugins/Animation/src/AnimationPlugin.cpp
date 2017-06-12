@@ -87,6 +87,16 @@ namespace AnimationPlugin
         }
     }
 
+    bool AnimationPluginC::doAddFeatureTrackingWidget()
+    {
+        return false;
+    }
+
+    QWidget* AnimationPluginC::getFeatureTrackingWidget()
+    {
+        return nullptr;
+    }
+
     void AnimationPluginC::toggleXray(bool on)
     {
         CORE_ASSERT(m_system, "System should be there ");

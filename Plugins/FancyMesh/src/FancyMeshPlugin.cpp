@@ -48,4 +48,14 @@ namespace FancyMeshPlugin
         return nullptr;
     }
 
+    bool FancyMeshPluginC::doAddFeatureTrackingWidget()
+    {
+        return false;
+    }
+
+    QWidget* FancyMeshPluginC::getFeatureTrackingWidget()
+    {
+        return nullptr;
+    }
+
 }

@@ -71,6 +71,11 @@ namespace Ra
             renderObject.reset();
         }
 
+        uint RenderObjectManager::getRenderObjectsCount()
+        {
+            return m_renderObjects.size();
+        }
+
         std::shared_ptr<RenderObject> RenderObjectManager::getRenderObject( const Core::Index& index )
         {
             CORE_ASSERT( exists (index), "Trying to access a render object which doesn't exist");
@@ -88,14 +93,6 @@ namespace Ra
                 renderObjectsOut.push_back( m_renderObjects.at( i ) );
             }
         }
-
-        //-------------------------------------------------------------------
-        //Added by Axel
-        uint RenderObjectManager::getNumRenderObjects()
-        {
-            return m_renderObjects.size();
-        }
-        //-------------------------------------------------------------------
 
         void RenderObjectManager::getRenderObjectsByType( const RenderData& renderData,
                                                           std::vector<std::shared_ptr<RenderObject>>& objectsOut,

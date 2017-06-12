@@ -13,7 +13,6 @@ namespace Ra
     {
 
         FeaturePickingManager::FeaturePickingManager() :
-            m_vertexIndex(-1),
             m_firstRO(0),
             m_sphereComponent(nullptr)
         {
@@ -112,13 +111,28 @@ namespace Ra
         {
             if (m_FeatureData.m_featureType == Engine::Renderer::VERTEX)
             {
-                m_FeatureData.m_data[0] = id;
+                auto ro = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(m_FeatureData.m_roIdx);
+                if (id < ro->getMesh()->getGeometry().m_vertices.size())
+                {
+                    m_FeatureData.m_data[0] = id;
+                }
             }
         }
 
-        bool FeaturePickingManager::isVertexSelected() const
+        void FeaturePickingManager::setTriangleIndex(int id)
         {
-            return m_FeatureData.m_featureType == Engine::Renderer::VERTEX;
+            if (m_FeatureData.m_featureType == Engine::Renderer::TRIANGLE)
+            {
+                m_FeatureData.m_data[0] = id;
+                auto ro = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(m_FeatureData.m_roIdx);
+                if (id < ro->getMesh()->getGeometry().m_triangles.size())
+                {
+                    const auto& T = ro->getMesh()->getGeometry().m_triangles[id];
+                    m_FeatureData.m_data[1] = T(0);
+                    m_FeatureData.m_data[2] = T(1);
+                    m_FeatureData.m_data[3] = T(2);
+                }
+            }
         }
 
         void FeaturePickingManager::setSpherePosition()

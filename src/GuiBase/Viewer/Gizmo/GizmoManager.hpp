@@ -62,12 +62,6 @@ namespace Ra
             /// Retrieve the transform from the editable and update the gizmos.
             void updateValues() override;
 
-            //-------------------------------------------------------------------
-            //Added by Axel
-        signals:
-            void GizmoMouseMove ();
-            //-------------------------------------------------------------------
-
         private:
             // Helper method to change the current gizmo
             void updateGizmo();

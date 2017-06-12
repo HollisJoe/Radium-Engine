@@ -26,7 +26,6 @@
 #include <GuiBase/SelectionManager/SelectionManager.hpp>
 #include <GuiBase/Utils/FeaturePickingManager.hpp>
 #include <GuiBase/Viewer/CameraInterface.hpp>
-#include <GuiBase/Utils/qt_utils.hpp>
 
 #include <MainApplication.hpp>
 
@@ -58,12 +57,9 @@ namespace Ra
 
         mainApp->framesCountForStatsChanged((uint) m_avgFramesCount->value());
 
-        //-------------------------------------------------------------------
-        //Added by Axel
-        m_vertexIdx->setReadOnly(true);
-        Qt_utils::rec_set_visible(*m_edgeInfo, false);
-        Qt_utils::rec_set_visible(*m_triangleInfo, false);
-        //-------------------------------------------------------------------
+        m_vertexInfo->setVisible(false);
+        m_edgeInfo->setVisible(false);
+        m_triangleInfo->setVisible(false);
     }
 
     Gui::MainWindow::~MainWindow()
@@ -245,18 +241,16 @@ namespace Ra
                 Ra::Engine::Entity* ent = comp->getEntity();
                 const auto& fdata = m_viewer->getFeaturePickingManager()->getFeatureData();
 
-                //-------------------------------------------------------------------
-                //Added by Axel
-                if (m_vertexIdx->isReadOnly())
-                {
-                    m_vertexIdx->setReadOnly(false);
-                }
                 if (fdata.m_featureType == Ra::Engine::Renderer::VERTEX)
                 {
                     m_vertexIdx->setValue(fdata.m_data[0]);
+                    m_vertexIdx->setMaximum(ro->getMesh()->getGeometry().m_vertices.size() - 1);
                 }
-                m_vertexIdx->setMaximum(ro->getMesh()->getGeometry().m_vertices.size() - 1);
-                //-------------------------------------------------------------------
+                if (fdata.m_featureType == Ra::Engine::Renderer::TRIANGLE)
+                {
+                    m_triangleIdx->setValue(fdata.m_data[0]);
+                    m_triangleIdx->setMaximum(ro->getMesh()->getGeometry().m_triangles.size() - 1);
+                }
 
                 // For now we don't enable group selection.
                 m_selectionManager->setCurrentEntry( ItemEntry(ent, comp, roIndex, fdata),
@@ -414,6 +408,12 @@ namespace Ra
             }
             toolBar->addSeparator();
         }
+
+        // Add feature widget
+        if (plugin->doAddFeatureTrackingWidget())
+        {
+            plugin->getFeatureTrackingWidget()->setParent( tab_tracking );
+        }
     }
 
     void Gui::MainWindow::onRendererReady()
@@ -432,14 +432,7 @@ namespace Ra
     void Gui::MainWindow::onFrameComplete()
     {
         m_viewer->getGizmoManager()->updateValues();
-
-        //-------------------------------------------------------------------
-        //Added by Axel
-        // FIXME: todo: connect a new slot connected to SelectionManager::selectionChanged
-        //               -> update current feature data
-        //              then use current feature data to properly update GUI
-        updateTrackedVertInfo();
-        //-------------------------------------------------------------------
+        updateTrackedFeatureInfo();
     }
 
     void Gui::MainWindow::onItemAdded(const Engine::ItemEntry& ent)
@@ -544,31 +537,56 @@ namespace Ra
         m_viewer->fitCameraToScene(Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getSceneAabb());
     }
 
-    //-------------------------------------------------------------------
-    //Added by Axel
-    // FIXME: todo: use current feature data to properly update GUI
-
-
     void Ra::Gui::MainWindow::on_m_vertexIdx_valueChanged(int arg1)
     {
-        m_viewer->getFeaturePickingManager() -> setVertexIndex(arg1);
-        m_viewer->getFeaturePickingManager() -> setSpherePosition();
+        m_viewer->getFeaturePickingManager()->setVertexIndex(arg1);
+        m_viewer->getFeaturePickingManager()->setSpherePosition();
     }
 
-    void Gui::MainWindow::updateTrackedVertInfo()
+    void Ra::Gui::MainWindow::on_m_triangleIdx_valueChanged(int arg1)
     {
-        if (m_viewer->getFeaturePickingManager() -> isVertexSelected())
+        m_viewer->getFeaturePickingManager()->setTriangleIndex(arg1);
+        m_viewer->getFeaturePickingManager()->setSpherePosition();
+    }
+
+    void Gui::MainWindow::updateTrackedFeatureInfo()
+    {
+        m_vertexInfo->setVisible(false);
+        m_edgeInfo->setVisible(false);
+        m_triangleInfo->setVisible(false);
+        auto fdata = m_viewer->getFeaturePickingManager()->getFeatureData();
+        switch (fdata.m_featureType)
         {
+        case Engine::Renderer::VERTEX:
+        {
+            m_vertexInfo->setVisible(true);
             m_vertexPX->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[0]));
             m_vertexPY->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[1]));
             m_vertexPZ->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[2]));
-
             m_vertexNX->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[0]));
             m_vertexNY->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[1]));
             m_vertexNZ->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[2]));
+            break;
+        }
+        case Engine::Renderer::EDGE:
+        {
+            m_edgeInfo->setVisible(true);
+            m_edgeV0->setText(QString::number(fdata.m_data[0]));
+            m_edgeV1->setText(QString::number(fdata.m_data[1]));
+            break;
+        }
+        case Engine::Renderer::TRIANGLE:
+        {
+            m_triangleInfo->setVisible(true);
+            m_triangleV0->setText(QString::number(fdata.m_data[1]));
+            m_triangleV1->setText(QString::number(fdata.m_data[2]));
+            m_triangleV2->setText(QString::number(fdata.m_data[3]));
+            break;
+        }
+        default:
+            break;
         }
         m_viewer->getFeaturePickingManager()->setSpherePosition();
     }
-    //------------------------------------------------------------------------------------------
 
 } // namespace Ra
