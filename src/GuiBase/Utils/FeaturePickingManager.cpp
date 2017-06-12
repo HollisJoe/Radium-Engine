@@ -42,7 +42,7 @@ namespace Ra
                 m_FeatureData.m_featureType = Engine::Renderer::RO;
             }
             // if picking is on the RO, the nothing to be done here
-            if (query.m_mode == Engine::Renderer::RO)
+            if (m_FeatureData.m_featureType == Engine::Renderer::RO)
             {
                 return;
             }
@@ -145,7 +145,7 @@ namespace Ra
             {
             case Engine::Renderer::VERTEX:
             {
-                // return half the edge length of the first edge we can find with the vertex
+                // return 1 fourth of the edge length of the first edge we can find with the vertex
                 const auto& T = ro->getMesh()->getGeometry().m_triangles;
                 const auto& v = m_FeatureData.m_data[0];
                 for (const auto& t : T)
@@ -154,17 +154,17 @@ namespace Ra
                     {
                         const Core::Vector3& v0 = V[ v ];
                         const Core::Vector3& v1 = V[ t(0)==v? t(1) : t(0) ];
-                        return (v1-v0).norm() / 2.0;
+                        return (v1-v0).norm() / 4.0;
                     }
                 }
                 return 1.0; // should never come here
             }
             case Engine::Renderer::EDGE:
             {
-                // return half the edge length
+                // return 1 fourth of the edge length
                 const Core::Vector3& v0 = V[ m_FeatureData.m_data[0] ];
                 const Core::Vector3& v1 = V[ m_FeatureData.m_data[1] ];
-                return (v1-v0).norm() / 2.0;
+                return (v1-v0).norm() / 4.0;
             }
             case Engine::Renderer::TRIANGLE:
             {
@@ -272,13 +272,12 @@ namespace Ra
         SphereComponent::SphereComponent()
                 : Ra::Engine::Component("SphereC Component"), m_sphereRo (nullptr)
         {
-            m_sphere = Ra::Core::MeshUtils::makeParametricSphere(0.1);
+            m_sphere = Ra::Core::MeshUtils::makeParametricSphere(1.0);
         }
 
 
         void SphereComponent::initialize()
         {
-            // Create a cube mesh render object.
             std::shared_ptr<Ra::Engine::Mesh> display(new Ra::Engine::Mesh("FeaturePickingManagerSphere"));
             display->loadGeometry(m_sphere);
             std::shared_ptr<Ra::Engine::Material> material;
