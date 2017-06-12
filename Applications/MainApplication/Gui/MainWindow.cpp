@@ -26,6 +26,7 @@
 #include <GuiBase/SelectionManager/SelectionManager.hpp>
 #include <GuiBase/Utils/FeaturePickingManager.hpp>
 #include <GuiBase/Viewer/CameraInterface.hpp>
+#include <GuiBase/Utils/qt_utils.hpp>
 
 #include <MainApplication.hpp>
 
@@ -59,7 +60,9 @@ namespace Ra
 
         //-------------------------------------------------------------------
         //Added by Axel
-        spinBox_VertexIndex->setReadOnly(true);
+        m_vertexIdx->setReadOnly(true);
+        Qt_utils::rec_set_visible(*m_edgeInfo, false);
+        Qt_utils::rec_set_visible(*m_triangleInfo, false);
         //-------------------------------------------------------------------
     }
 
@@ -100,18 +103,11 @@ namespace Ra
 
         // Inform property editors of new selections
         connect(m_selectionManager, &GuiBase::SelectionManager::selectionChanged, this, &MainWindow::onSelectionChanged);
-        //connect(this, &MainWindow::selectedItem, tab_edition, &TransformEditorWidget::setEditable);
 
         // Make selected item event visible to plugins
         connect(this, &MainWindow::selectedItem, mainApp, &MainApplication::onSelectedItem);
         connect(this, &MainWindow::selectedItem, m_viewer->getGizmoManager(), &GizmoManager::setEditable);
         connect(this, &MainWindow::selectedItem, m_viewer->getGizmoManager(), &GizmoManager::setEditable);
-
-
-        //-------------------------------------------------------------------
-        //Added by Axel
-        connect(spinBox_VertexIndex,SIGNAL(valueChanged(int)),this,SLOT(spinBoxManualUpdate(int)));
-        //-------------------------------------------------------------------
 
         // Enable changing shaders
         connect(m_currentShaderBox, static_cast<void (QComboBox::*)(const QString&)>( &QComboBox::currentIndexChanged ),
@@ -251,15 +247,15 @@ namespace Ra
 
                 //-------------------------------------------------------------------
                 //Added by Axel
-                if (spinBox_VertexIndex->isReadOnly())
+                if (m_vertexIdx->isReadOnly())
                 {
-                    spinBox_VertexIndex->setReadOnly(false);
+                    m_vertexIdx->setReadOnly(false);
                 }
                 if (fdata.m_featureType == Ra::Engine::Renderer::VERTEX)
                 {
-                    spinBox_VertexIndex->setValue(fdata.m_data[0]);
+                    m_vertexIdx->setValue(fdata.m_data[0]);
                 }
-                spinBox_VertexIndex->setMaximum(ro->getMesh()->getGeometry().m_vertices.size() - 1);
+                m_vertexIdx->setMaximum(ro->getMesh()->getGeometry().m_vertices.size() - 1);
                 //-------------------------------------------------------------------
 
                 // For now we don't enable group selection.
@@ -435,7 +431,6 @@ namespace Ra
 
     void Gui::MainWindow::onFrameComplete()
     {
-        tab_edition->updateValues();
         m_viewer->getGizmoManager()->updateValues();
 
         //-------------------------------------------------------------------
@@ -553,9 +548,10 @@ namespace Ra
     //Added by Axel
     // FIXME: todo: use current feature data to properly update GUI
 
-    void Gui::MainWindow::spinBoxManualUpdate(int value)
+
+    void Ra::Gui::MainWindow::on_m_vertexIdx_valueChanged(int arg1)
     {
-        m_viewer->getFeaturePickingManager() -> setVertexIndex(value);
+        m_viewer->getFeaturePickingManager() -> setVertexIndex(arg1);
         m_viewer->getFeaturePickingManager() -> setSpherePosition();
     }
 
@@ -563,13 +559,13 @@ namespace Ra
     {
         if (m_viewer->getFeaturePickingManager() -> isVertexSelected())
         {
-            m_valueX -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[0]));
-            m_valueY -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[1]));
-            m_valueZ -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[2]));
+            m_vertexPX->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[0]));
+            m_vertexPY->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[1]));
+            m_vertexPZ->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeaturePosition()[2]));
 
-            label_nxValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[0]));
-            label_nyValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[1]));
-            label_nzValue -> setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[2]));
+            m_vertexNX->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[0]));
+            m_vertexNY->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[1]));
+            m_vertexNZ->setText(QString::number(m_viewer->getFeaturePickingManager()->getFeatureVector()[2]));
         }
         m_viewer->getFeaturePickingManager()->setSpherePosition();
     }

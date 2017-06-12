@@ -70,7 +70,6 @@ namespace Ra
             /// Update the UI ( most importantly gizmos ) to the modifications of the engine/
             void onFrameComplete();
 
-
         public slots:
             /// Callback to rebuild the item model when the engine objects change.
             void onItemAdded( const Engine::ItemEntry& ent );
@@ -101,13 +100,6 @@ namespace Ra
             /// Cleanup resources.
             void cleanup();
 
-            //-------------------------------------------------------------------
-            //Added by Axel
-            // FIXME: todo: use current feature data to properly update GUI
-            void updateTrackedVertInfo();
-            void spinBoxManualUpdate(int value);
-            //-------------------------------------------------------------------
-
         signals:
             /// Emitted when the closed button has been hit.
             void closed();
@@ -124,6 +116,12 @@ namespace Ra
         private:
             /// Connect qt signals and slots. Called once by the constructor.
             void createConnections();
+
+            //-------------------------------------------------------------------
+            //Added by Axel
+            // FIXME: todo: use current feature data to properly update GUI
+            void updateTrackedVertInfo();
+            //-------------------------------------------------------------------
 
             virtual void closeEvent( QCloseEvent* event ) override;
 
@@ -142,6 +140,9 @@ namespace Ra
 
             /// Slot for the picking results from the viewer.
             void handlePicking(int pickingResult);
+
+            /// Slot for tracking vertice info.
+            void on_m_vertexIdx_valueChanged(int arg1);
 
             /// Slot to accept a new renderer
             void onRendererReady();
