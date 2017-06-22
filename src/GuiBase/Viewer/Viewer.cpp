@@ -69,10 +69,8 @@ namespace Ra
         LOG( logINFO ) << "GLSL                 : " << gl::glGetString(gl::GLenum(GL_SHADING_LANGUAGE_VERSION));
 
         // FIXME(Charly): Renderer type should not be changed here
-
         // m_renderers.resize( 3 );
         // FIXME (Mathias): width and height might be wrong the first time ResizeGL is called (see QOpenGLWidget doc). This may cause problem on Retina display under MacOsX (and this happens)
-
         m_renderers[0].reset( new Engine::ForwardRenderer( width(), height() ) ); // Forward
         m_renderers[1].reset( nullptr ); // deferred
         // m_renderers[2].reset( new Engine::ExperimentalRenderer( width(), height() ) ); // experimental
@@ -155,7 +153,6 @@ namespace Ra
         m_camera->resizeViewport( width, height );
         m_currentRenderer->resize( width, height );
     }
-
 
     void Gui::Viewer::mousePressEvent( QMouseEvent* event )
     {
@@ -433,7 +430,6 @@ namespace Ra
 
     void Gui::Viewer::resetCamera()
     {
-
         m_camera.reset( new Gui::TrackballCamera( width(), height() ) );
     }
 } // namespace Ra
